@@ -1,0 +1,18 @@
+name: luizhenriquedevbr
+
+services:
+  app:
+    ports: !reset []
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.luizhenriquedevbr.rule=Host(`luizhenrique.dev.br`) || Host(`www.luizhenrique.dev.br`)"
+      - "traefik.http.routers.luizhenriquedevbr.entrypoints=websecure"
+      - "traefik.http.routers.luizhenriquedevbr.tls.certresolver=le"
+      - "traefik.http.services.luizhenriquedevbr.loadbalancer.server.port=80"
+      - "traefik.docker.network=web"
+    networks:
+      - web
+
+networks:
+  web:
+    external: true

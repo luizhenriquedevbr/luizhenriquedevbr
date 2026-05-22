@@ -16,5 +16,5 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /var/www/luizhenriquedevbr
-            git pull origin main
-            echo "Deploy concluído em $(date)"
+            git pull
+            docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build

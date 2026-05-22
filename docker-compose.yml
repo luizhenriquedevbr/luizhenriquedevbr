@@ -1,0 +1,10 @@
+name: luizhenriquedevbr
+
+services:
+  app:
+    image: nginx:alpine
+    ports:
+      - "4500:80"
+    volumes:
+      - .:/usr/share/nginx/html:ro
+    restart: unless-stopped
