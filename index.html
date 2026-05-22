@@ -96,6 +96,37 @@
     }
 
     #cursor { display: inline-block; width: 2px; height: 1em; background: #22d3ee; margin-left: 2px; vertical-align: middle; animation: blink 1s step-end infinite; }
+
+    .photo-frame {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid rgba(34,211,238,0.15);
+      box-shadow: 0 0 0 1px rgba(34,211,238,0.06), 0 24px 64px rgba(0,0,0,0.5), 0 0 80px rgba(34,211,238,0.06);
+    }
+    .photo-frame::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.5) 0%, transparent 40%);
+      pointer-events: none;
+    }
+    .photo-img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      filter: brightness(0.95) contrast(1.02);
+      transition: transform 0.5s ease;
+    }
+    .photo-frame:hover .photo-img {
+      transform: scale(1.02);
+    }
+    @media (max-width: 768px) {
+      .photo-frame { order: -1; max-width: 280px; margin: 0 auto; }
+      .photo-img { height: 380px; }
+    }
   </style>
 </head>
 <body class="bg-[#0a0a0a] text-gray-100 antialiased">
@@ -149,26 +180,27 @@
   <!-- SOBRE -->
   <section id="sobre" class="py-28 border-t border-white/5">
     <div class="max-w-5xl mx-auto px-6">
-      <div class="grid md:grid-cols-2 gap-16 items-center section-hidden">
+      <div class="grid md:grid-cols-[1fr_320px] gap-12 items-start section-hidden">
 
-        <div>
-          <p class="font-mono text-cyan-400 text-xs uppercase tracking-widest mb-4">// sobre mim</p>
-          <h2 class="text-3xl md:text-4xl font-bold mb-6">
-            Código com propósito,<br/>design com intenção.
-          </h2>
-          <p class="text-gray-400 leading-relaxed mb-4">
-            Sou desenvolvedor com experiência em criar aplicações web robustas, desde o backend até interfaces que as pessoas realmente querem usar.
-          </p>
-          <p class="text-gray-400 leading-relaxed mb-8">
-            Acredito que bom código é aquele que resolve o problema certo, da forma mais simples possível — e que ainda funciona daqui a dois anos.
-          </p>
-          <a href="#contato"
-             class="inline-flex items-center gap-2 text-cyan-400 font-mono text-sm hover:gap-3 transition-all">
-            vamos conversar <span>&rarr;</span>
-          </a>
-        </div>
+        <!-- Conteúdo -->
+        <div class="space-y-8">
+          <div>
+            <p class="font-mono text-cyan-400 text-xs uppercase tracking-widest mb-4">// sobre mim</p>
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">
+              Código com propósito,<br/>design com intenção.
+            </h2>
+            <p class="text-gray-400 leading-relaxed mb-4">
+              Sou desenvolvedor com experiência em criar aplicações web robustas, desde o backend até interfaces que as pessoas realmente querem usar.
+            </p>
+            <p class="text-gray-400 leading-relaxed mb-6">
+              Acredito que bom código é aquele que resolve o problema certo, da forma mais simples possível — e que ainda funciona daqui a dois anos.
+            </p>
+            <a href="#contato"
+               class="inline-flex items-center gap-2 text-cyan-400 font-mono text-sm hover:gap-3 transition-all">
+              vamos conversar <span>&rarr;</span>
+            </a>
+          </div>
 
-        <div class="space-y-6">
           <div class="bg-white/3 rounded-2xl p-6 border border-white/8">
             <p class="text-xs font-mono text-gray-500 mb-4 uppercase tracking-widest">stack principal</p>
             <div class="flex flex-wrap gap-2">
@@ -203,6 +235,12 @@
             </div>
           </div>
         </div>
+
+        <!-- Foto -->
+        <div class="photo-frame section-hidden">
+          <img src="luiz.jpg" alt="Luiz Henrique" class="photo-img" />
+        </div>
+
       </div>
     </div>
   </section>
