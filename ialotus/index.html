@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IA.Lotus — Plataforma de Data Centers</title>
+  <meta name="description" content="Infraestrutura de Data Centers de alta performance para a nova era da Inteligência Artificial. Colocation, conectividade e serviços gerenciados na América Latina." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar" id="navbar">
+    <div class="container navbar__inner">
+      <a href="#" class="navbar__logo">
+        <!-- IA.Lotus icon: layered network -->
+        <svg class="logo-icon" width="36" height="36" viewBox="0 0 48 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- top diamond -->
+          <circle cx="24" cy="4"  r="2.8" fill="currentColor"/>
+          <circle cx="40" cy="15" r="2.8" fill="currentColor"/>
+          <circle cx="24" cy="22" r="2.8" fill="currentColor"/>
+          <circle cx="8"  cy="15" r="2.8" fill="currentColor"/>
+          <line x1="24" y1="4"  x2="40" y2="15" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+          <line x1="40" y1="15" x2="24" y2="22" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+          <line x1="24" y1="22" x2="8"  y2="15" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+          <line x1="8"  y1="15" x2="24" y2="4"  stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+          <!-- middle chevron -->
+          <circle cx="4"  cy="33" r="2.8" fill="currentColor"/>
+          <circle cx="24" cy="39" r="2.8" fill="currentColor"/>
+          <circle cx="44" cy="33" r="2.8" fill="currentColor"/>
+          <line x1="4"  y1="33" x2="24" y2="39" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+          <line x1="24" y1="39" x2="44" y2="33" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+          <!-- bottom chevron -->
+          <circle cx="2"  cy="45" r="2.8" fill="currentColor"/>
+          <circle cx="24" cy="52" r="2.8" fill="currentColor"/>
+          <circle cx="46" cy="45" r="2.8" fill="currentColor"/>
+          <line x1="2"  y1="45" x2="24" y2="52" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+          <line x1="24" y1="52" x2="46" y2="45" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+        </svg>
+        <span class="logo-text">IA.Lotus</span>
+      </a>
+
+      <nav class="navbar__nav">
+        <a href="#solucoes">Soluções</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#infraestrutura">Infraestrutura</a>
+        <a href="#contato">Contato</a>
+      </nav>
+      <a href="#contato" class="btn btn--outline navbar__cta">Fale com a gente</a>
+      <button class="navbar__hamburger" id="hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#solucoes">Soluções</a>
+    <a href="#sobre">Sobre</a>
+    <a href="#infraestrutura">Infraestrutura</a>
+    <a href="#contato">Contato</a>
+    <a href="#contato" class="btn btn--primary">Fale com a gente</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <!-- Background video — substitua pelo seu arquivo -->
+    <div class="hero__video-bg">
+      <video autoplay muted loop playsinline>
+        <source src="hero-video.mp4" type="video/mp4" />
+      </video>
+    </div>
+    <div class="hero__overlay"></div>
+    <div class="hero__noise"></div>
+    <div class="hero__grid" aria-hidden="true"></div>
+
+    <div class="container hero__inner">
+      <div class="hero__content">
+        <div class="hero__badge">
+          <span class="badge__dot"></span>
+          Infraestrutura de nova geração
+        </div>
+        <h1 class="hero__title">
+          Data Centers para<br/>a era da
+          <span class="text-gradient"> Inteligência<br/>Artificial</span>
+        </h1>
+        <p class="hero__description">
+          Alta performance, conectividade global e soluções escaláveis
+          para workloads críticos na América Latina.
+        </p>
+        <div class="hero__actions">
+          <a href="#contato" class="btn btn--primary btn--lg">Conheça nossas soluções</a>
+          <a href="#sobre" class="btn btn--ghost btn--lg">
+            Saiba mais
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+              <path d="M3 8h10M8 3l5 5-5 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="hero__scroll">
+      <span>Scroll</span>
+      <div class="hero__scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__track">
+      <span>ISO 27001</span><span class="ticker__sep">·</span>
+      <span>Tier III Certificado</span><span class="ticker__sep">·</span>
+      <span>SOC 2 Type II</span><span class="ticker__sep">·</span>
+      <span>LGPD Compliant</span><span class="ticker__sep">·</span>
+      <span>PCI DSS</span><span class="ticker__sep">·</span>
+      <span>99.99% SLA</span><span class="ticker__sep">·</span>
+      <span>100G Backbone</span><span class="ticker__sep">·</span>
+      <span>NOC 24/7/365</span><span class="ticker__sep">·</span>
+      <span>Energia Verde</span><span class="ticker__sep">·</span>
+      <span>Redundância N+1</span><span class="ticker__sep">·</span>
+      <span>ISO 27001</span><span class="ticker__sep">·</span>
+      <span>Tier III Certificado</span><span class="ticker__sep">·</span>
+      <span>SOC 2 Type II</span><span class="ticker__sep">·</span>
+      <span>LGPD Compliant</span><span class="ticker__sep">·</span>
+      <span>PCI DSS</span><span class="ticker__sep">·</span>
+      <span>99.99% SLA</span><span class="ticker__sep">·</span>
+      <span>100G Backbone</span><span class="ticker__sep">·</span>
+      <span>NOC 24/7/365</span><span class="ticker__sep">·</span>
+      <span>Energia Verde</span><span class="ticker__sep">·</span>
+      <span>Redundância N+1</span><span class="ticker__sep">·</span>
+    </div>
+  </div>
+
+  <!-- SOLUÇÕES -->
+  <section class="solucoes" id="solucoes">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">O que oferecemos</p>
+        <h2 class="section-title">Soluções completas para<br/>sua infraestrutura digital</h2>
+        <p class="section-sub">Desenvolvemos ambientes de missão crítica com os mais altos padrões de disponibilidade, segurança e eficiência energética.</p>
+      </div>
+      <div class="solucoes__grid">
+
+        <div class="solution-card">
+          <div class="solution-card__icon">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+              <rect x="2" y="5" width="22" height="6" rx="2" stroke="currentColor" stroke-width="1.8"/>
+              <rect x="2" y="15" width="22" height="6" rx="2" stroke="currentColor" stroke-width="1.8"/>
+              <circle cx="20.5" cy="8" r="1.4" fill="currentColor"/>
+              <circle cx="20.5" cy="18" r="1.4" fill="currentColor"/>
+            </svg>
+          </div>
+          <h3>Colocation</h3>
+          <p>Infraestrutura segura e escalável para seus equipamentos críticos. Racks, energia redundante e ambiente climatizado com total controle operacional.</p>
+          <a href="#contato" class="solution-card__link">Saiba mais <span>→</span></a>
+        </div>
+
+        <div class="solution-card solution-card--featured">
+          <div class="solution-card__icon">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+              <circle cx="13" cy="13" r="10" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M3 13h20M13 3c-2.8 3.5-3.5 5.8-3.5 10s.7 6.5 3.5 10M13 3c2.8 3.5 3.5 5.8 3.5 10s-.7 6.5-3.5 10" stroke="currentColor" stroke-width="1.8"/>
+            </svg>
+          </div>
+          <h3>Conectividade</h3>
+          <p>Conexões diretas, rápidas e confiáveis com os principais carriers globais. Baixa latência e redundância para missões críticas.</p>
+          <a href="#contato" class="solution-card__link">Saiba mais <span>→</span></a>
+        </div>
+
+        <div class="solution-card">
+          <div class="solution-card__icon">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+              <path d="M13 2L24 8V18L13 24L2 18V8L13 2Z" stroke="currentColor" stroke-width="1.8"/>
+              <circle cx="13" cy="13" r="3" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M13 2v5M13 19v5M2 8l4.5 2.5M19.5 15.5L24 18M24 8l-4.5 2.5M6.5 15.5L2 18" stroke="currentColor" stroke-width="1.4"/>
+            </svg>
+          </div>
+          <h3>Serviços Gerenciados</h3>
+          <p>Gestão especializada de infraestrutura 24/7. Monitoramento proativo, suporte técnico dedicado e relatórios de disponibilidade.</p>
+          <a href="#contato" class="solution-card__link">Saiba mais <span>→</span></a>
+        </div>
+
+        <div class="solution-card">
+          <div class="solution-card__icon">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+              <path d="M8 16L5 20M18 16L21 20M13 15V20" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <rect x="3" y="5" width="20" height="12" rx="2.5" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M8 9h10M8 12h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h3>Cloud Híbrido</h3>
+          <p>Ambientes híbridos integrados com as principais plataformas de nuvem. Flexibilidade para escalar workloads de IA sob demanda.</p>
+          <a href="#contato" class="solution-card__link">Saiba mais <span>→</span></a>
+        </div>
+
+        <div class="solution-card">
+          <div class="solution-card__icon">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+              <path d="M13 2L22 6V14C22 18.5 18 22 13 24C8 22 4 18.5 4 14V6L13 2Z" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M9 13l3 3 5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Segurança & Compliance</h3>
+          <p>Certificações internacionais, controle de acesso físico e lógico, CCTV 24h e conformidade com LGPD e normas ISO.</p>
+          <a href="#contato" class="solution-card__link">Saiba mais <span>→</span></a>
+        </div>
+
+        <div class="solution-card">
+          <div class="solution-card__icon">
+            <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+              <path d="M5 21L9 13L13 17L17 9L21 5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="21" cy="5" r="2.2" fill="currentColor"/>
+            </svg>
+          </div>
+          <h3>Alta Disponibilidade</h3>
+          <p>Uptime garantido com infraestrutura Tier III, energia redundante, cooling de precisão e planos de continuidade testados.</p>
+          <a href="#contato" class="solution-card__link">Saiba mais <span>→</span></a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section class="sobre" id="sobre">
+    <div class="container sobre__inner">
+      <div class="sobre__visual">
+        <div class="sobre__layers">
+          <!-- Animated IA.Lotus icon scaled up -->
+          <svg class="layers-icon" viewBox="0 0 96 112" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="48" cy="8"   r="5" fill="currentColor" opacity="0.9"/>
+            <circle cx="80" cy="30" r="5" fill="currentColor" opacity="0.9"/>
+            <circle cx="48" cy="44" r="5" fill="currentColor" opacity="0.9"/>
+            <circle cx="16" cy="30" r="5" fill="currentColor" opacity="0.9"/>
+            <line x1="48" y1="8"  x2="80" y2="30" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+            <line x1="80" y1="30" x2="48" y2="44" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+            <line x1="48" y1="44" x2="16" y2="30" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+            <line x1="16" y1="30" x2="48" y2="8"  stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="8"  cy="66" r="5" fill="currentColor" opacity="0.75"/>
+            <circle cx="48" cy="78" r="5" fill="currentColor" opacity="0.75"/>
+            <circle cx="88" cy="66" r="5" fill="currentColor" opacity="0.75"/>
+            <line x1="8"  y1="66" x2="48" y2="78" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+            <line x1="48" y1="78" x2="88" y2="66" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="4"  cy="90" r="5" fill="currentColor" opacity="0.55"/>
+            <circle cx="48" cy="104" r="5" fill="currentColor" opacity="0.55"/>
+            <circle cx="92" cy="90" r="5" fill="currentColor" opacity="0.55"/>
+            <line x1="4"  y1="90" x2="48" y2="104" stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+            <line x1="48" y1="104" x2="92" y2="90"  stroke="currentColor" stroke-width="3.5" stroke-linecap="round"/>
+          </svg>
+          <div class="layers-glow"></div>
+        </div>
+      </div>
+      <div class="sobre__content">
+        <p class="section-label">Sobre a IA.Lotus</p>
+        <h2 class="section-title">Posicionamento estratégico<br/>na América Latina</h2>
+        <p class="sobre__text">
+          A IA.Lotus nasceu para responder à crescente demanda por infraestrutura digital de alta performance na América Latina. Combinamos engenharia de ponta com localização estratégica para oferecer a base ideal para workloads intensivos de IA, machine learning e aplicações críticas.
+        </p>
+        <p class="sobre__text">
+          Nossos data centers são projetados com os mais rígidos padrões internacionais, garantindo máxima disponibilidade, segurança e eficiência energética. Conectamos empresas ao ecossistema global com a confiabilidade que missões críticas exigem.
+        </p>
+        <ul class="sobre__list">
+          <li>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M6 10l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Alta disponibilidade energética e conectividade global
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M6 10l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Energia sustentável com certificação verde
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M6 10l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Equipe técnica especializada e suporte 24/7/365
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="10" fill="currentColor" fill-opacity="0.15"/><path d="M6 10l3 3 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Infraestrutura escalável e customizável por cliente
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFRAESTRUTURA -->
+  <section class="infraestrutura" id="infraestrutura">
+    <div class="container">
+      <div class="section-header">
+        <p class="section-label">Nossa infraestrutura</p>
+        <h2 class="section-title">Construída para o futuro,<br/>operando no presente</h2>
+      </div>
+      <div class="infra__grid">
+
+        <div class="infra-feature">
+          <div class="infra-feature__icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <path d="M11 2L2 7V15L11 20L20 15V7L11 2Z" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M11 20V11M2 7L11 11L20 7" stroke="currentColor" stroke-width="1.8"/>
+            </svg>
+          </div>
+          <h4>Padrão Tier III</h4>
+          <p>Infraestrutura certificada com redundância N+1 e manutenção concorrente sem impacto na operação.</p>
+        </div>
+
+        <div class="infra-feature">
+          <div class="infra-feature__icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <path d="M12 2L4 12.5H10L9 21L18 10.5H12L12 2Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h4>Energia Redundante</h4>
+          <p>Múltiplas fontes com UPS de alta eficiência e geradores a diesel para plena continuidade operacional.</p>
+        </div>
+
+        <div class="infra-feature">
+          <div class="infra-feature__icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <circle cx="11" cy="11" r="8.5" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M2.5 11h17M11 2.5c-2.2 2.8-3.2 5-3.2 8.5S8.8 16.7 11 19.5M11 2.5c2.2 2.8 3.2 5 3.2 8.5S13.2 16.7 11 19.5" stroke="currentColor" stroke-width="1.8"/>
+            </svg>
+          </div>
+          <h4>Conectividade Global</h4>
+          <p>Acesso neutro a múltiplos carriers com IP transit, IXP e conexões privadas dedicadas de baixa latência.</p>
+        </div>
+
+        <div class="infra-feature">
+          <div class="infra-feature__icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <rect x="2" y="6.5" width="18" height="4.5" rx="1.5" stroke="currentColor" stroke-width="1.8"/>
+              <rect x="2" y="13" width="18" height="4.5" rx="1.5" stroke="currentColor" stroke-width="1.8"/>
+              <circle cx="17" cy="8.75" r="1" fill="currentColor"/>
+              <circle cx="17" cy="15.25" r="1" fill="currentColor"/>
+            </svg>
+          </div>
+          <h4>Cooling de Precisão</h4>
+          <p>Sistemas de resfriamento de alta eficiência com controle de temperatura e umidade por zona de rack.</p>
+        </div>
+
+        <div class="infra-feature">
+          <div class="infra-feature__icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <rect x="3" y="10" width="16" height="10" rx="2" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M7 10V7a4 4 0 018 0v3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+              <circle cx="11" cy="15" r="1.5" fill="currentColor"/>
+            </svg>
+          </div>
+          <h4>Segurança Física</h4>
+          <p>Controle de acesso biométrico, CCTV 24h, perímetro monitorado e sala cofre para ativos críticos.</p>
+        </div>
+
+        <div class="infra-feature">
+          <div class="infra-feature__icon">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+              <path d="M11 2L20 6V13C20 17 16 20 11 22C6 20 2 17 2 13V6L11 2Z" stroke="currentColor" stroke-width="1.8"/>
+              <path d="M8 11l2.5 2.5L14 9" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h4>Compliance & Certificações</h4>
+          <p>Conformidade com ISO 27001, LGPD, SOC 2 e demais normas regulatórias para o mercado brasileiro.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BANNER -->
+  <section class="cta-banner">
+    <div class="container cta-banner__inner">
+      <div class="cta-banner__content">
+        <h2>Pronto para elevar sua infraestrutura<br/>ao próximo nível?</h2>
+        <p>Fale com nossos especialistas e descubra como a IA.Lotus pode potencializar seus negócios com infraestrutura de classe mundial.</p>
+        <a href="#contato" class="btn btn--primary btn--lg">Iniciar conversa</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTATO -->
+  <section class="contato" id="contato">
+    <div class="container contato__inner">
+      <div class="contato__info">
+        <p class="section-label">Contato</p>
+        <h2 class="section-title">Vamos construir algo<br/>extraordinário juntos</h2>
+        <p class="contato__text">Entre em contato com nossa equipe de especialistas. Estamos prontos para entender suas necessidades e apresentar a solução ideal para sua infraestrutura.</p>
+        <div class="contato__details">
+          <div class="contato__item">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M2.5 3.5h13a1 1 0 011 1v9a1 1 0 01-1 1h-13a1 1 0 01-1-1v-9a1 1 0 011-1z" stroke="currentColor" stroke-width="1.5"/><path d="M1.5 4.5l7.5 5.5 7.5-5.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <span>contato@ialotus.com</span>
+          </div>
+          <div class="contato__item">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M15.5 12.2c0 .27-.06.53-.2.78-.13.24-.32.47-.56.67-.4.34-.82.5-1.27.5-.32 0-.67-.07-1.04-.24-.37-.16-.74-.39-1.13-.67-.38-.28-.74-.58-1.08-.92-.34-.34-.64-.7-.92-1.08-.28-.38-.5-.75-.66-1.12a3.1 3.1 0 01-.23-1.02c0-.33.07-.64.21-.9.14-.25.34-.48.6-.68.3-.22.63-.32.97-.32.14 0 .27.03.39.08.12.06.23.14.32.28l1.12 1.57c.09.12.16.23.2.35.05.11.08.21.08.3 0 .12-.03.24-.1.36-.07.12-.16.24-.28.36l-.38.4c-.06.05-.08.12-.08.19 0 .03.01.07.02.1l.04.1c.1.17.26.4.48.66.23.26.47.52.73.77.26.26.52.48.78.68.26.2.48.33.65.41l.1.04c.04.01.07.02.12.02.08 0 .14-.03.2-.09l.38-.39c.13-.13.25-.22.38-.28.12-.06.24-.1.37-.1.1 0 .2.02.3.07.11.04.23.11.36.2l1.58 1.14c.14.1.24.2.29.32.05.12.08.25.08.4z" stroke="currentColor" stroke-width="1.4"/></svg>
+            <span>+55 (11) 3000-0000</span>
+          </div>
+          <div class="contato__item">
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 10a3 3 0 100-6 3 3 0 000 6z" stroke="currentColor" stroke-width="1.5"/><path d="M9 1.5a6.5 6.5 0 00-6.5 6.5c0 4.875 6.5 10.25 6.5 10.25S15.5 12.875 15.5 8A6.5 6.5 0 009 1.5z" stroke="currentColor" stroke-width="1.5"/></svg>
+            <span>São Paulo, Brasil</span>
+          </div>
+        </div>
+      </div>
+
+      <form class="contato__form" id="contactForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nome">Nome completo</label>
+            <input type="text" id="nome" name="nome" placeholder="Seu nome" required />
+          </div>
+          <div class="form-group">
+            <label for="empresa">Empresa</label>
+            <input type="text" id="empresa" name="empresa" placeholder="Nome da empresa" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="email">E-mail corporativo</label>
+          <input type="email" id="email" name="email" placeholder="voce@empresa.com" required />
+        </div>
+        <div class="form-group">
+          <label for="servico">Solução de interesse</label>
+          <select id="servico" name="servico">
+            <option value="">Selecione uma solução</option>
+            <option value="colocation">Colocation</option>
+            <option value="conectividade">Conectividade</option>
+            <option value="gerenciados">Serviços Gerenciados</option>
+            <option value="cloud">Cloud Híbrido</option>
+            <option value="outro">Outro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="mensagem">Mensagem</label>
+          <textarea id="mensagem" name="mensagem" rows="4" placeholder="Conte-nos sobre sua necessidade..."></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary btn--full">Enviar mensagem</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">
+        <a href="#" class="navbar__logo">
+          <svg class="logo-icon" width="30" height="30" viewBox="0 0 48 56" fill="none">
+            <circle cx="24" cy="4"  r="2.8" fill="currentColor"/>
+            <circle cx="40" cy="15" r="2.8" fill="currentColor"/>
+            <circle cx="24" cy="22" r="2.8" fill="currentColor"/>
+            <circle cx="8"  cy="15" r="2.8" fill="currentColor"/>
+            <line x1="24" y1="4"  x2="40" y2="15" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+            <line x1="40" y1="15" x2="24" y2="22" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+            <line x1="24" y1="22" x2="8"  y2="15" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+            <line x1="8"  y1="15" x2="24" y2="4"  stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+            <circle cx="4"  cy="33" r="2.8" fill="currentColor"/>
+            <circle cx="24" cy="39" r="2.8" fill="currentColor"/>
+            <circle cx="44" cy="33" r="2.8" fill="currentColor"/>
+            <line x1="4"  y1="33" x2="24" y2="39" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+            <line x1="24" y1="39" x2="44" y2="33" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+            <circle cx="2"  cy="45" r="2.8" fill="currentColor"/>
+            <circle cx="24" cy="52" r="2.8" fill="currentColor"/>
+            <circle cx="46" cy="45" r="2.8" fill="currentColor"/>
+            <line x1="2"  y1="45" x2="24" y2="52" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+            <line x1="24" y1="52" x2="46" y2="45" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/>
+          </svg>
+          <span class="logo-text">IA.Lotus</span>
+        </a>
+        <p>Infraestrutura digital de alta performance para a nova era da Inteligência Artificial.</p>
+        <div class="footer__social">
+          <a href="#" aria-label="LinkedIn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/>
+              <circle cx="4" cy="4" r="2"/>
+            </svg>
+          </a>
+          <a href="#" aria-label="YouTube">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer__links">
+        <div class="footer__col">
+          <h5>Soluções</h5>
+          <a href="#">Colocation</a>
+          <a href="#">Conectividade</a>
+          <a href="#">Serviços Gerenciados</a>
+          <a href="#">Cloud Híbrido</a>
+        </div>
+        <div class="footer__col">
+          <h5>Empresa</h5>
+          <a href="#">Sobre nós</a>
+          <a href="#">Infraestrutura</a>
+          <a href="#">Sustentabilidade</a>
+          <a href="#">Contato</a>
+        </div>
+        <div class="footer__col">
+          <h5>Legal</h5>
+          <a href="#">Política de Privacidade</a>
+          <a href="#">Termos de Uso</a>
+          <a href="#">Compliance</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <div class="container">
+        <p>© IA.Lotus 2026. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
