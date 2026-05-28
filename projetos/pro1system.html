@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PRO1 System — Sistema de Gestão para Eventos | Luiz Henrique Dev</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cyan: { 400: '#22d3ee', 500: '#06b6d4' },
+            blue: { 500: '#3b82f6', 400: '#60a5fa' },
+          },
+          fontFamily: { mono: ['JetBrains Mono', 'Fira Code', 'monospace'] },
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { max-width: 100%; overflow-x: hidden; }
+    body { font-family: 'Inter', sans-serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0a0a0a; }
+    ::-webkit-scrollbar-thumb { background: #3b82f640; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #3b82f680; }
+
+    .section-hidden { opacity: 0; transform: translateY(28px); }
+    .section-visible { opacity: 1; transform: translateY(0); transition: opacity 0.6s ease, transform 0.6s ease; }
+
+    .feature-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    .feature-card:hover {
+      border-color: rgba(59,130,246,0.3);
+      box-shadow: 0 0 0 1px rgba(59,130,246,0.1), 0 8px 24px rgba(59,130,246,0.06);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(59,130,246,0.08);
+      color: rgba(96,165,250,0.9);
+      border: 1px solid rgba(59,130,246,0.15);
+    }
+
+    .role-badge-admin {
+      background: rgba(249,115,22,0.1);
+      color: rgba(249,115,22,0.9);
+      border-color: rgba(249,115,22,0.2);
+    }
+    .role-badge-client {
+      background: rgba(59,130,246,0.1);
+      color: rgba(96,165,250,0.9);
+      border-color: rgba(59,130,246,0.2);
+    }
+
+    .hero-bg {
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(29,78,216,0.25) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 80% 60%, rgba(59,130,246,0.06) 0%, transparent 60%),
+        #0a0a0a;
+    }
+
+    .screenshot-wrap {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      transition: all 0.3s ease;
+    }
+    .screenshot-wrap:hover {
+      border-color: rgba(59,130,246,0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(59,130,246,0.1);
+    }
+    .screenshot-wrap img {
+      width: 100%;
+      display: block;
+    }
+
+    .product-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 20px;
+      transition: all 0.3s ease;
+    }
+    .product-card:hover {
+      border-color: rgba(59,130,246,0.25);
+      background: rgba(59,130,246,0.04);
+    }
+
+    .wpp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #25D366;
+      color: white;
+      font-weight: 700;
+      padding: 16px 32px;
+      border-radius: 14px;
+      font-size: 16px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .wpp-btn:hover {
+      background: #20bd5a;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(37,211,102,0.35);
+    }
+  </style>
+</head>
+<body class="bg-[#0a0a0a] text-gray-100 antialiased">
+
+  <!-- NAV -->
+  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-white/5 backdrop-blur-md bg-[#0a0a0a]/80">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <a href="../index.html#projetos" class="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        <span class="font-mono">voltar ao portfólio</span>
+      </a>
+      <a href="https://wa.me/5561992868444?text=Olá!%20Vi%20o%20PRO1%20System%20no%20portfólio%20e%20tenho%20interesse%20em%20saber%20mais." target="_blank"
+         class="text-xs font-mono border border-green-400/40 text-green-400 px-3 sm:px-4 py-2 rounded hover:bg-green-400/10 transition-all">
+        Tenho interesse &rarr;
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero-bg pt-32 pb-20 px-4">
+    <div class="max-w-5xl mx-auto">
+      <div class="section-hidden">
+        <div class="flex flex-wrap items-center gap-3 mb-6">
+          <span class="badge">Sistema de Gestão</span>
+          <span class="badge">PHP 8.3 + Vue 3</span>
+          <span class="badge">Eventos + Música</span>
+          <span class="badge">Spotify API</span>
+        </div>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-tight">
+          PRO1 System —<br/>
+          <span style="color:#60a5fa">Gestão de Eventos<br/>Audiovisuais</span>
+        </h1>
+        <p class="text-gray-400 text-lg leading-relaxed max-w-2xl mb-8">
+          Sistema web completo para empresas de sonorização, iluminação e produção de eventos em Brasília-DF. Gerencie clientes, eventos, repertório musical e catálogo de equipamentos — tudo em um só lugar.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a href="https://pro1system.com.br/" target="_blank"
+             class="inline-flex items-center gap-2 font-semibold px-5 py-3 rounded-xl hover:opacity-90 transition-all text-sm text-white"
+             style="background:#3b82f6;">
+            Ver o sistema
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+            </svg>
+          </a>
+          <a href="https://wa.me/5561992868444?text=Olá!%20Vi%20o%20PRO1%20System%20no%20portfólio%20do%20Luiz%20e%20quero%20saber%20mais!" target="_blank"
+             class="inline-flex items-center gap-2 border border-green-400/40 text-green-400 font-semibold px-5 py-3 rounded-xl hover:bg-green-400/10 transition-all text-sm">
+            <svg fill="currentColor" viewBox="0 0 24 24" class="w-4 h-4"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Tenho interesse
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREENSHOT -->
+  <section class="py-12 px-4 border-t border-white/5">
+    <div class="max-w-5xl mx-auto">
+      <div class="section-hidden mb-6">
+        <p class="font-mono text-xs uppercase tracking-widest mb-2" style="color:#60a5fa">// prévia do sistema</p>
+        <h2 class="text-2xl font-bold">Interface do sistema</h2>
+      </div>
+      <div class="screenshot-wrap section-hidden">
+        <img src="../assets/projects/pro1system.png" alt="PRO1 System — interface" />
+      </div>
+    </div>
+  </section>
+
+  <!-- VISÃO GERAL -->
+  <section class="py-20 px-4 border-t border-white/5">
+    <div class="max-w-5xl mx-auto">
+      <div class="section-hidden mb-12">
+        <p class="font-mono text-xs uppercase tracking-widest mb-3" style="color:#60a5fa">// sobre o sistema</p>
+        <h2 class="text-3xl font-bold mb-4">O que é o PRO1 System?</h2>
+        <p class="text-gray-400 leading-relaxed max-w-3xl">
+          Plataforma SaaS desenvolvida para a <strong class="text-white">PRO1 System</strong> — empresa especializada em sonorização, iluminação e imagem para eventos privados e corporativos em Brasília-DF. O sistema conecta a equipe administrativa aos clientes, facilitando a gestão de eventos, seleção do repertório musical e apresentação do catálogo de equipamentos.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-4 section-hidden">
+        <div class="feature-card text-center">
+          <div class="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4" style="background:rgba(59,130,246,0.1)">
+            <svg class="w-6 h-6" style="color:#60a5fa" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-white mb-1">Gestão de Eventos</h3>
+          <p class="text-gray-500 text-sm">Agenda completa de eventos, clientes e serviços contratados.</p>
+        </div>
+        <div class="feature-card text-center">
+          <div class="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4" style="background:rgba(34,197,94,0.1)">
+            <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-white mb-1">Repertório + Spotify</h3>
+          <p class="text-gray-500 text-sm">Cliente monta sua playlist para o evento com integração Spotify.</p>
+        </div>
+        <div class="feature-card text-center">
+          <div class="w-12 h-12 rounded-2xl flex items-center justify-center mx-auto mb-4" style="background:rgba(168,85,247,0.1)">
+            <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2h-2"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-white mb-1">Catálogo de Equipamentos</h3>
+          <p class="text-gray-500 text-sm">Landing pages para LED, pisos de vidro e sistemas premium.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADMIN FEATURES -->
+  <section class="py-20 px-4 border-t border-white/5">
+    <div class="max-w-5xl mx-auto">
+      <div class="section-hidden mb-10">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="badge role-badge-admin font-mono text-xs">Perfil: Administrador</span>
+        </div>
+        <h2 class="text-3xl font-bold mb-3">Ferramentas do administrador</h2>
+        <p class="text-gray-500 text-sm">Controle total da operação — da agenda de eventos ao catálogo musical.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-4 section-hidden">
+
+        <div class="feature-card">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5" style="background:rgba(249,115,22,0.1)">
+              <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white mb-1">Gestão de Eventos</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">Cadastro completo de eventos com data, horário, local (com seleção de cidade e região administrativa do DF), cliente vinculado e status de confirmação.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5" style="background:rgba(249,115,22,0.1)">
+              <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white mb-1">Gestão de Clientes</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">Cadastro e controle de clientes com acesso individual ao sistema, histórico de eventos e acesso à área restrita para seleção do repertório do seu evento.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5" style="background:rgba(249,115,22,0.1)">
+              <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white mb-1">Gestão de Músicas e Ritmos</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">Cadastro de gêneros musicais (samba, forró, axé, pagode, funk, sertanejo...) e banco de músicas por ritmo, que servem de base para os clientes montarem seus repertórios.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5" style="background:rgba(249,115,22,0.1)">
+              <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white mb-1">Gestão de Repertório</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">Visualização e gerenciamento das playlists montadas pelos clientes para cada evento. O DJ/sonorizador acessa o repertório aprovado e se prepara para a apresentação.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5" style="background:rgba(249,115,22,0.1)">
+              <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white mb-1">Feed do Instagram integrado</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">Exibição automática do feed do Instagram da empresa na plataforma — mantendo o visual atualizado com as últimas produções e eventos realizados.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5" style="background:rgba(249,115,22,0.1)">
+              <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white mb-1">Dashboard com Métricas</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">Painel com visão geral: total de clientes, eventos cadastrados, ritmos e músicas no acervo — além do calendário de eventos para visualização da agenda.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CLIENT FEATURES -->
+  <section class="py-20 px-4 border-t border-white/5">
+    <div class="max-w-5xl mx-auto">
+      <div class="section-hidden mb-10">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="badge role-badge-client font-mono text-xs">Perfil: Cliente</span>
+        </div>
+        <h2 class="text-3xl font-bold mb-3">A experiência do cliente</h2>
+        <p class="text-gray-500 text-sm">O contratante tem acesso a um painel exclusivo para personalizar o evento.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-4 section-hidden">
+
+        <div class="feature-card">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5" style="background:rgba(59,130,246,0.1)">
+              <svg class="w-5 h-5" style="color:#60a5fa" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white mb-1">Monte seu Repertório</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">O cliente escolhe os gêneros musicais que quer no seu evento e personaliza a playlist. Pode pesquisar músicas específicas e adicionar ao repertório personalizado.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5" style="background:rgba(59,130,246,0.1)">
+              <svg class="w-5 h-5" style="color:#60a5fa" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white mb-1">Prévia via Spotify</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">Integração com a API do Spotify para exibir o top 10 de cada ritmo — o cliente ouve prévia das músicas antes de confirmar o repertório do evento.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5" style="background:rgba(59,130,246,0.1)">
+              <svg class="w-5 h-5" style="color:#60a5fa" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white mb-1">Status e detalhes do evento</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">Painel pessoal com data, horário, local do evento e status de confirmação do serviço. O cliente acompanha em tempo real o progresso da contratação.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5" style="background:rgba(59,130,246,0.1)">
+              <svg class="w-5 h-5" style="color:#60a5fa" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white mb-1">Área restrita e segura</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">Cada cliente tem login individual e vê apenas as informações do próprio evento. Sistema de autenticação seguro com sessões protegidas.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CATÁLOGO DE PRODUTOS -->
+  <section class="py-20 px-4 border-t border-white/5">
+    <div class="max-w-5xl mx-auto">
+      <div class="section-hidden mb-10">
+        <p class="font-mono text-xs uppercase tracking-widest mb-3" style="color:#60a5fa">// catálogo de equipamentos</p>
+        <h2 class="text-3xl font-bold mb-3">Landing pages dos produtos</h2>
+        <p class="text-gray-500 text-sm max-w-2xl">Além do sistema de gestão, foram desenvolvidas landing pages de vendas para os principais equipamentos da empresa — cada uma otimizada para conversão.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 section-hidden">
+        <div class="product-card">
+          <div class="w-8 h-8 rounded-lg mb-3 flex items-center justify-center" style="background:rgba(59,130,246,0.15)">
+            <svg class="w-4 h-4" style="color:#60a5fa" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-white text-sm mb-1">Iluminação Decorativa</h3>
+          <p class="text-gray-500 text-xs leading-relaxed">Sistemas de iluminação decorativa para eventos com efeitos personalizados.</p>
+        </div>
+
+        <div class="product-card">
+          <div class="w-8 h-8 rounded-lg mb-3 flex items-center justify-center" style="background:rgba(59,130,246,0.15)">
+            <svg class="w-4 h-4" style="color:#60a5fa" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2h-2"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-white text-sm mb-1">Painel de LED</h3>
+          <p class="text-gray-500 text-xs leading-relaxed">Painéis LED para shows, corporativos e telões de eventos.</p>
+        </div>
+
+        <div class="product-card">
+          <div class="w-8 h-8 rounded-lg mb-3 flex items-center justify-center" style="background:rgba(168,85,247,0.15)">
+            <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-white text-sm mb-1">Piso de Vidro LED RGB</h3>
+          <p class="text-gray-500 text-xs leading-relaxed">Piso interativo com LEDs RGB — perfeito para pistas de dança e espaços premium.</p>
+        </div>
+
+        <div class="product-card">
+          <div class="w-8 h-8 rounded-lg mb-3 flex items-center justify-center" style="background:rgba(251,191,36,0.1)">
+            <svg class="w-4 h-4 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-white text-sm mb-1">Piso de Vidro Paris</h3>
+          <p class="text-gray-500 text-xs leading-relaxed">Versão luxo e versão black do icônico piso Paris — elegância para eventos de alto padrão.</p>
+        </div>
+
+        <div class="product-card sm:col-span-2">
+          <div class="w-8 h-8 rounded-lg mb-3 flex items-center justify-center" style="background:rgba(59,130,246,0.15)">
+            <svg class="w-4 h-4" style="color:#60a5fa" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-white text-sm mb-1">Sistemas Premium 1 ao 4</h3>
+          <p class="text-gray-500 text-xs leading-relaxed">Quatro pacotes premium combinando sonorização, iluminação e imagem — do básico ao completo, com landing pages individuais e chamadas para orçamento.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH STACK -->
+  <section class="py-16 px-4 border-t border-white/5">
+    <div class="max-w-5xl mx-auto section-hidden">
+      <p class="font-mono text-xs uppercase tracking-widest mb-6" style="color:#60a5fa">// stack tecnológico</p>
+      <div class="flex flex-wrap gap-2">
+        <span class="badge">PHP 8.3</span>
+        <span class="badge">Vue 3 + Vite</span>
+        <span class="badge">Tailwind CSS</span>
+        <span class="badge">MariaDB / MySQL</span>
+        <span class="badge">Docker</span>
+        <span class="badge">Spotify API</span>
+        <span class="badge">Instagram API</span>
+        <span class="badge">Pinia + Vue Router</span>
+        <span class="badge">REST API PHP</span>
+        <span class="badge">Tabler UI</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="py-24 px-4 border-t border-white/5">
+    <div class="max-w-3xl mx-auto text-center section-hidden">
+      <p class="font-mono text-xs uppercase tracking-widest mb-4" style="color:#60a5fa">// próximo passo</p>
+      <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+        Quer um sistema como esse<br/>para o seu negócio?
+      </h2>
+      <p class="text-gray-400 leading-relaxed mb-10 max-w-xl mx-auto">
+        Posso desenvolver um sistema de gestão personalizado para sua empresa de eventos, buffet, espaço de festas, DJ ou qualquer negócio que precise de um painel administrativo e uma experiência de cliente diferenciada.
+      </p>
+      <a href="https://wa.me/5561992868444?text=Olá%20Luiz!%20Vi%20o%20PRO1%20System%20no%20seu%20portfólio%20e%20tenho%20interesse%20em%20desenvolver%20algo%20similar%20para%20meu%20negócio!" target="_blank" class="wpp-btn">
+        <svg fill="currentColor" viewBox="0 0 24 24" style="width:24px;height:24px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Quero esse produto
+      </a>
+      <p class="text-gray-600 text-xs mt-4 font-mono">WhatsApp: (61) 99286-8444</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/5 py-8">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <a href="../index.html" class="font-mono text-xs text-gray-600 hover:text-blue-400 transition-colors">
+        &larr; luizhenrique.dev.br
+      </a>
+      <p class="font-mono text-xs text-gray-700">
+        &copy; 2026 Luiz Henrique
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('section-hidden');
+          entry.target.classList.add('section-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.section-hidden').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
