@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gestão para Personal de Ciclismo | Luiz Henrique Dev</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: { cyan: { 400: '#22d3ee', 500: '#06b6d4' } },
+          fontFamily: { mono: ['JetBrains Mono', 'Fira Code', 'monospace'] },
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { max-width: 100%; overflow-x: hidden; }
+    body { font-family: 'Inter', sans-serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0a0a0a; }
+    ::-webkit-scrollbar-thumb { background: #22d3ee40; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #22d3ee80; }
+
+    .card-glow:hover {
+      box-shadow: 0 0 0 1px rgba(34,211,238,0.3), 0 8px 32px rgba(34,211,238,0.08);
+    }
+
+    .section-hidden { opacity: 0; transform: translateY(28px); }
+    .section-visible { opacity: 1; transform: translateY(0); transition: opacity 0.6s ease, transform 0.6s ease; }
+
+    .feature-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+    .feature-card:hover {
+      border-color: rgba(34,211,238,0.3);
+      box-shadow: 0 0 0 1px rgba(34,211,238,0.1), 0 8px 24px rgba(34,211,238,0.06);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(34,211,238,0.08);
+      color: rgba(34,211,238,0.8);
+      border: 1px solid rgba(34,211,238,0.15);
+    }
+
+    .role-badge-admin {
+      background: rgba(249,115,22,0.1);
+      color: rgba(249,115,22,0.9);
+      border-color: rgba(249,115,22,0.2);
+    }
+    .role-badge-aluno {
+      background: rgba(34,211,238,0.1);
+      color: rgba(34,211,238,0.9);
+      border-color: rgba(34,211,238,0.2);
+    }
+
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .screenshot-grid-wide {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .screenshot-card {
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: #111;
+      transition: all 0.3s ease;
+    }
+    .screenshot-card:hover {
+      border-color: rgba(34,211,238,0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(34,211,238,0.1);
+    }
+    .screenshot-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      opacity: 0.9;
+      transition: opacity 0.3s ease;
+    }
+    .screenshot-card.is-wide img { height: 260px; }
+    .screenshot-card.is-phone img {
+      height: 460px;
+      object-fit: contain;
+      background: #080808;
+    }
+    .screenshot-card:hover img { opacity: 1; }
+    .screenshot-card .caption {
+      padding: 10px 14px;
+      font-size: 12px;
+      color: #9ca3af;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .wpp-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: #25D366;
+      color: white;
+      font-weight: 700;
+      padding: 16px 32px;
+      border-radius: 14px;
+      font-size: 16px;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .wpp-btn:hover {
+      background: #20bd5a;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(37,211,102,0.35);
+    }
+    .wpp-btn svg { width: 24px; height: 24px; }
+
+    .hero-bg {
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(14,79,102,0.3) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 80% 60%, rgba(34,211,238,0.06) 0%, transparent 60%),
+        #0a0a0a;
+    }
+
+    @media (max-width: 640px) {
+      .screenshot-grid,
+      .screenshot-grid-wide { grid-template-columns: 1fr; gap: 12px; }
+      .screenshot-card img,
+      .screenshot-card.is-wide img { height: 220px; }
+      .screenshot-card.is-phone img { height: 520px; }
+    }
+  </style>
+</head>
+<body class="bg-[#0a0a0a] text-gray-100 antialiased">
+
+  <!-- NAV -->
+  <nav class="fixed top-0 left-0 right-0 z-50 border-b border-white/5 backdrop-blur-md bg-[#0a0a0a]/80">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+      <a href="../index.html#projetos" class="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        <span class="font-mono">voltar ao portfólio</span>
+      </a>
+      <a href="https://wa.me/5561992868444?text=Olá!%20Vi%20a%20plataforma%20Gestão%20para%20Personal%20de%20Ciclismo%20e%20tenho%20interesse%20em%20saber%20mais." target="_blank"
+         class="text-xs font-mono border border-green-400/40 text-green-400 px-3 sm:px-4 py-2 rounded hover:bg-green-400/10 transition-all">
+        Tenho interesse &rarr;
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero-bg pt-32 pb-20 px-4">
+    <div class="max-w-5xl mx-auto">
+      <div class="section-hidden">
+        <div class="flex flex-wrap items-center gap-3 mb-6">
+          <span class="badge">Aplicação Web + PWA</span>
+          <span class="badge">PHP 8.3 + Vue 3</span>
+          <span class="badge">SaaS para Ciclismo</span>
+        </div>
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight mb-6 leading-tight">
+          Gestão para<br/>
+          <span class="text-cyan-400">Personal de Ciclismo</span>
+        </h1>
+        <p class="text-gray-400 text-lg leading-relaxed max-w-2xl mb-8">
+          Sistema completo desenvolvido para conecta personal e atletas, com gestão de treinos, integração com Strava e Intervals.icu, controle financeiro e muito mais.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a href="https://brunocaixeta.com.br/" target="_blank"
+             class="inline-flex items-center gap-2 bg-cyan-400 text-[#0a0a0a] font-semibold px-5 py-3 rounded-xl hover:bg-cyan-300 transition-colors text-sm">
+            Ver site do projeto
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+            </svg>
+          </a>
+          <a href="https://wa.me/5561992868444?text=Olá!%20Vi%20a%20plataforma%20Gestão%20para%20Personal%20de%20Ciclismo%20no%20portfólio%20e%20quero%20saber%20mais!" target="_blank"
+             class="inline-flex items-center gap-2 border border-green-400/40 text-green-400 font-semibold px-5 py-3 rounded-xl hover:bg-green-400/10 transition-all text-sm">
+            <svg fill="currentColor" viewBox="0 0 24 24" class="w-4 h-4"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Tenho interesse
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCREENSHOTS HERO -->
+  <section class="py-12 px-4 border-t border-white/5">
+    <div class="max-w-5xl mx-auto">
+      <div class="section-hidden mb-8">
+        <p class="font-mono text-cyan-400 text-xs uppercase tracking-widest mb-3">// telas do sistema</p>
+        <h2 class="text-2xl font-bold">Veja a plataforma em ação</h2>
+      </div>
+
+      <div class="screenshot-grid section-hidden">
+        <div class="screenshot-card">
+          <img src="../assets/projects/bruno-caixeta/05-app-login.jpg" alt="Tela de login" />
+          <div class="caption">Tela de login — PWA mobile</div>
+        </div>
+        <div class="screenshot-card">
+          <img src="../assets/projects/bruno-caixeta/06-admin-alunos.jpg" alt="Gestão de alunos" />
+          <div class="caption">Admin — Gestão de alunos</div>
+        </div>
+        <div class="screenshot-card">
+          <img src="../assets/projects/bruno-caixeta/07-admin-financeiro.jpg" alt="Painel financeiro" />
+          <div class="caption">Admin — Painel financeiro</div>
+        </div>
+        <div class="screenshot-card">
+          <img src="../assets/projects/bruno-caixeta/08-app-treinos.jpg" alt="Visualização de treinos" />
+          <div class="caption">Aluno — Treinos e atividades</div>
+        </div>
+        <div class="screenshot-card">
+          <img src="../assets/projects/bruno-caixeta/09-app-grupo.jpg" alt="Grupo de atletas" />
+          <div class="caption">Aluno — Grupo e comunidade</div>
+        </div>
+        <div class="screenshot-card">
+          <img src="../assets/projects/bruno-caixeta/10-app-configuracoes.jpg" alt="Configurações do perfil" />
+          <div class="caption">Aluno — Perfil e configurações</div>
+        </div>
+      </div>
+
+      <div class="screenshot-grid section-hidden mt-4">
+        <div class="screenshot-card col-span-2">
+          <img src="../assets/projects/bruno-caixeta/01-landing-hero.jpg" alt="Landing page hero" style="height:240px; object-fit:cover; object-position:top;" />
+          <div class="caption">Landing page — Apresentação do programa de treinamento</div>
+        </div>
+        <div class="screenshot-card">
+          <img src="../assets/projects/bruno-caixeta/03-landing-programa.jpg" alt="Programa de treino" />
+          <div class="caption">Programa e planos de coaching</div>
+        </div>
+        <div class="screenshot-card">
+          <img src="../assets/projects/bruno-caixeta/04-landing-ferramentas.jpg" alt="Ferramentas integradas" />
+          <div class="caption">Ferramentas e integrações</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISÃO GERAL -->
+  <section class="py-20 px-4 border-t border-white/5">
+    <div class="max-w-5xl mx-auto">
+      <div class="section-hidden mb-12">
+        <p class="font-mono text-cyan-400 text-xs uppercase tracking-widest mb-3">// sobre o sistema</p>
+        <h2 class="text-3xl font-bold mb-4">O que é essa plataforma?</h2>
+        <p class="text-gray-400 leading-relaxed max-w-3xl">
+          É um sistema SaaS completo, que conecta o treinador de ciclismo aos seus atletas. O personal tem controle total sobre alunos, finanças, treinos e comunicação — enquanto o aluno acessa tudo que precisa saber na palma da mão.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-4 section-hidden">
+        <div class="feature-card text-center">
+          <div class="w-12 h-12 rounded-2xl bg-cyan-400/10 flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-white mb-1">PWA — instala no celular</h3>
+          <p class="text-gray-500 text-sm">Funciona como app nativo no iOS e Android, sem precisar de App Store.</p>
+        </div>
+        <div class="feature-card text-center">
+          <div class="w-12 h-12 rounded-2xl bg-orange-400/10 flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-white mb-1">Integração com Strava</h3>
+          <p class="text-gray-500 text-sm">Sincroniza automaticamente as atividades do atleta via OAuth.</p>
+        </div>
+        <div class="feature-card text-center">
+          <div class="w-12 h-12 rounded-2xl bg-purple-400/10 flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-white mb-1">Integração com Intervals.icu</h3>
+          <p class="text-gray-500 text-sm">Prescrição e visualização de treinos direto na plataforma.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADMIN FEATURES -->
+  <section class="py-20 px-4 border-t border-white/5">
+    <div class="max-w-5xl mx-auto">
+      <div class="section-hidden mb-10">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="badge role-badge-admin font-mono text-xs">Perfil: Personal / Admin</span>
+        </div>
+        <h2 class="text-3xl font-bold mb-3">O que o Personal pode fazer</h2>
+        <p class="text-gray-500 text-sm">Controle total da operação de coaching — do cadastro do aluno ao recebimento.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-4 section-hidden">
+
+        <div class="feature-card">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-orange-400/10 flex items-center justify-center shrink-0 mt-0.5">
+              <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white mb-1">Gestão de Alunos</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">Cadastro completo de atletas com dados pessoais, experiência em ciclismo, objetivos, equipamentos (bicicleta, potenciômetro, frequencímetro), restrições médicas e horário disponível.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-orange-400/10 flex items-center justify-center shrink-0 mt-0.5">
+              <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white mb-1">Controle Financeiro + API do banco</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">Geração de cobranças, acompanhamento de pagamentos e webhook de confirmação via API do banco que o personal tem conta bancária. Histórico financeiro por aluno e relatórios de recebimentos.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-orange-400/10 flex items-center justify-center shrink-0 mt-0.5">
+              <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white mb-1">Prescrição de Treinos via Intervals.icu</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">Integração com a plataforma Intervals.icu para visualização dos treinos prescritos, métricas de carga de treinamento e análise de performance do atleta.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-orange-400/10 flex items-center justify-center shrink-0 mt-0.5">
+              <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white mb-1">Push Notifications</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">Envio de notificações push Web para os alunos — novos treinos, avisos, mensagens motivacionais — diretamente no celular, mesmo com o app fechado.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-orange-400/10 flex items-center justify-center shrink-0 mt-0.5">
+              <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white mb-1">Planos e Turmas de Treinamento</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">Criação de planos de coaching personalizados e gestão de grupos/turmas de atletas. Organização de múltiplos alunos com foco em escalabilidade do negócio.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-orange-400/10 flex items-center justify-center shrink-0 mt-0.5">
+              <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white mb-1">Dashboard + Relatórios</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">Painel administrativo com visão geral de alunos ativos, atividades Strava recentes, status financeiro e indicadores de performance por atleta.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card sm:col-span-2">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-orange-400/10 flex items-center justify-center shrink-0 mt-0.5">
+              <svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white mb-1">Gestão de Administradores + Segurança</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">Controle de acesso com múltiplos administradores, criação e gerenciamento de contas de admins, troca de senha segura via e-mail (SendGrid) e sessões protegidas com tokens de autenticação.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ALUNO FEATURES -->
+  <section class="py-20 px-4 border-t border-white/5">
+    <div class="max-w-5xl mx-auto">
+      <div class="section-hidden mb-10">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="badge role-badge-aluno font-mono text-xs">Perfil: Atleta / Aluno</span>
+        </div>
+        <h2 class="text-3xl font-bold mb-3">O que o Atleta vê no app</h2>
+        <p class="text-gray-500 text-sm">Uma experiência limpa e focada, pensada para quem está pedalando e quer acompanhar sua evolução.</p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 gap-4 section-hidden">
+
+        <div class="feature-card">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-cyan-400/10 flex items-center justify-center shrink-0 mt-0.5">
+              <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white mb-1">Atividades do Strava em tempo real</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">Após conectar o Strava, as atividades aparecem automaticamente no app — distância, tempo, altitude, potência (watts) e frequência cardíaca de cada pedalada.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-cyan-400/10 flex items-center justify-center shrink-0 mt-0.5">
+              <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white mb-1">Plano de Treinos da Semana</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">Visualização dos treinos prescritos pelo personal direto no Intervals.icu — séries, intensidades e objetivos de cada sessão de treinamento.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-cyan-400/10 flex items-center justify-center shrink-0 mt-0.5">
+              <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white mb-1">Perfil completo do atleta</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">Foto de perfil, dados pessoais, troca de senha e configuração de conexões com Strava e Intervals.icu.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-cyan-400/10 flex items-center justify-center shrink-0 mt-0.5">
+              <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white mb-1">Grupo e Comunidade</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">Visualização do grupo de atletas treinando junto, progresso coletivo e senso de comunidade para manter a motivação durante o programa.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-cyan-400/10 flex items-center justify-center shrink-0 mt-0.5">
+              <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white mb-1">Notificações push no celular</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">Recebe alertas do personal diretamente na tela de bloqueio do celular — novos treinos, avisos e mensagens motivacionais, como um app nativo.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="flex items-start gap-4">
+            <div class="w-10 h-10 rounded-xl bg-cyan-400/10 flex items-center justify-center shrink-0 mt-0.5">
+              <svg class="w-5 h-5 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-semibold text-white mb-1">Direto no celular</h3>
+              <p class="text-gray-400 text-sm leading-relaxed">O aluno adiciona o app na tela inicial do iPhone ou Android em segundos. Funciona offline, carrega instantâneo e tem visual de app nativo — sem baixar nada na loja.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- COMERCIAL -->
+  <section class="py-20 px-4 border-t border-white/5">
+    <div class="max-w-5xl mx-auto">
+      <div class="section-hidden mb-10">
+        <p class="font-mono text-cyan-400 text-xs uppercase tracking-widest mb-3">// produto para profissionais</p>
+        <h2 class="text-3xl font-bold mb-4">Venda mais acompanhamento, com menos trabalho manual</h2>
+        <p class="text-gray-400 leading-relaxed max-w-3xl">
+          A plataforma foi validada na operação do treinador Bruno Caixeta e pode ser adaptada para outros profissionais de ciclismo que querem organizar alunos, entregar uma experiência mais profissional e escalar o atendimento sem depender de planilhas, mensagens soltas e controles separados.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-3 gap-4 section-hidden">
+        <div class="feature-card">
+          <h3 class="font-semibold text-white mb-2">Marca mais profissional</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Seu aluno acessa treinos, perfil, grupo, notificações e informações importantes em um ambiente próprio, com aparência de aplicativo e foco na sua metodologia.</p>
+        </div>
+        <div class="feature-card">
+          <h3 class="font-semibold text-white mb-2">Operação centralizada</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">Alunos, pagamentos, treinos, integrações e relatórios ficam em um só lugar, reduzindo retrabalho e melhorando o acompanhamento da evolução de cada atleta.</p>
+        </div>
+        <div class="feature-card">
+          <h3 class="font-semibold text-white mb-2">Produto sob medida</h3>
+          <p class="text-gray-400 text-sm leading-relaxed">A base da plataforma pode receber sua identidade visual, seus planos, sua forma de cobrança e integrações com as ferramentas que você já usa no dia a dia.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="py-24 px-4 border-t border-white/5">
+    <div class="max-w-3xl mx-auto text-center section-hidden">
+      <p class="font-mono text-cyan-400 text-xs uppercase tracking-widest mb-4">// próximo passo</p>
+      <h2 class="text-3xl sm:text-4xl font-bold mb-4">
+        Quer um sistema assim<br/>para o seu negócio?
+      </h2>
+      <p class="text-gray-400 leading-relaxed mb-10 max-w-xl mx-auto">
+        Leve para seus atletas uma plataforma própria, com gestão de treinos, financeiro, integrações e experiência mobile. Ideal para personal de ciclismo que quer vender acompanhamento com mais valor percebido e menos processos manuais.
+      </p>
+      <a href="https://wa.me/5561992868444?text=Olá%20Luiz!%20Vi%20a%20plataforma%20Gestão%20para%20Personal%20de%20Ciclismo%20no%20seu%20portfólio%20e%20tenho%20interesse%20em%20saber%20mais.%20Podemos%20conversar?" target="_blank" class="wpp-btn">
+        <svg fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Quero esse produto
+      </a>
+      <p class="text-gray-600 text-xs mt-4 font-mono">WhatsApp: (61) 99286-8444</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/5 py-8">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <a href="../index.html" class="font-mono text-xs text-gray-600 hover:text-cyan-400 transition-colors">
+        &larr; luizhenrique.dev.br
+      </a>
+      <p class="font-mono text-xs text-gray-700">
+        &copy; 2026 Luiz Henrique
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.remove('section-hidden');
+          entry.target.classList.add('section-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.section-hidden').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
