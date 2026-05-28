@@ -79,6 +79,12 @@
       gap: 16px;
     }
 
+    .screenshot-grid-wide {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
     .screenshot-card {
       border-radius: 16px;
       overflow: hidden;
@@ -99,6 +105,12 @@
       display: block;
       opacity: 0.9;
       transition: opacity 0.3s ease;
+    }
+    .screenshot-card.is-wide img { height: 260px; }
+    .screenshot-card.is-phone img {
+      height: 460px;
+      object-fit: contain;
+      background: #080808;
     }
     .screenshot-card:hover img { opacity: 1; }
     .screenshot-card .caption {
@@ -136,8 +148,11 @@
     }
 
     @media (max-width: 640px) {
-      .screenshot-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-      .screenshot-card img { height: 140px; }
+      .screenshot-grid,
+      .screenshot-grid-wide { grid-template-columns: 1fr; gap: 12px; }
+      .screenshot-card img,
+      .screenshot-card.is-wide img { height: 220px; }
+      .screenshot-card.is-phone img { height: 520px; }
     }
   </style>
 </head>
@@ -199,47 +214,73 @@
       <div class="section-hidden mb-8">
         <p class="font-mono text-cyan-400 text-xs uppercase tracking-widest mb-3">// telas do sistema</p>
         <h2 class="text-2xl font-bold">Veja a plataforma em ação</h2>
+        <p class="text-gray-500 text-sm mt-3 max-w-2xl">
+          Prints reais da experiência do personal e do atleta, com painéis para desktop e telas mobile para uso direto no celular.
+        </p>
+      </div>
+
+      <div class="screenshot-grid-wide section-hidden mb-4">
+        <div class="screenshot-card is-wide">
+          <img src="../assets/projects/gestao-ciclismo/dashboardAdminDesktop.jpg" alt="Dashboard administrativo no desktop" />
+          <div class="caption">Admin desktop — visão geral da operação, alunos e indicadores principais</div>
+        </div>
+        <div class="screenshot-card is-wide">
+          <img src="../assets/projects/gestao-ciclismo/dashboardAlunoDesktop.jpg" alt="Dashboard do aluno no desktop" />
+          <div class="caption">Aluno desktop — acompanhamento de treinos, atividades e evolução</div>
+        </div>
       </div>
 
       <div class="screenshot-grid section-hidden">
-        <div class="screenshot-card">
-          <img src="../assets/projects/bruno-caixeta/05-app-login.jpg" alt="Tela de login" />
-          <div class="caption">Tela de login — PWA mobile</div>
+        <div class="screenshot-card is-phone">
+          <img src="../assets/projects/gestao-ciclismo/login.jpeg" alt="Tela de login mobile" />
+          <div class="caption">Login — acesso seguro para personal e atletas</div>
         </div>
-        <div class="screenshot-card">
-          <img src="../assets/projects/bruno-caixeta/06-admin-alunos.jpg" alt="Gestão de alunos" />
-          <div class="caption">Admin — Gestão de alunos</div>
+        <div class="screenshot-card is-phone">
+          <img src="../assets/projects/gestao-ciclismo/dashboardAmind.jpeg" alt="Dashboard administrativo mobile" />
+          <div class="caption">Admin mobile — painel rápido para acompanhar a operação pelo celular</div>
         </div>
-        <div class="screenshot-card">
-          <img src="../assets/projects/bruno-caixeta/07-admin-financeiro.jpg" alt="Painel financeiro" />
-          <div class="caption">Admin — Painel financeiro</div>
+        <div class="screenshot-card is-phone">
+          <img src="../assets/projects/gestao-ciclismo/gestaoAluno.jpeg" alt="Tela de gestão de alunos" />
+          <div class="caption">Gestão de alunos — cadastro, dados esportivos e organização dos atletas</div>
         </div>
-        <div class="screenshot-card">
-          <img src="../assets/projects/bruno-caixeta/08-app-treinos.jpg" alt="Visualização de treinos" />
-          <div class="caption">Aluno — Treinos e atividades</div>
+        <div class="screenshot-card is-phone">
+          <img src="../assets/projects/gestao-ciclismo/financeiro.jpeg" alt="Tela de controle financeiro" />
+          <div class="caption">Financeiro — cobranças, status de pagamento e histórico por aluno</div>
         </div>
-        <div class="screenshot-card">
-          <img src="../assets/projects/bruno-caixeta/09-app-grupo.jpg" alt="Grupo de atletas" />
-          <div class="caption">Aluno — Grupo e comunidade</div>
+        <div class="screenshot-card is-phone">
+          <img src="../assets/projects/gestao-ciclismo/configAdmin.jpeg" alt="Tela de configurações administrativas" />
+          <div class="caption">Configurações — personalização da operação, contas e integrações</div>
         </div>
-        <div class="screenshot-card">
-          <img src="../assets/projects/bruno-caixeta/10-app-configuracoes.jpg" alt="Configurações do perfil" />
-          <div class="caption">Aluno — Perfil e configurações</div>
+        <div class="screenshot-card is-phone">
+          <img src="../assets/projects/gestao-ciclismo/dashboardAluno.jpeg" alt="Dashboard do aluno mobile" />
+          <div class="caption">Aluno mobile — resumo dos treinos, atividades e próximos passos</div>
+        </div>
+        <div class="screenshot-card is-phone">
+          <img src="../assets/projects/gestao-ciclismo/meusTreinosIntervals.jpeg" alt="Tela de treinos via Intervals.icu" />
+          <div class="caption">Meus treinos — prescrição e visualização integrada com Intervals.icu</div>
+        </div>
+        <div class="screenshot-card is-phone">
+          <img src="../assets/projects/gestao-ciclismo/grupoStrava.jpeg" alt="Tela de grupo Strava" />
+          <div class="caption">Grupo Strava — comunidade, atividades e engajamento entre atletas</div>
+        </div>
+        <div class="screenshot-card is-phone">
+          <img src="../assets/projects/gestao-ciclismo/mensagensPush.jpeg" alt="Tela de mensagens push" />
+          <div class="caption">Mensagens push — avisos e orientações enviados direto ao celular</div>
+        </div>
+        <div class="screenshot-card is-phone">
+          <img src="../assets/projects/gestao-ciclismo/perfilAluno.jpeg" alt="Tela de perfil do aluno" />
+          <div class="caption">Perfil do aluno — dados pessoais, senha e conexões com Strava e Intervals.icu</div>
         </div>
       </div>
 
-      <div class="screenshot-grid section-hidden mt-4">
-        <div class="screenshot-card col-span-2">
-          <img src="../assets/projects/bruno-caixeta/01-landing-hero.jpg" alt="Landing page hero" style="height:240px; object-fit:cover; object-position:top;" />
-          <div class="caption">Landing page — Apresentação do programa de treinamento</div>
+      <div class="screenshot-grid-wide section-hidden mt-4">
+        <div class="screenshot-card is-wide">
+          <img src="../assets/projects/gestao-ciclismo/configAdminDesktop.jpg" alt="Configurações administrativas no desktop" />
+          <div class="caption">Configurações desktop — gestão da plataforma em tela ampla</div>
         </div>
-        <div class="screenshot-card">
-          <img src="../assets/projects/bruno-caixeta/03-landing-programa.jpg" alt="Programa de treino" />
-          <div class="caption">Programa e planos de coaching</div>
-        </div>
-        <div class="screenshot-card">
-          <img src="../assets/projects/bruno-caixeta/04-landing-ferramentas.jpg" alt="Ferramentas integradas" />
-          <div class="caption">Ferramentas e integrações</div>
+        <div class="screenshot-card is-wide">
+          <img src="../assets/projects/gestao-ciclismo/galera-la-debaixo.png" alt="Tela de comunidade de atletas" />
+          <div class="caption">Comunidade — reforço de grupo e conexão entre atletas do personal</div>
         </div>
       </div>
     </div>
