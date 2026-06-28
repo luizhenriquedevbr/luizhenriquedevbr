@@ -1,0 +1,11 @@
+{
+  "name": "luizhenriquedevbr",
+  "private": true,
+  "scripts": {
+    "build:css": "tailwindcss -i src/input.css -o dist/tailwind.css --minify",
+    "watch:css": "tailwindcss -i src/input.css -o dist/tailwind.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.13"
+  }
+}
