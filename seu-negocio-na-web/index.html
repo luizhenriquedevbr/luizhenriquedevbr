@@ -1,0 +1,1549 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seu Negócio na Web — Presença Digital para Profissionais Liberais</title>
+  <meta name="description" content="Landing page profissional + domínio + hospedagem por 12 meses. Tudo por R$1.099. Pacote completo para médicos, advogados, psicólogos, dentistas e profissionais liberais.">
+  <meta name="robots" content="index, follow">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Seu Negócio na Web — Presença Digital para Profissionais Liberais">
+  <meta property="og:description" content="Landing page + domínio + hospedagem por R$1.099. Mais bônus de consultoria Instagram e Google Meu Negócio.">
+
+  <!-- Google Fonts: Poppins + Open Sans (Modern Professional) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       CUSTOMIZE: Variáveis de design — edite aqui para personalizar
+    ============================================================ */
+    :root {
+      --primary:        #0EA5E9; /* Azul principal */
+      --primary-dark:   #0284C7;
+      --primary-darker: #0C4A6E;
+      --cta:            #F97316; /* Laranja — todos os botões de ação */
+      --cta-dark:       #EA6A0A;
+      --bg-light:       #F0F9FF;
+      --text-dark:      #0F172A;
+      --text-body:      #334155;
+      --text-muted:     #64748B;
+      --border:         #E2E8F0;
+      --success:        #10B981;
+      --radius:         12px;
+      --radius-lg:      20px;
+      --shadow-sm:      0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md:      0 4px 20px rgba(0,0,0,0.10);
+      --shadow-lg:      0 8px 40px rgba(0,0,0,0.15);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--text-body);
+      background: #fff;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Poppins', sans-serif;
+      color: var(--text-dark);
+      line-height: 1.2;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; }
+
+    .container {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ============================================================
+       NAV
+    ============================================================ */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.3s;
+    }
+    .nav.scrolled { box-shadow: var(--shadow-md); }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .nav-logo {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--primary-darker);
+    }
+    .nav-logo span { color: var(--cta); }
+    /* CUSTOMIZE: Substitua o href pelo link do seu WhatsApp */
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--cta);
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 0.82rem;
+      padding: 10px 20px;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+      white-space: nowrap;
+    }
+    .nav-cta:hover { background: var(--cta-dark); transform: translateY(-1px); }
+
+    /* ============================================================
+       BOTÃO PRIMÁRIO (CTA) — Reutilizado em toda a página
+    ============================================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--cta);
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 16px 36px;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 4px 24px rgba(249,115,22,0.35);
+      border: none;
+    }
+    .btn:hover {
+      background: var(--cta-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 32px rgba(249,115,22,0.45);
+    }
+    .btn:active { transform: translateY(0); }
+    .btn-lg { font-size: 1.1rem; padding: 18px 44px; }
+
+    /* ============================================================
+       RÓTULOS DE SEÇÃO
+    ============================================================ */
+    .tag {
+      display: inline-block;
+      background: var(--bg-light);
+      color: var(--primary-dark);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      border: 1px solid rgba(14,165,233,0.2);
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 560px;
+    }
+    .text-center { text-align: center; }
+    .text-center .section-sub { margin: 0 auto; }
+
+    section { padding: 80px 0; }
+
+    /* ============================================================
+       HERO
+    ============================================================ */
+    .hero {
+      padding-top: 104px;
+      padding-bottom: 80px;
+      background: linear-gradient(150deg, #073B5C 0%, #0284C7 55%, #38BDF8 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -40%; right: -15%;
+      width: 55%; height: 190%;
+      background: radial-gradient(ellipse, rgba(255,255,255,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 52px;
+      align-items: center;
+    }
+    @media (min-width: 768px) {
+      .hero-grid { grid-template-columns: 1.1fr 0.9fr; }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.28);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 22px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .hero-badge .dot {
+      width: 8px; height: 8px;
+      background: #4ADE80;
+      border-radius: 50%;
+      animation: blink 2s infinite;
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+    .hero h1 {
+      font-size: clamp(1.85rem, 4.2vw, 2.9rem);
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 20px;
+    }
+    .hero h1 em { font-style: normal; color: #FDE68A; }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.88);
+      margin-bottom: 34px;
+      line-height: 1.75;
+      max-width: 500px;
+    }
+    .hero-sub strong { color: #fff; }
+
+    .hero-note {
+      font-size: 0.83rem;
+      color: rgba(255,255,255,0.65);
+      margin-top: 14px;
+    }
+
+    .hero-proof {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 20px;
+      margin-top: 36px;
+      padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.15);
+    }
+    .proof-avatars {
+      display: flex;
+    }
+    .proof-avatar {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.75);
+      background: var(--primary-dark);
+      margin-right: -9px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.72rem; font-weight: 700; color: #fff;
+    }
+    .proof-avatar:last-child { margin-right: 0; }
+    .proof-text { color: rgba(255,255,255,0.9); font-size: 0.85rem; font-weight: 500; }
+    .proof-text strong { color: #fff; }
+
+    .proof-stars { display: flex; gap: 3px; }
+    .proof-stars svg { width: 16px; height: 16px; color: #FBBF24; }
+
+    /* Hero card */
+    .hero-card {
+      background: #fff;
+      border-radius: var(--radius-lg);
+      padding: 28px 24px;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.28);
+      max-width: 340px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .hero-card-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-bottom: 18px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+    .card-icon {
+      width: 44px; height: 44px;
+      background: var(--bg-light);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--primary);
+      flex-shrink: 0;
+    }
+    .card-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.9rem; color: var(--text-dark); }
+    .card-sub { font-size: 0.72rem; color: var(--text-muted); }
+
+    .card-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .stat-box {
+      background: var(--bg-light);
+      border-radius: 10px;
+      padding: 12px;
+      text-align: center;
+    }
+    .stat-box .num {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.5rem; font-weight: 800;
+      color: var(--primary-dark);
+    }
+    .stat-box .lbl { font-size: 0.68rem; color: var(--text-muted); }
+
+    .card-bar { margin-bottom: 10px; }
+    .bar-label {
+      display: flex; justify-content: space-between;
+      font-size: 0.72rem; color: var(--text-muted);
+      margin-bottom: 5px;
+    }
+    .bar-track {
+      height: 7px; background: var(--border);
+      border-radius: 100px; overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--cta));
+      border-radius: 100px;
+    }
+
+    /* ============================================================
+       PROBLEM
+    ============================================================ */
+    .problem { background: #0F172A; }
+    .problem .tag { background: rgba(14,165,233,0.12); color: #7DD3FC; border-color: rgba(14,165,233,0.25); }
+    .problem .section-title { color: #fff; }
+    .problem .section-sub { color: #94A3B8; }
+
+    .problem-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 48px;
+    }
+    @media (min-width: 640px) { .problem-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .problem-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .problem-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: var(--radius);
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+    .problem-card:hover { border-color: rgba(14,165,233,0.35); }
+    .problem-card .icon {
+      width: 44px; height: 44px;
+      border-radius: 10px;
+      background: rgba(14,165,233,0.12);
+      display: flex; align-items: center; justify-content: center;
+      color: #7DD3FC;
+      margin-bottom: 16px;
+    }
+    .problem-card h3 { font-size: 0.95rem; font-weight: 600; color: #fff; margin-bottom: 8px; }
+    .problem-card p { font-size: 0.88rem; color: #94A3B8; line-height: 1.65; }
+
+    .problem-stat {
+      text-align: center;
+      margin-top: 52px;
+      padding: 44px 32px;
+      background: rgba(14,165,233,0.07);
+      border: 1px solid rgba(14,165,233,0.18);
+      border-radius: var(--radius-lg);
+    }
+    .problem-stat .big-num {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(3.5rem, 8vw, 5.5rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, #7DD3FC, #38BDF8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+    .problem-stat p { font-size: 1.05rem; color: #CBD5E1; max-width: 480px; margin: 0 auto; }
+
+    /* ============================================================
+       BENEFITS
+    ============================================================ */
+    .benefits { background: var(--bg-light); }
+
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-top: 48px;
+    }
+    @media (min-width: 640px) { .benefits-grid { grid-template-columns: repeat(2, 1fr); } }
+
+    .benefit-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 32px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.22s, box-shadow 0.22s;
+    }
+    .benefit-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+
+    .benefit-icon {
+      width: 56px; height: 56px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+    }
+    .bi-blue   { background: #EFF6FF; color: #2563EB; }
+    .bi-orange { background: #FFF7ED; color: #EA580C; }
+    .bi-green  { background: #ECFDF5; color: #059669; }
+    .bi-purple { background: #F5F3FF; color: #7C3AED; }
+
+    .benefit-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; }
+    .benefit-card p  { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
+
+    /* ============================================================
+       HOW IT WORKS
+    ============================================================ */
+    .how { background: #fff; }
+
+    .steps {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      margin-top: 56px;
+    }
+    @media (min-width: 768px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 24px 48px;
+      position: relative;
+    }
+    @media (min-width: 768px) {
+      .step { padding-bottom: 0; }
+      .step:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        top: 35px; right: -20%;
+        width: 40%; height: 2px;
+        background: linear-gradient(90deg, var(--primary), rgba(14,165,233,0.15));
+      }
+    }
+
+    .step-num {
+      width: 70px; height: 70px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #fff;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.6rem; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(14,165,233,0.3);
+    }
+    .step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 10px; }
+    .step p   { font-size: 0.88rem; color: var(--text-muted); line-height: 1.7; }
+
+    /* ============================================================
+       TESTIMONIALS
+    ============================================================ */
+    .testimonials { background: var(--bg-light); }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+      margin-top: 48px;
+    }
+    @media (min-width: 640px)  { .testimonials-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1024px) { .testimonials-grid { grid-template-columns: repeat(3, 1fr); } }
+
+    .t-card {
+      background: #fff;
+      border-radius: var(--radius);
+      padding: 28px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.22s, box-shadow 0.22s;
+      display: flex; flex-direction: column;
+    }
+    .t-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+
+    .t-stars { display: flex; gap: 3px; margin-bottom: 16px; }
+    .t-stars svg { width: 17px; height: 17px; color: #FBBF24; }
+
+    .t-quote {
+      font-size: 0.93rem;
+      color: var(--text-body);
+      line-height: 1.75;
+      font-style: italic;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+    .t-author { display: flex; align-items: center; gap: 12px; }
+    .t-avatar { width: 46px; height: 46px; border-radius: 50%; overflow: hidden; flex-shrink: 0; }
+    .t-name { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.88rem; color: var(--text-dark); }
+    .t-role { font-size: 0.77rem; color: var(--text-muted); }
+    .t-result {
+      display: inline-block;
+      background: #ECFDF5; color: #059669;
+      font-size: 0.72rem; font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 100px;
+      margin-top: 14px;
+    }
+
+    .cta-center { display: flex; justify-content: center; margin-top: 48px; }
+
+    /* ============================================================
+       PRICING
+    ============================================================ */
+    .pricing { background: #fff; }
+
+    .price-card {
+      max-width: 680px;
+      margin: 48px auto 0;
+      background: linear-gradient(150deg, #073B5C 0%, #0284C7 100%);
+      border-radius: var(--radius-lg);
+      padding: 48px;
+      box-shadow: 0 24px 60px rgba(7,59,92,0.28);
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .price-card::before {
+      content: '';
+      position: absolute;
+      top: -30%; right: -10%;
+      width: 50%; height: 200%;
+      background: radial-gradient(ellipse, rgba(255,255,255,0.06) 0%, transparent 70%);
+    }
+
+    .price-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--cta);
+      color: #fff;
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+    .price-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.55rem; font-weight: 800;
+      color: #fff; margin-bottom: 10px;
+    }
+    .price-sub { color: rgba(255,255,255,0.72); font-size: 0.95rem; margin-bottom: 30px; }
+
+    /* Tabela de decomposição */
+    .breakdown {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      margin-bottom: 22px;
+    }
+    .breakdown-head {
+      font-size: 0.7rem; font-weight: 700;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .breakdown-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      font-size: 0.88rem;
+    }
+    .breakdown-row:last-child { border-bottom: none; }
+    .breakdown-row .lbl { color: rgba(255,255,255,0.78); }
+    .breakdown-row .val { color: #fff; font-weight: 600; }
+    .breakdown-total {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 14px;
+      margin-top: 6px;
+      border-top: 2px solid rgba(255,255,255,0.14);
+    }
+    .breakdown-total .lbl { font-size: 0.82rem; color: rgba(255,255,255,0.55); text-decoration: line-through; }
+    .breakdown-total .val { color: #FCA5A5; text-decoration: line-through; font-size: 0.95rem; }
+
+    /* Preço destacado */
+    .price-display {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .price-from { font-size: 0.9rem; color: rgba(255,255,255,0.65); }
+    .price-value {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(2.8rem, 7vw, 3.8rem);
+      font-weight: 900;
+      color: #FDE68A;
+      line-height: 1;
+    }
+    .price-cents { font-size: 0.9rem; color: rgba(255,255,255,0.65); }
+
+    .price-saving {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(74,222,128,0.18);
+      border: 1px solid rgba(74,222,128,0.35);
+      color: #4ADE80;
+      font-size: 0.83rem; font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 26px;
+    }
+
+    /* Itens inclusos */
+    .includes-head {
+      font-size: 0.7rem; font-weight: 700;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .include-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 11px;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.9);
+    }
+    .include-row .ck {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: rgba(74,222,128,0.18);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      color: #4ADE80;
+      margin-top: 1px;
+    }
+    .includes-block { margin-bottom: 24px; }
+
+    /* Bônus */
+    .bonus-box {
+      background: rgba(249,115,22,0.13);
+      border: 1px solid rgba(249,115,22,0.28);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      margin-bottom: 28px;
+    }
+    .bonus-head {
+      font-size: 0.72rem; font-weight: 700;
+      color: #FED7AA;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .bonus-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 8px;
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.88);
+    }
+    .bonus-row .ck {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: rgba(249,115,22,0.18);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      color: #FDBA74;
+      margin-top: 2px;
+    }
+    .bonus-value {
+      font-size: 0.83rem; color: #FDBA74; font-weight: 600; margin-top: 12px;
+    }
+
+    .price-cta { width: 100%; text-align: center; font-size: 1.05rem; margin-bottom: 12px; }
+    .price-note { text-align: center; font-size: 0.78rem; color: rgba(255,255,255,0.55); }
+    .price-installment { text-align: center; font-size: 0.92rem; color: rgba(255,255,255,0.82); font-weight: 500; margin-top: 6px; }
+
+    /* ============================================================
+       GUARANTEE
+    ============================================================ */
+    .guarantee {
+      background: #FFFBEB;
+      border-top: 4px solid #FBBF24;
+      padding: 64px 0;
+    }
+    .guarantee-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 24px;
+    }
+    @media (min-width: 768px) {
+      .guarantee-inner { flex-direction: row; text-align: left; gap: 44px; }
+    }
+    .g-icon {
+      width: 100px; height: 100px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 24px rgba(251,191,36,0.25);
+      flex-shrink: 0;
+      color: #D97706;
+    }
+    .guarantee h2 { font-size: 1.5rem; color: #92400E; margin-bottom: 12px; }
+    .guarantee p  { color: #78350F; line-height: 1.75; }
+
+    /* ============================================================
+       FAQ
+    ============================================================ */
+    .faq { background: #fff; }
+
+    .faq-list {
+      max-width: 700px;
+      margin: 48px auto 0;
+    }
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .faq-item:hover { box-shadow: var(--shadow-sm); }
+    .faq-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 24px;
+      background: none; border: none;
+      cursor: pointer;
+      text-align: left;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.93rem; font-weight: 600;
+      color: var(--text-dark);
+      transition: background 0.2s;
+    }
+    .faq-btn:hover { background: var(--bg-light); }
+    .faq-icon {
+      width: 24px; height: 24px;
+      border-radius: 50%;
+      background: var(--bg-light);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--primary);
+      flex-shrink: 0;
+      transition: transform 0.3s, background 0.2s;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--primary); color: #fff; }
+    .faq-body { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+    .faq-item.open .faq-body { max-height: 280px; }
+    .faq-text {
+      padding: 0 24px 20px;
+      padding-top: 16px;
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.75;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ============================================================
+       FINAL CTA
+    ============================================================ */
+    .final-cta {
+      background: linear-gradient(150deg, #073B5C 0%, #0284C7 100%);
+      text-align: center;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      bottom: -20%; left: -10%;
+      width: 50%; height: 160%;
+      background: radial-gradient(ellipse, rgba(255,255,255,0.05) 0%, transparent 70%);
+    }
+    .urgency {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(239,68,68,0.14);
+      border: 1px solid rgba(239,68,68,0.28);
+      color: #FCA5A5;
+      font-size: 0.8rem; font-weight: 700;
+      padding: 8px 20px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+      letter-spacing: 0.05em;
+    }
+    .final-cta h2 {
+      font-size: clamp(1.8rem, 4.2vw, 2.6rem);
+      font-weight: 900; color: #fff; margin-bottom: 16px;
+    }
+    .final-cta h2 em { font-style: normal; color: #FDE68A; }
+    .final-cta p {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,0.78);
+      max-width: 500px;
+      margin: 0 auto 36px;
+    }
+    .final-note {
+      margin-top: 18px;
+      font-size: 0.83rem;
+      color: rgba(255,255,255,0.55);
+    }
+
+    /* ============================================================
+       FOOTER
+    ============================================================ */
+    .footer {
+      background: #0F172A;
+      color: #64748B;
+      padding: 28px 0;
+      text-align: center;
+      font-size: 0.83rem;
+    }
+    .footer a { color: #7DD3FC; }
+    .footer a:hover { text-decoration: underline; }
+
+    /* ============================================================
+       WHATSAPP FLUTUANTE
+    ============================================================ */
+    /* CUSTOMIZE: Substitua o href pelo seu link do WhatsApp */
+    .wa-float {
+      position: fixed;
+      bottom: 28px; right: 28px;
+      z-index: 90;
+      width: 56px; height: 56px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+      transition: transform 0.2s, box-shadow 0.2s;
+      color: #fff;
+    }
+    .wa-float:hover { transform: scale(1.1); box-shadow: 0 6px 28px rgba(37,211,102,0.55); }
+    .wa-float svg { width: 28px; height: 28px; }
+
+    /* ============================================================
+       ANIMAÇÕES DE SCROLL
+    ============================================================ */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.1s; }
+    .d2 { transition-delay: 0.2s; }
+    .d3 { transition-delay: 0.3s; }
+    .d4 { transition-delay: 0.4s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .fade-up { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ============================================================
+       RESPONSIVO
+    ============================================================ */
+    @media (max-width: 640px) {
+      section { padding: 60px 0; }
+      .price-card { padding: 32px 20px; }
+      .hero-card { display: none; } /* esconde card no mobile pequeno */
+    }
+    @media (min-width: 480px) {
+      .hero-card { display: block; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     NAV FIXA
+============================================================ -->
+<nav class="nav" role="navigation" aria-label="Navegação principal">
+  <div class="nav-inner">
+    <span class="nav-logo">Seu Negócio<span>Na Web</span></span>
+    <!-- CUSTOMIZE: Substitua pelo seu número de WhatsApp (formato internacional sem +) -->
+    <a href="https://wa.me/5561999999999?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20pacote%20Seu%20Negócio%20na%20Web"
+       class="nav-cta" target="_blank" rel="noopener noreferrer"
+       aria-label="Falar no WhatsApp">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      Falar no WhatsApp
+    </a>
+  </div>
+</nav>
+
+<!-- ============================================================
+     HERO
+============================================================ -->
+<section class="hero" aria-label="Apresentação">
+  <div class="container">
+    <div class="hero-grid">
+
+      <!-- Conteúdo -->
+      <div>
+        <div class="hero-badge">
+          <span class="dot"></span>
+          Promoção por tempo limitado
+        </div>
+
+        <h1>
+          Seu cliente está pesquisando agora<br>
+          sobre o seu ramo.<br>
+          <em>Ele vai encontrar você?</em>
+        </h1>
+
+        <p class="hero-sub">
+          Profissional liberal sem presença online perde clientes todos os dias. Com o pacote
+          <strong>Seu Negócio na Web</strong>, sua página profissional vai ao ar em até 7 dias —
+          por um valor que cabe no bolso e já inclui domínio e hospedagem por 12 meses.
+        </p>
+
+        <!-- CUSTOMIZE: Substitua pelo seu link de WhatsApp ou checkout -->
+        <a href="https://wa.me/5561999999999?text=Olá!%20Quero%20contratar%20o%20pacote%20Seu%20Negócio%20na%20Web"
+           class="btn" target="_blank" rel="noopener noreferrer"
+           aria-label="Contratar pelo WhatsApp">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Quero Minha Página Agora
+        </a>
+
+        <p class="hero-note">Sem risco — você paga somente após ver e aprovar o resultado</p>
+
+        <!-- Prova social -->
+        <div class="hero-proof">
+          <div style="display:flex;align-items:center;gap:12px;">
+            <div class="proof-avatars">
+              <div class="proof-avatar" aria-hidden="true">M</div>
+              <div class="proof-avatar" aria-hidden="true">A</div>
+              <div class="proof-avatar" aria-hidden="true">R</div>
+              <div class="proof-avatar" aria-hidden="true">+</div>
+            </div>
+            <div>
+              <div class="proof-text"><strong>+50</strong> profissionais</div>
+              <div class="proof-text">já têm o negócio online</div>
+            </div>
+          </div>
+          <div>
+            <div class="proof-stars" aria-label="5 estrelas">
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            </div>
+            <div class="proof-text" style="margin-top:4px;"><strong>5.0</strong> de avaliação média</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Card visual -->
+      <div style="display:flex;justify-content:center;">
+        <div class="hero-card" role="img" aria-label="Exemplo de painel de resultados digitais">
+          <div class="hero-card-head">
+            <div class="card-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            </div>
+            <div>
+              <div class="card-title">Seu Negócio Online</div>
+              <div class="card-sub">Resultados do último mês</div>
+            </div>
+          </div>
+          <div class="card-stats">
+            <div class="stat-box">
+              <div class="num">127</div>
+              <div class="lbl">Visitas</div>
+            </div>
+            <div class="stat-box">
+              <div class="num">34</div>
+              <div class="lbl">Contatos</div>
+            </div>
+          </div>
+          <div class="card-bar">
+            <div class="bar-label"><span>Aparições no Google</span><span>78%</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:78%"></div></div>
+          </div>
+          <div class="card-bar">
+            <div class="bar-label"><span>Cliques no WhatsApp</span><span>62%</span></div>
+            <div class="bar-track"><div class="bar-fill" style="width:62%"></div></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PROBLEMA
+============================================================ -->
+<section class="problem" aria-label="O problema">
+  <div class="container">
+    <div class="text-center">
+      <span class="tag">A realidade do mercado</span>
+      <h2 class="section-title">Enquanto você não está no Google,<br>seus concorrentes estão faturando</h2>
+      <p class="section-sub">
+        A cada minuto, dezenas de pessoas na sua cidade pesquisam por serviços como o seu.
+        Sem um endereço digital, você simplesmente não existe para elas.
+      </p>
+    </div>
+
+    <div class="problem-grid">
+      <div class="problem-card fade-up">
+        <div class="icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </div>
+        <h3>Invisível nas buscas</h3>
+        <p>93% das pesquisas por serviços locais começam no Google. Se você não aparece, o cliente vai direto para quem aparece.</p>
+      </div>
+      <div class="problem-card fade-up d1">
+        <div class="icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3z"/><path d="M17 2h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></svg>
+        </div>
+        <h3>Credibilidade perdida</h3>
+        <p>Hoje o cliente pesquisa antes de ligar. Profissional sem site transmite menos confiança do que quem tem presença digital sólida.</p>
+      </div>
+      <div class="problem-card fade-up d2">
+        <div class="icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+        </div>
+        <h3>Renda deixada na mesa</h3>
+        <p>Cada dia sem presença online é dinheiro perdido. Seus concorrentes com site captam clientes que seriam seus.</p>
+      </div>
+    </div>
+
+    <div class="problem-stat fade-up">
+      <div class="big-num">76%</div>
+      <p>dos consumidores visitam o site de uma empresa antes de fazer contato — mesmo quando a indicação veio de um amigo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     BENEFÍCIOS
+============================================================ -->
+<section class="benefits" aria-label="Benefícios">
+  <div class="container">
+    <div class="text-center">
+      <span class="tag">O que você ganha</span>
+      <h2 class="section-title">4 transformações que sua<br>landing page vai trazer</h2>
+    </div>
+
+    <div class="benefits-grid">
+      <div class="benefit-card fade-up">
+        <div class="benefit-icon bi-blue" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <h3>No ar em até 7 dias úteis</h3>
+        <p>Do briefing à publicação: sua página profissional pronta em menos de uma semana. Enquanto outros demoram meses, você já está captando clientes.</p>
+      </div>
+      <div class="benefit-card fade-up d1">
+        <div class="benefit-icon bi-orange" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Consultoria inicial inclusa</h3>
+        <p>Receba orientação profissional sobre identidade digital, escolha do domínio ideal e estratégia de presença online para o seu ramo específico.</p>
+      </div>
+      <div class="benefit-card fade-up d2">
+        <div class="benefit-icon bi-green" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        </div>
+        <h3>Aparecer no Google</h3>
+        <p>Sua página é otimizada para buscas locais. Quando alguém pesquisar pelo seu serviço na sua cidade, você passa a aparecer nos resultados.</p>
+      </div>
+      <div class="benefit-card fade-up d3">
+        <div class="benefit-icon bi-purple" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.59 1.22h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <h3>WhatsApp bombando de contatos</h3>
+        <p>Sua página é construída para converter visitante em contato. O botão do WhatsApp posicionado estrategicamente transforma interesse em conversa.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     COMO FUNCIONA
+============================================================ -->
+<section class="how" aria-label="Como funciona">
+  <div class="container">
+    <div class="text-center">
+      <span class="tag">Processo simples</span>
+      <h2 class="section-title">Do zero ao digital em 3 passos</h2>
+      <p class="section-sub">Sem complicação, sem tecnicismos. Cuido de tudo enquanto você foca no seu trabalho.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step fade-up">
+        <div class="step-num" aria-label="Passo 1">1</div>
+        <h3>Fechamos o contrato</h3>
+        <p>Conversamos pelo WhatsApp, entendo seu negócio e definimos juntos o domínio ideal. Você não paga nada ainda.</p>
+      </div>
+      <div class="step fade-up d1">
+        <div class="step-num" aria-label="Passo 2">2</div>
+        <h3>Tudo pronto em até 7 dias</h3>
+        <p>Sua landing page fica pronta, o Instagram é orientado e o Google Meu Negócio configurado. Você revisa e aprova.</p>
+      </div>
+      <div class="step fade-up d2">
+        <div class="step-num" aria-label="Passo 3">3</div>
+        <h3>Seu negócio lucrando</h3>
+        <p>Com tudo no ar, novos clientes começam a encontrar você. Seu WhatsApp recebe contatos de pessoas prontas para contratar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     DEPOIMENTOS
+============================================================ -->
+<section class="testimonials" aria-label="Depoimentos de clientes">
+  <div class="container">
+    <div class="text-center">
+      <span class="tag">Resultados reais</span>
+      <h2 class="section-title">Profissionais que já têm o negócio<br>trabalhando pela internet</h2>
+    </div>
+
+    <div class="testimonials-grid">
+
+      <!-- CUSTOMIZE: Substitua pelos depoimentos reais dos seus clientes -->
+      <div class="t-card fade-up">
+        <div class="t-stars" aria-label="5 estrelas">
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        </div>
+        <p class="t-quote">"Em menos de 30 dias com a página no ar, minha agenda de consultas triplicou. Antes eu dependia só de indicações. Hoje o Google me manda pacientes novos toda semana."</p>
+        <div class="t-author">
+          <div class="t-avatar" aria-hidden="true">
+            <svg viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="46" height="46" fill="#DBEAFE"/>
+              <circle cx="23" cy="17" r="9" fill="#93C5FD"/>
+              <ellipse cx="23" cy="39" rx="15" ry="9" fill="#60A5FA"/>
+            </svg>
+          </div>
+          <div>
+            <div class="t-name">Dra. Amanda Ferreira</div>
+            <div class="t-role">Nutricionista — Brasília, DF</div>
+          </div>
+        </div>
+        <span class="t-result">+3x mais agendamentos</span>
+      </div>
+
+      <div class="t-card fade-up d1">
+        <div class="t-stars" aria-label="5 estrelas">
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        </div>
+        <p class="t-quote">"Sou advogado e sempre achei que site era coisa de empresa grande. Hoje apareço na primeira página do Google quando alguém pesquisa 'advogado trabalhista' na minha cidade. Valeu cada centavo."</p>
+        <div class="t-author">
+          <div class="t-avatar" aria-hidden="true">
+            <svg viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="46" height="46" fill="#D1FAE5"/>
+              <circle cx="23" cy="17" r="9" fill="#6EE7B7"/>
+              <ellipse cx="23" cy="39" rx="15" ry="9" fill="#34D399"/>
+            </svg>
+          </div>
+          <div>
+            <div class="t-name">Dr. Ricardo Souza</div>
+            <div class="t-role">Advogado — Goiânia, GO</div>
+          </div>
+        </div>
+        <span class="t-result">1ª página do Google</span>
+      </div>
+
+      <div class="t-card fade-up d2">
+        <div class="t-stars" aria-label="5 estrelas">
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        </div>
+        <p class="t-quote">"Sou personal trainer e trabalho com alunos online. Com a landing page, meu WhatsApp não para. Fechei 8 novos alunos só no primeiro mês. O investimento se pagou rápido demais."</p>
+        <div class="t-author">
+          <div class="t-avatar" aria-hidden="true">
+            <svg viewBox="0 0 46 46" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="46" height="46" fill="#FEF3C7"/>
+              <circle cx="23" cy="17" r="9" fill="#FDE68A"/>
+              <ellipse cx="23" cy="39" rx="15" ry="9" fill="#FBBF24"/>
+            </svg>
+          </div>
+          <div>
+            <div class="t-name">Mariana Costa</div>
+            <div class="t-role">Personal Trainer — São Paulo, SP</div>
+          </div>
+        </div>
+        <span class="t-result">8 novos alunos no 1º mês</span>
+      </div>
+
+    </div>
+
+    <!-- CTA #2 -->
+    <div class="cta-center">
+      <!-- CUSTOMIZE: Substitua pelo seu link de WhatsApp -->
+      <a href="https://wa.me/5561999999999?text=Olá!%20Quero%20contratar%20o%20pacote%20Seu%20Negócio%20na%20Web"
+         class="btn" target="_blank" rel="noopener noreferrer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        Quero o Mesmo Resultado
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     OFERTA / PREÇO
+============================================================ -->
+<section class="pricing" aria-label="Preço e pacote">
+  <div class="container">
+    <div class="text-center">
+      <span class="tag">Oferta especial</span>
+      <h2 class="section-title">Tudo que você precisa para<br>decolar na internet</h2>
+      <p class="section-sub">Um único pacote completo. Sem surpresas, sem taxa escondida.</p>
+    </div>
+
+    <div class="price-card fade-up">
+      <span class="price-badge">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        Pacote Completo — Promoção
+      </span>
+
+      <h3 class="price-title">Seu Negócio na Web</h3>
+      <p class="price-sub">Landing page profissional + domínio + hospedagem por 12 meses</p>
+
+      <!-- Decomposição de preço -->
+      <div class="breakdown">
+        <div class="breakdown-head">O que você pagaria separado</div>
+        <div class="breakdown-row">
+          <span class="lbl">Domínio (registro anual)</span>
+          <span class="val">R$&nbsp;40,00</span>
+        </div>
+        <div class="breakdown-row">
+          <span class="lbl">Hospedagem (R$&nbsp;20 × 12 meses)</span>
+          <span class="val">R$&nbsp;240,00</span>
+        </div>
+        <div class="breakdown-row">
+          <span class="lbl">Desenvolvimento da landing page</span>
+          <span class="val">R$&nbsp;1.000,00</span>
+        </div>
+        <div class="breakdown-total">
+          <span class="lbl">Total avulso</span>
+          <span class="val">R$&nbsp;1.280,00</span>
+        </div>
+      </div>
+
+      <!-- Preço destaque -->
+      <div class="price-display">
+        <span class="price-from">Por apenas</span>
+        <span class="price-value">R$&nbsp;1.099</span>
+        <span class="price-cents">,00</span>
+      </div>
+      <div class="price-saving">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        Você economiza R$&nbsp;181,00 nessa promoção
+      </div>
+
+      <!-- Itens inclusos -->
+      <div class="includes-block">
+        <div class="includes-head">Incluso no pacote</div>
+        <div class="include-row">
+          <div class="ck" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          Landing page profissional e responsiva (mobile + desktop)
+        </div>
+        <div class="include-row">
+          <div class="ck" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          Domínio registrado a seu nome por 12 meses
+        </div>
+        <div class="include-row">
+          <div class="ck" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          Hospedagem segura e rápida por 12 meses
+        </div>
+        <div class="include-row">
+          <div class="ck" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          Otimização SEO para aparecer nas buscas do Google
+        </div>
+        <div class="include-row">
+          <div class="ck" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          Botão WhatsApp para captar contatos direto na página
+        </div>
+        <div class="include-row">
+          <div class="ck" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          30 dias de suporte técnico pós-entrega
+        </div>
+      </div>
+
+      <!-- Bônus -->
+      <div class="bonus-box">
+        <div class="bonus-head">Bônus exclusivos — valor de mercado R$&nbsp;2.000+</div>
+        <div class="bonus-row">
+          <div class="ck" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          Consultoria do perfil do Instagram (posicionamento e dicas de conteúdo)
+        </div>
+        <div class="bonus-row">
+          <div class="ck" aria-hidden="true"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+          Configuração do Google Meu Negócio (apareça nos mapas do Google)
+        </div>
+        <p class="bonus-value">Só os bônus já valem mais de R$&nbsp;2.000 no mercado — e são seus, de graça.</p>
+      </div>
+
+      <!-- CTA #3 -->
+      <!-- CUSTOMIZE: Substitua pelo seu link de WhatsApp ou checkout -->
+      <a href="https://wa.me/5561999999999?text=Olá!%20Quero%20contratar%20o%20pacote%20Seu%20Negócio%20na%20Web"
+         class="btn price-cta" target="_blank" rel="noopener noreferrer">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Quero Contratar Agora
+      </a>
+      <p class="price-note">Pagamento somente após entrega e aprovação do projeto</p>
+      <p class="price-installment">ou parcelado em até <strong>12x</strong> com as menores taxas do mercado</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     GARANTIA
+============================================================ -->
+<section class="guarantee" aria-label="Garantia">
+  <div class="container">
+    <div class="guarantee-inner fade-up">
+      <div class="g-icon" aria-hidden="true">
+        <svg width="52" height="52" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <polyline points="9 12 11 14 15 10"/>
+        </svg>
+      </div>
+      <div>
+        <h2>Zero risco para você</h2>
+        <p>
+          Não trabalho com adiantamento. <strong>Você só paga quando o projeto estiver pronto, revisado e aprovado por você.</strong>
+          Se não ficar satisfeito durante o desenvolvimento, cancelamos sem custo algum.
+          Meu negócio depende da sua satisfação — e eu tenho consciência disso.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FAQ
+============================================================ -->
+<section class="faq" aria-label="Perguntas frequentes">
+  <div class="container">
+    <div class="text-center">
+      <span class="tag">Tire suas dúvidas</span>
+      <h2 class="section-title">Perguntas frequentes</h2>
+    </div>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-btn" aria-expanded="false" aria-controls="faq-1">
+          Preciso ter o domínio .com.br?
+          <div class="faq-icon" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </div>
+        </button>
+        <div class="faq-body" id="faq-1" role="region">
+          <div class="faq-text">
+            Não! Vamos escolher juntos qual extensão faz mais sentido para o seu negócio — e nem sempre o .com.br é o ideal.
+            Isso já faz parte da nossa consultoria inicial: ajudar a definir o seu novo endereço eletrônico de forma estratégica.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn" aria-expanded="false" aria-controls="faq-2">
+          Eu pago primeiro e depois você desenvolve?
+          <div class="faq-icon" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </div>
+        </button>
+        <div class="faq-body" id="faq-2" role="region">
+          <div class="faq-text">
+            Não! Não trabalho com dinheiro do cliente antes da entrega. Após o desenvolvimento, ajustes e sua aprovação,
+            aí sim acertamos o pagamento. Você tem toda a segurança de só pagar pelo que viu e aprovou.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn" aria-expanded="false" aria-controls="faq-3">
+          Tenho que pagar somente à vista?
+          <div class="faq-icon" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </div>
+        </button>
+        <div class="faq-body" id="faq-3" role="region">
+          <div class="faq-text">
+            Não! Pode pagar à vista (com desconto especial) ou parcelar em até 12x com as menores taxas do mercado.
+            O parcelamento não deve ser empecilho para você ter seu negócio na internet.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-btn" aria-expanded="false" aria-controls="faq-4">
+          E depois de 12 meses, perco tudo que fizemos?
+          <div class="faq-icon" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </div>
+        </button>
+        <div class="faq-body" id="faq-4" role="region">
+          <div class="faq-text">
+            De forma alguma! Seu negócio depois de 12 meses estará firme e bem posicionado online.
+            Caso não queira alterações, manteremos somente a hospedagem com o menor preço do mercado.
+            Tudo que construímos é completamente seu.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     CTA FINAL
+============================================================ -->
+<section class="final-cta" aria-label="Ação final">
+  <div class="container">
+    <!-- CUSTOMIZE: Ajuste a quantidade de vagas disponíveis -->
+    <div class="urgency" role="alert">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Apenas 5 vagas disponíveis neste mês
+    </div>
+
+    <h2>
+      Pronto para seu negócio<br>
+      <em>aparecer no Google?</em>
+    </h2>
+
+    <p>
+      Cada dia que passa, seu concorrente está captando clientes que poderiam ser seus.
+      Dê o primeiro passo agora — sem risco, sem adiantamento.
+    </p>
+
+    <!-- CUSTOMIZE: Substitua pelo seu link de WhatsApp -->
+    <a href="https://wa.me/5561999999999?text=Olá!%20Vi%20a%20oferta%20e%20quero%20contratar%20o%20pacote%20Seu%20Negócio%20na%20Web"
+       class="btn btn-lg" target="_blank" rel="noopener noreferrer">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+      </svg>
+      Quero Contratar Agora
+    </a>
+
+    <p class="final-note">Você paga somente depois de aprovar o projeto &nbsp;·&nbsp; Parcelamento em até 12x</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer class="footer" role="contentinfo">
+  <div class="container">
+    <!-- CUSTOMIZE: Atualize o nome e link do desenvolvedor -->
+    <p>&copy; 2025 Seu Negócio na Web. Desenvolvido por <a href="https://luizhenrique.dev.br" target="_blank" rel="noopener">Luiz Henrique</a>.</p>
+  </div>
+</footer>
+
+<!-- ============================================================
+     BOTÃO FLUTUANTE WHATSAPP
+============================================================ -->
+<!-- CUSTOMIZE: Substitua o href pelo seu link do WhatsApp -->
+<a href="https://wa.me/5561999999999?text=Olá!%20Quero%20saber%20mais%20sobre%20o%20pacote%20Seu%20Negócio%20na%20Web"
+   class="wa-float" target="_blank" rel="noopener noreferrer"
+   aria-label="Conversar pelo WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+  // Sombra no nav ao fazer scroll
+  const nav = document.querySelector('.nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  // FAQ accordion acessível
+  document.querySelectorAll('.faq-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-btn').setAttribute('aria-expanded', 'false');
+      });
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // Animações de entrada com Intersection Observer
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -36px 0px' });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
