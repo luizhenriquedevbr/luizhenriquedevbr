@@ -1,0 +1,46 @@
+# Luiz Henrique
+
+> Desenvolvedor Full Stack e AI-Augmented Developer com mais de 7 anos de experiência
+> em sistemas web, indicadores, painéis de dados interativos e automações para a saúde
+> pública. Base sólida em Python (Django), Next.js e PHP 8+. Atua de ponta a ponta, do
+> levantamento de requisitos ao deploy, e presta serviços freelance para empresas e
+> profissionais liberais a partir de Brasília-DF.
+
+Contato: luizmorais@gmail.com · WhatsApp +55 61 99286-8444 · https://luizhenrique.dev.br
+
+## Serviços
+
+- [Seu Negócio na Web](https://luizhenrique.dev.br/seu-negocio-na-web/): pacote de landing page profissional com domínio e hospedagem inclusos por 12 meses, voltado a profissionais liberais — médicos, advogados, psicólogos, dentistas, personal trainers e nutricionistas.
+- Desenvolvimento de sistemas web sob medida: aplicações completas em Python (Django), Laravel/PHP 8+ e Next.js/React, do levantamento de requisitos ao deploy.
+- Dashboards e painéis de dados: indicadores, relatórios e visualizações interativas conectados a PostgreSQL, MySQL e SQL Server.
+- Integração de IA em produtos: integração de LLMs via API, construção de agentes, automações inteligentes, extração e classificação de dados.
+- Infraestrutura e deploy: servidores Linux na DigitalOcean, Docker, Nginx e pipelines de CI/CD.
+
+## Projetos
+
+- [ElevX](https://elevx.app.br/): ecossistema para atletas e profissionais do esporte que conecta Strava e Intervals.icu, com módulos de treino, nutrição, garagem de bikes, oficina e clubes. PHP 8.3, Vue 3, PWA, arquitetura multi-tenant.
+- [Avora](https://avora.med.br/): sistema de gestão para clínicas e profissionais de saúde — agenda, prontuário eletrônico, prescrições, farmácia e financeiro. Laravel 10 e React, arquitetura multi-tenant.
+- [PRO1 System](https://pro1system.com.br/): sistema de gestão para empresa de eventos audiovisuais, com agenda, clientes, repertório musical integrado ao Spotify e catálogo de equipamentos. [Detalhes](https://luizhenrique.dev.br/projetos/gestao-evento.html)
+- [Bruno Caixeta](https://brunocaixeta.com.br/): plataforma PWA para personal de ciclismo, com gestão de alunos, treinos via Intervals.icu, sincronização com Strava, controle financeiro e push notifications. [Detalhes](https://luizhenrique.dev.br/projetos/gestao-ciclismo.html)
+- [CIH Brasil](https://cihbrasil.com/): site institucional para clínica de saúde mental, com foco em serviços, convênios e contato rápido via WhatsApp.
+- [Galera Lá de Baixo](https://galeraladebaixo.com.br/): site oficial de bike club de Sobradinho-DF, com comunicação do grupo, eventos e integração com redes sociais.
+
+## Experiência
+
+- Desenvolvedor Full Stack Python na FIOTEC, projeto DJUD/SE do Departamento de Judicialização na Saúde do Ministério da Saúde, desde dezembro de 2024. Django no backend, Next.js no frontend, design system DS GOV BR, PostgreSQL, Docker e deploy via GitLab. Solução implantada em todo o território nacional.
+- Desenvolvedor Full Stack PHP em consultoria OPAS/OMS para a SVSA/DATHI, Departamento de HIV/Aids, TB, Hepatites e IST do Ministério da Saúde, desde março de 2019. Sistemas web em PHP orientado a objetos, dashboards de vigilância epidemiológica, integração com SQL Server e modernização de sistemas legados para PHP 8+.
+
+## Tecnologias
+
+- Linguagens: Python, PHP 8+, JavaScript (ES6+), TypeScript
+- Frameworks: Django, Next.js, React, Laravel, Symfony, Node.js, Bootstrap 5, Tailwind, DS GOV BR
+- IA e LLMs: Claude, APIs de LLM, integração e agentes, IA aplicada a produtos, engenharia de prompt
+- Dados: PostgreSQL, MySQL, SQL Server, Chart.js
+- DevOps: Docker, Nginx, Linux, CI/CD com GitLab CI, DigitalOcean, Git
+
+## Links
+
+- [Site](https://luizhenrique.dev.br/)
+- [GitHub](https://github.com/luizhenriquedevbr)
+- [LinkedIn](https://www.linkedin.com/in/luizhenriquedevbr/)
+- [Instagram](https://www.instagram.com/devluizhenrique/)
