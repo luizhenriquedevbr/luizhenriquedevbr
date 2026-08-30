@@ -2,7 +2,7 @@
 
 > Desenvolvedor Full Stack e AI-Augmented Developer com mais de 7 anos de experiência
 > em sistemas web, indicadores, painéis de dados interativos e automações para a saúde
-> pública. Base sólida em Python (Django), Next.js e PHP 8+. Atua de ponta a ponta, do
+> pública. Base sólida em PHP 8+ (Laravel), com Python e Next.js. Atua de ponta a ponta, do
 > levantamento de requisitos ao deploy, e presta serviços freelance para empresas e
 > profissionais liberais a partir de Brasília-DF.
 
@@ -11,7 +11,7 @@ Contato: luizmorais@gmail.com · WhatsApp +55 61 99286-8444 · https://luizhenri
 ## Serviços
 
 - [Seu Negócio na Web](https://luizhenrique.dev.br/seu-negocio-na-web/): pacote de landing page profissional com domínio e hospedagem inclusos por 12 meses, voltado a profissionais liberais — médicos, advogados, psicólogos, dentistas, personal trainers e nutricionistas.
-- Desenvolvimento de sistemas web sob medida: aplicações completas em Python (Django), Laravel/PHP 8+ e Next.js/React, do levantamento de requisitos ao deploy.
+- Desenvolvimento de sistemas web sob medida: aplicações completas em PHP 8+ (Laravel, Symfony), além de Python (Django) e Next.js/React, do levantamento de requisitos ao deploy.
 - Dashboards e painéis de dados: indicadores, relatórios e visualizações interativas conectados a PostgreSQL, MySQL e SQL Server.
 - Integração de IA em produtos: integração de LLMs via API, construção de agentes, automações inteligentes, extração e classificação de dados.
 - Infraestrutura e deploy: servidores Linux na DigitalOcean, Docker, Nginx e pipelines de CI/CD.
@@ -32,8 +32,8 @@ Contato: luizmorais@gmail.com · WhatsApp +55 61 99286-8444 · https://luizhenri
 
 ## Tecnologias
 
-- Linguagens: Python, PHP 8+, JavaScript (ES6+), TypeScript
-- Frameworks: Django, Next.js, React, Laravel, Symfony, Node.js, Bootstrap 5, Tailwind, DS GOV BR
+- Linguagens: PHP 8+, JavaScript (ES6+), TypeScript, Python
+- Frameworks: Laravel, Symfony, Vue 3, Django, Next.js, React, Node.js, Bootstrap 5, Tailwind, DS GOV BR
 - IA e LLMs: Claude, APIs de LLM, integração e agentes, IA aplicada a produtos, engenharia de prompt
 - Dados: PostgreSQL, MySQL, SQL Server, Chart.js
 - DevOps: Docker, Nginx, Linux, CI/CD com GitLab CI, DigitalOcean, Git
