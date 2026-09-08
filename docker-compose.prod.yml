@@ -5,9 +5,21 @@ services:
     ports: !reset []
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.luizhenriquedevbr.rule=Host(`luizhenrique.dev.br`) || Host(`www.luizhenrique.dev.br`)"
+      - "traefik.http.routers.luizhenriquedevbr.rule=Host(`luizhenrique.dev.br`)"
       - "traefik.http.routers.luizhenriquedevbr.entrypoints=websecure"
       - "traefik.http.routers.luizhenriquedevbr.tls.certresolver=le"
+      # O www servia uma copia 200 do site inteiro. Agora so redireciona para o apex.
+      - "traefik.http.routers.luizhenriquedevbr-www.rule=Host(`www.luizhenrique.dev.br`)"
+      - "traefik.http.routers.luizhenriquedevbr-www.entrypoints=websecure"
+      - "traefik.http.routers.luizhenriquedevbr-www.tls.certresolver=le"
+      - "traefik.http.routers.luizhenriquedevbr-www.service=luizhenriquedevbr"
+      - "traefik.http.routers.luizhenriquedevbr-www.middlewares=luizhenriquedevbr-www"
+      # O router acima ja garante que so o host www chega aqui, entao [^/]+ basta
+      # e evita escapar ponto dentro do YAML. $${1} escapado: com um cifrao so,
+      # o compose interpola e o grupo de captura chega vazio no Traefik.
+      - "traefik.http.middlewares.luizhenriquedevbr-www.redirectregex.regex=^https://[^/]+/(.*)"
+      - "traefik.http.middlewares.luizhenriquedevbr-www.redirectregex.replacement=https://luizhenrique.dev.br/$${1}"
+      - "traefik.http.middlewares.luizhenriquedevbr-www.redirectregex.permanent=true"
       - "traefik.http.services.luizhenriquedevbr.loadbalancer.server.port=80"
       - "traefik.docker.network=web"
     networks:
