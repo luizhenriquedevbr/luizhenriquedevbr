@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html><head><meta charset="UTF-8"/><title>Currículo Luiz Henrique</title>
+<style>
+body{font-family:Calibri,Arial,sans-serif;color:#111;}
+h1,h2{color:#003366;}
+ul{margin-top:0;}
+</style></head><body>
+<h1>Luiz Henrique de Sousa Morais</h1>
+<p><em>Desenvolvedor Full Stack PHP | Product Owner (PO)</em></p>
+<h2>Contato</h2><ul>
+<li><strong>Telefone:</strong> +55 (61) 99286-8444</li>
+<li><strong>E-mail:</strong> luizmorais@gmail.com</li>
+<li><strong>GitHub:</strong> github.com/luizhenriquedevbr</li>
+<li><strong>LinkedIn:</strong> linkedin.com/in/luizhenriquedevbr</li>
+<li><strong>Portfólio:</strong> luizhenrique.dev.br</li>
+</ul>
+<h2>Perfil Profissional</h2>
+<p>Desenvolvedor Full Stack PHP com mais de 7 anos de experiência em sistemas web e produtos digitais. Foco em soluções de missão crítica para saúde pública, dashboards analíticos, integrações de dados e aplicações corporativas. Atuação também como Product Owner, com levantamento de requisitos, definição de escopo e alinhamento com stakeholders.</p>
+<h2>Principais Tecnologias</h2><ul>
+<li>PHP 8+</li>
+<li>Python 3+</li>
+<li>JavaScript (ES6+)</li>
+<li>TypeScript</li>
+<li>React</li>
+<li>Node.js</li>
+<li>Next.js</li>
+<li>HTML5</li>
+<li>CSS3</li>
+<li>Tailwind CSS</li>
+<li>Bootstrap</li>
+<li>Design System GOV.BR</li>
+<li>PostgreSQL</li>
+<li>MySQL</li>
+<li>SQL Server</li>
+<li>Docker</li>
+<li>Nginx</li>
+<li>Linux</li>
+<li>APIs REST</li>
+<li>JSON</li>
+<li>Git (GitHub/GitLab)</li>
+<li>Scrum/Kanban</li>
+</ul>
+<h2>Projetos Selecionados</h2><ul>
+<li><strong>CIH Brasil</strong>: Site institucional para clínica de saúde mental com foco em comunicação clara, serviços, convênios e contato rápido via WhatsApp.</li>
+<li><strong>Bruno Caixeta</strong>: Presença digital para treinador de ciclismo, apresentando programa de treinamento, posicionamento profissional e chamada direta para conversão.</li>
+<li><strong>Galera Lá de Baixo</strong>: Site oficial para bike club de Sobradinho-DF, com identidade própria, comunicação do grupo, eventos e integração com redes sociais.</li>
+<li><strong>Dra. Fabiana Sarkis</strong>: Site profissional para dermatologia, tricologia e transplante capilar, estruturado para apresentar especialidades, tecnologias, galeria e contato.</li>
+<li><strong>IA.Lotus</strong>: Landing page para plataforma de data centers e conectividade de IA, apresentando soluções de colocation, conectividade e serviços gerenciados.</li>
+</ul>
+<h2>Experiência Profissional</h2>
+<p><strong>OPAS/OMS — Desenvolvedor Full Stack PHP (03/2019 – Atual)</strong></p><ul>
+<li>Desenvolvimento e manutenção de sistemas web completos com CRUD, relatórios e dashboards analíticos.</li>
+<li>Implementação de consultas otimizadas em SQL Server para grandes volumes de dados.</li>
+<li>Criação de dashboards interativos com Chart.js e visualização de dados estratégicos.</li>
+<li>Implantação e manutenção de aplicações em Docker com versionamento via GitLab.</li>
+<li>Atuação em sistemas estratégicos do DATHI (Ministério da Saúde), com foco em performance e escalabilidade.</li>
+</ul>
+<p><strong>FIOTEC — Desenvolvedor Full Stack | Product Owner (12/2024 – Atual)</strong></p><ul>
+<li>Desenvolvimento e evolução do sistema SisDJUD (Judicialização da Saúde).</li>
+<li>Construção de dashboards com filtros dinâmicos e integração de múltiplas fontes de dados.</li>
+<li>Modelagem e otimização de banco de dados em PostgreSQL.</li>
+<li>Desenvolvimento de interfaces usando Design System GOV.BR.</li>
+<li>Atuação como Product Owner em alinhamento com stakeholders e definição de escopo.</li>
+</ul>
+<p><strong>Cast Informática — Analista de Infraestrutura Sr (02/2017 – 02/2019)</strong></p><ul>
+<li>Suporte técnico em ambientes críticos dos sistemas do DATHI/SVSA/Ministério da Saúde.</li>
+<li>Atendimento e resolução de incidentes em operação 24/7.</li>
+</ul>
+<p><strong>Link Data — Técnico de Suporte (08/2014 – 04/2016)</strong></p><ul>
+<li>Suporte técnico a usuários e manutenção de ambientes corporativos.</li>
+</ul>
+<h2>Formação Acadêmica</h2><ul>
+<li>Bacharel em Sistemas de Informação – Faculdade Projeção (2010 – 2015)</li>
+<li>Pós-graduação em Gerenciamento de Projetos – FACEL (2016 – 2017)</li>
+<li>Pós-graduação em Docência em TI – UniBF (2019)</li>
+</ul>
+<h2>Resumo de Aplicações no Portfólio</h2>
+<p>Portfólio com foco em sites institucionais, landing pages e experiências digitais responsivas, incluindo trabalhos para saúde mental, esporte, comunidade local e infraestrutura de data centers. Os projetos destacam construção front-end com HTML/CSS/JavaScript, uso de PHP e integração de contato para conversão.</p>
+</body></html>
