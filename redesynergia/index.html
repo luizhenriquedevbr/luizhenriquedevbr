@@ -180,8 +180,8 @@
       </p>
 
       <div class="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-        <a href="https://wa.me/5561983843359?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Rede%20Synergia%20e%20preciso%20de%20ajuda."
-           class="btn-primario btn-lg" rel="noopener">
+        <a href="#unidades" data-whats="Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Rede%20Synergia%20e%20preciso%20de%20ajuda."
+           class="btn-primario btn-lg">
           <svg class="h-5 w-5" aria-hidden="true"><use href="#i-whats"/></svg>
           Falar com a equipe agora
         </a>
@@ -348,6 +348,10 @@
             <li>
               <svg class="mt-0.5 h-5 w-5 shrink-0 text-laranja-txt" aria-hidden="true"><use href="#i-check"/></svg>
               <span>Hospital Dia e resgate em todo o Distrito Federal</span>
+            </li>
+            <li>
+              <svg class="mt-0.5 h-5 w-5 shrink-0 text-laranja-txt" aria-hidden="true"><use href="#i-check"/></svg>
+              <span>Ambulatório de psiquiatria e psicologia no Liberty Mall, Asa Norte</span>
             </li>
           </ul>
 
@@ -611,8 +615,8 @@
           condições antes mesmo da primeira visita.
         </p>
         <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-          <a href="https://wa.me/5561983843359?text=Ol%C3%A1%2C%20gostaria%20de%20consultar%20a%20cobertura%20do%20meu%20conv%C3%AAnio."
-             class="btn-primario" rel="noopener">
+          <a href="#unidades" data-whats="Ol%C3%A1%2C%20gostaria%20de%20consultar%20a%20cobertura%20do%20meu%20conv%C3%AAnio."
+             class="btn-primario">
             <svg class="h-[1.125rem] w-[1.125rem]" aria-hidden="true"><use href="#i-whats"/></svg>
             Consultar meu convênio
           </a>
@@ -675,6 +679,11 @@
           <div class="flex items-start gap-3">
             <svg class="mt-0.5 h-5 w-5 shrink-0 text-laranja-txt" aria-hidden="true"><use href="#i-pin"/></svg>
             <div><dt class="sr-only">Endereço</dt><dd>Núcleo Rural Des. C. Cerqueira, 558<br>Paranoá – Brasília/DF · CEP 71570-990</dd></div>
+          </div>
+          <div class="flex items-start gap-3">
+            <svg class="mt-0.5 h-5 w-5 shrink-0 text-laranja-txt" aria-hidden="true"><use href="#i-pin"/></svg>
+            <div><dt class="sr-only">Ambulatório</dt>
+              <dd><span class="font-semibold text-petroleo">Ambulatório:</span> Centro Empresarial Liberty Mall · Torre B, sala 1121<br>SCN Quadra 2, Bloco D · Asa Norte – Brasília/DF</dd></div>
           </div>
         </dl>
         <a href="https://luizhenrique.dev.br/synergiahumana/" class="btn-primario mt-7 w-full" rel="noopener">
@@ -795,13 +804,48 @@
 
 
 <!-- Botão flutuante de WhatsApp. Fica acima do rodapé em telas pequenas e nunca cobre
-     um alvo de toque, por isso o bottom generoso. -->
-<a href="https://wa.me/5561983843359?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Rede%20Synergia%20e%20preciso%20de%20ajuda."
-   rel="noopener"
+     um alvo de toque, por isso o bottom generoso. Abre o seletor de unidade; sem JS,
+     cai na seção de unidades, que tem o WhatsApp de cada uma. -->
+<a href="#unidades" data-whats="Ol%C3%A1%2C%20vim%20pelo%20site%20da%20Rede%20Synergia%20e%20preciso%20de%20ajuda."
    class="fixed bottom-5 right-5 z-50 flex h-14 w-14 cursor-pointer items-center justify-center rounded-full bg-[#25D366] text-white shadow-card-hover transition-transform duration-200 hover:bg-[#1FAE53]"
    aria-label="Falar com a Rede Synergia pelo WhatsApp">
   <svg class="h-7 w-7" aria-hidden="true"><use href="#i-whats"/></svg>
 </a>
+
+<!-- Seletor de unidade para o WhatsApp. A rede não tem número próprio: cada unidade
+     atende pelo seu. O texto da mensagem vem do data-whats de quem abriu. -->
+<dialog id="dlg-whats" aria-labelledby="dlg-whats-titulo"
+        class="w-[calc(100%-2rem)] max-w-md rounded-2xl p-0 shadow-card-hover backdrop:bg-petroleo-esc/70">
+  <div class="p-6 sm:p-7">
+    <div class="flex items-start justify-between gap-4">
+      <h2 id="dlg-whats-titulo" class="text-xl">Com qual unidade você quer falar?</h2>
+      <button type="button" data-fechar class="-mr-2 -mt-2 flex h-11 w-11 shrink-0 cursor-pointer items-center justify-center rounded-lg text-petroleo hover:bg-gelo" aria-label="Fechar">
+        <svg class="h-5 w-5" aria-hidden="true"><use href="#i-fechar"/></svg>
+      </button>
+    </div>
+    <p class="mt-2 text-[0.9375rem] leading-relaxed">Na dúvida, escolha qualquer uma — a equipe orienta você.</p>
+    <div class="mt-6 space-y-3">
+      <a data-numero="556130201412" href="https://wa.me/556130201412" rel="noopener"
+         class="flex min-h-[4rem] items-center gap-4 rounded-xl border-2 border-borda px-4 py-3 transition-colors duration-200 hover:border-laranja/50 hover:bg-laranja-50">
+        <svg class="h-7 w-7 shrink-0 text-[#1FAE53]" aria-hidden="true"><use href="#i-whats"/></svg>
+        <span class="flex-1">
+          <span class="block font-bold text-petroleo">Falar com a Synergia Humana</span>
+          <span class="block text-sm">Hospital Psiquiátrico · Paranoá</span>
+        </span>
+        <svg class="h-5 w-5 shrink-0 text-muted" aria-hidden="true"><use href="#i-seta"/></svg>
+      </a>
+      <a data-numero="5561983843359" href="https://wa.me/5561983843359" rel="noopener"
+         class="flex min-h-[4rem] items-center gap-4 rounded-xl border-2 border-borda px-4 py-3 transition-colors duration-200 hover:border-verde/50 hover:bg-verde-50">
+        <svg class="h-7 w-7 shrink-0 text-[#1FAE53]" aria-hidden="true"><use href="#i-whats"/></svg>
+        <span class="flex-1">
+          <span class="block font-bold text-petroleo">Falar com a CIH Brasil</span>
+          <span class="block text-sm">Clínica Integração Humana · Santa Maria</span>
+        </span>
+        <svg class="h-5 w-5 shrink-0 text-muted" aria-hidden="true"><use href="#i-seta"/></svg>
+      </a>
+    </div>
+  </div>
+</dialog>
 
 
 <script>
@@ -842,6 +886,24 @@
       btn.focus();
     }
   });
+
+  // ---- seletor de WhatsApp ----
+  var dlg = document.getElementById('dlg-whats');
+  var opcoes = dlg.querySelectorAll('a[data-numero]');
+  document.querySelectorAll('[data-whats]').forEach(function (gatilho) {
+    gatilho.addEventListener('click', function (e) {
+      if (typeof dlg.showModal !== 'function') return;
+      e.preventDefault();
+      opcoes.forEach(function (a) {
+        a.href = 'https://wa.me/' + a.dataset.numero + '?text=' + gatilho.dataset.whats;
+      });
+      dlg.showModal();
+    });
+  });
+  dlg.querySelector('[data-fechar]').addEventListener('click', function () { dlg.close(); });
+  // Clique no fundo escurecido fecha: o alvo é o próprio <dialog>, não o conteúdo.
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+  opcoes.forEach(function (a) { a.addEventListener('click', function () { dlg.close(); }); });
 
   // ---- ano no rodapé ----
   document.getElementById('ano').textContent = new Date().getFullYear();
