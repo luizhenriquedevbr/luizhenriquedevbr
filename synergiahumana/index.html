@@ -71,6 +71,10 @@
   <symbol id="i-pessoas" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
   <symbol id="i-escudo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="m9 12 2 2 4-4"/></symbol>
   <symbol id="i-estrela" viewBox="0 0 24 24" fill="currentColor"><path d="m12 2.6 2.9 5.9 6.5.95-4.7 4.58 1.11 6.47L12 17.44 6.19 20.5l1.11-6.47L2.6 9.45l6.5-.95L12 2.6Z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15a1 1 0 0 0 1.5.86l12.5-7.5a1 1 0 0 0 0-1.72L8.5 3.64A1 1 0 0 0 7 4.5Z"/></symbol>
+  <symbol id="i-pausa" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></symbol>
+  <symbol id="i-som" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a10 10 0 0 1 0 14"/></symbol>
+  <symbol id="i-mudo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="m22 9-6 6M16 9l6 6"/></symbol>
   <symbol id="i-seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></symbol>
   <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m20 6-11 11-5-5"/></symbol>
   <symbol id="i-alerta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></symbol>
@@ -842,19 +846,6 @@
         O atendimento ambulatorial — consultas de psiquiatria e psicologia — fica em outro
         endereço: o Centro Empresarial Liberty Mall, na Asa Norte.
       </p>
-
-      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-        <a href="https://www.google.com/maps/search/?api=1&amp;query=N%C3%BAcleo+Rural+Des+C+Cerqueira+558+Parano%C3%A1+Bras%C3%ADlia+DF"
-           class="btn-primario" rel="noopener">
-          <svg class="h-[1.125rem] w-[1.125rem]" aria-hidden="true"><use href="#i-pin"/></svg>
-          Ir com o Google Maps
-        </a>
-        <a href="https://waze.com/ul?q=N%C3%BAcleo%20Rural%20Des%20C%20Cerqueira%20558%20Parano%C3%A1%20DF"
-           class="btn-secundario" rel="noopener">
-          <svg class="h-[1.125rem] w-[1.125rem] text-laranja-txt" aria-hidden="true"><use href="#i-pin"/></svg>
-          Ir com o Waze
-        </a>
-      </div>
     </div>
 
     <div class="space-y-5">
@@ -865,7 +856,18 @@
           <svg class="mt-0.5 h-5 w-5 shrink-0 text-laranja-txt" aria-hidden="true"><use href="#i-pin"/></svg>
           <div><dt class="text-sm font-semibold text-muted">Endereço</dt>
             <dd class="font-bold text-petroleo">Núcleo Rural Des. C. Cerqueira, 558<br>
-              Paranoá – Brasília/DF · CEP 71570-990</dd></div>
+              Paranoá – Brasília/DF · CEP 71570-990</dd>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <a href="https://www.google.com/maps/search/?api=1&amp;query=N%C3%BAcleo+Rural+Des+C+Cerqueira+558+Parano%C3%A1+Bras%C3%ADlia+DF" class="btn-primario min-h-[2.75rem] px-4 text-sm" rel="noopener">
+                <svg class="h-4 w-4" aria-hidden="true"><use href="#i-pin"/></svg>
+                Google Maps
+              </a>
+              <a href="https://waze.com/ul?q=N%C3%BAcleo%20Rural%20Des%20C%20Cerqueira%20558%20Parano%C3%A1%20DF" class="btn-secundario min-h-[2.75rem] px-4 text-sm" rel="noopener">
+                <svg class="h-4 w-4 text-laranja-txt" aria-hidden="true"><use href="#i-pin"/></svg>
+                Waze
+              </a>
+            </div>
+          </div>
         </div>
         <div class="flex items-start gap-3.5">
           <svg class="mt-0.5 h-5 w-5 shrink-0 text-laranja-txt" aria-hidden="true"><use href="#i-relogio"/></svg>
@@ -893,8 +895,19 @@
         <div class="flex items-start gap-3.5">
           <svg class="mt-0.5 h-5 w-5 shrink-0 text-laranja-txt" aria-hidden="true"><use href="#i-pin"/></svg>
           <div><dt class="text-sm font-semibold text-muted">Endereço</dt>
-            <dd class="font-bold text-petroleo">Centro Empresarial Liberty Mall · Torre B, sala 1121<br>
-              SCN Quadra 2, Bloco D · Asa Norte – Brasília/DF</dd></div>
+            <dd class="font-bold text-petroleo">Centro Empresarial Liberty Mall<br>Torre B, sala 1121 · SCN Quadra 2, Bloco D<br>
+              Asa Norte – Brasília/DF</dd>
+            <div class="mt-3 flex flex-wrap gap-2">
+              <a href="https://www.google.com/maps/search/?api=1&amp;query=Centro+Empresarial+Liberty+Mall+Torre+B+SCN+Quadra+2+Bras%C3%ADlia+DF" class="btn-primario min-h-[2.75rem] px-4 text-sm" rel="noopener">
+                <svg class="h-4 w-4" aria-hidden="true"><use href="#i-pin"/></svg>
+                Google Maps
+              </a>
+              <a href="https://waze.com/ul?q=Centro%20Empresarial%20Liberty%20Mall%20Bras%C3%ADlia" class="btn-secundario min-h-[2.75rem] px-4 text-sm" rel="noopener">
+                <svg class="h-4 w-4 text-laranja-txt" aria-hidden="true"><use href="#i-pin"/></svg>
+                Waze
+              </a>
+            </div>
+          </div>
         </div>
         <div class="flex items-start gap-3.5">
           <svg class="mt-0.5 h-5 w-5 shrink-0 text-laranja-txt" aria-hidden="true"><use href="#i-pessoas"/></svg>
@@ -907,11 +920,6 @@
             <dd><a href="tel:+556130201412" class="font-bold text-petroleo hover:text-laranja-txt">(61) 3020-1412</a></dd></div>
         </div>
       </dl>
-      <a href="https://www.google.com/maps/search/?api=1&amp;query=Centro+Empresarial+Liberty+Mall+Bras%C3%ADlia"
-         class="link-sublinhado mt-6 inline-flex items-center gap-2 text-sm text-laranja-txt decoration-laranja/40 hover:decoration-laranja-txt" rel="noopener">
-        Ver o ambulatório no Google Maps
-        <svg class="h-4 w-4" aria-hidden="true"><use href="#i-seta"/></svg>
-      </a>
     </div>
     </div>
   </div>
@@ -949,12 +957,30 @@
         </div>
       </div>
 
-      <div class="flex flex-col items-center gap-4 rounded-2xl border border-borda bg-white p-8 text-center shadow-card lg:w-72">
-        <img src="/synergiahumana/img/logo-rede.svg" alt="Rede Synergia" width="487" height="141" class="h-14 w-auto">
-        <p class="text-[0.9375rem] leading-relaxed">
-          Duas unidades, atendimento 24 horas e uma só forma de cuidar.
-        </p>
-      </div>
+      <!-- Reel "Agora somos Rede Synergia" (@synergia_humana), o mesmo do site da Rede.
+           Hospedado aqui: o embed do Instagram não permite loop nem autoplay e traz
+           rastreadores. Toca mudo e em loop só quando visível (legendas gravadas no vídeo),
+           com pausa e som sob controle de quem assiste; com movimento reduzido, não inicia. -->
+      <figure class="mx-auto w-full max-w-[18rem] lg:w-72">
+        <div class="relative overflow-hidden rounded-2xl bg-petroleo-esc shadow-card-hover">
+          <video id="video-rede" class="aspect-[9/16] w-full object-cover" muted loop playsinline preload="none"
+                 poster="/synergiahumana/img/video-rede-synergia.webp" aria-label="Vídeo: Agora somos Rede Synergia">
+            <source src="/synergiahumana/img/video-rede-synergia.mp4" type="video/mp4">
+          </video>
+          <div class="absolute bottom-3 right-3 flex gap-2">
+            <button type="button" id="video-play" class="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-petroleo-esc/75 text-white backdrop-blur transition-colors duration-200 hover:bg-petroleo-esc" aria-label="Reproduzir vídeo">
+              <svg class="h-5 w-5" aria-hidden="true"><use href="#i-play"/></svg>
+            </button>
+            <button type="button" id="video-som" class="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-petroleo-esc/75 text-white backdrop-blur transition-colors duration-200 hover:bg-petroleo-esc" aria-label="Ativar som">
+              <svg class="h-5 w-5" aria-hidden="true"><use href="#i-mudo"/></svg>
+            </button>
+          </div>
+        </div>
+        <figcaption class="mt-3 text-center text-sm">
+          Agora somos Rede Synergia
+          <a href="https://www.instagram.com/reel/DdLnTk9tcJw/" rel="noopener" class="link-sublinhado mt-1 block text-azul-txt decoration-azul/40 hover:decoration-azul-txt">Ver no Instagram</a>
+        </figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -1053,7 +1079,8 @@
           <li><a href="tel:+556130201412" class="hover:text-white">+55 (61) 3020-1412</a></li>
           <li><a href="https://wa.me/556130201412" rel="noopener" class="hover:text-white">WhatsApp 24 horas</a></li>
           <li><a href="mailto:sac@synergiahumana.com.br" class="hover:text-white">sac@synergiahumana.com.br</a></li>
-          <li class="pt-1">Núcleo Rural Des. C. Cerqueira, 558<br>Paranoá – Brasília/DF<br>CEP 71570-990</li>
+          <li class="pt-1"><span class="font-semibold text-white">Hospital</span><br>Núcleo Rural Des. C. Cerqueira, 558<br>Paranoá – Brasília/DF<br>CEP 71570-990</li>
+          <li class="pt-1"><span class="font-semibold text-white">Ambulatório</span><br>Centro Empresarial Liberty Mall<br>Torre B, sala 1121 · SCN Quadra 2, Bloco D<br>Asa Norte – Brasília/DF</li>
         </ul>
       </div>
 
@@ -1125,6 +1152,41 @@
       btn.focus();
     }
   });
+
+  // ---- vídeo da Rede Synergia ----
+  var video = document.getElementById('video-rede');
+  var btnPlay = document.getElementById('video-play');
+  var btnSom = document.getElementById('video-som');
+  // Pausado por quem assiste, não volta sozinho ao rolar a página.
+  var pausadoPeloUsuario = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function atualizarBotoes() {
+    btnPlay.setAttribute('aria-label', video.paused ? 'Reproduzir vídeo' : 'Pausar vídeo');
+    btnPlay.firstElementChild.firstElementChild.setAttribute('href', video.paused ? '#i-play' : '#i-pausa');
+    btnSom.setAttribute('aria-label', video.muted ? 'Ativar som' : 'Desativar som');
+    btnSom.firstElementChild.firstElementChild.setAttribute('href', video.muted ? '#i-mudo' : '#i-som');
+  }
+  video.addEventListener('play', atualizarBotoes);
+  video.addEventListener('pause', atualizarBotoes);
+  video.addEventListener('volumechange', atualizarBotoes);
+
+  btnPlay.addEventListener('click', function () {
+    pausadoPeloUsuario = !video.paused;
+    if (video.paused) video.play(); else video.pause();
+  });
+  btnSom.addEventListener('click', function () {
+    video.muted = !video.muted;
+    if (!video.muted && video.paused) { pausadoPeloUsuario = false; video.play(); }
+  });
+
+  // Só carrega e toca quando o vídeo aparece na tela; fora dela, pausa.
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (entradas) {
+      var visivel = entradas[0].isIntersecting;
+      if (visivel && !pausadoPeloUsuario) video.play().catch(function () {});
+      if (!visivel && !video.paused) video.pause();
+    }, { threshold: 0.5 }).observe(video);
+  }
 
   document.getElementById('ano').textContent = new Date().getFullYear();
 })();
