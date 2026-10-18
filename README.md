@@ -2,9 +2,10 @@
 
 # Olá, eu sou o Luiz Henrique 👋
 
-**Desenvolvedor Full Stack · AI-Augmented Developer · Brasília-DF**
+**Desenvolvedor Full Stack · Analista de Dados · IA Aplicada**<br>
+📍 Brasília-DF
 
-Construo sistemas web, painéis de dados e automações com IA — do levantamento de requisitos ao deploy.
+Construo sistemas web, painéis de dados e automações com IA para a saúde pública e para negócios — do levantamento de requisitos ao deploy.
 
 [![Site](https://img.shields.io/badge/luizhenrique.dev.br-0A0A0A?style=for-the-badge&logo=googlechrome&logoColor=white)](https://luizhenrique.dev.br/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/luizhenriquedevbr/)
@@ -18,10 +19,11 @@ Construo sistemas web, painéis de dados e automações com IA — do levantamen
 
 ## 🧭 Sobre mim
 
-- 🏛️ **7+ anos** desenvolvendo sistemas para a **saúde pública** no Ministério da Saúde
-- 🐘 Base sólida em **PHP 8+ / Laravel**, com **Python (Django)** e **Next.js / React**
-- 🤖 Integro **LLMs, agentes e automações inteligentes** em produtos reais
+- 🏛️ **7+ anos** desenvolvendo sistemas, indicadores e painéis para a **saúde pública** no Ministério da Saúde
+- 🐘 Stack principal: **PHP 8+**, **Python** e **Next.js / React**, com o design system **DS GOV BR**
+- 🤖 Integro **LLMs, RAG, agentes e automações inteligentes** em produtos reais
 - 📊 Especialista em **indicadores e dashboards** de dados conectados a PostgreSQL, MySQL e SQL Server
+- 🖥️ Base sólida em **infraestrutura de TI**: Linux, Docker, Nginx e CI/CD
 - 💼 Atendo como **freelancer** empresas e profissionais liberais
 
 ## 🚀 Apps que desenvolvi
@@ -65,9 +67,9 @@ Contas compartilhadas do casal ou do grupo: cada um lança o que pagou e, no fim
 ### Extrator SEI
 <img src="projetos/extrator-sei.png" alt="Extrator SEI" />
 
-Automatiza o SEI com navegador headless: extrai metadados, árvore de documentos, andamentos e inteiro teor (com OCR) de processos para JSON/CSV. CLI e interface web local.
+Raspagem de processos do SEI com navegador automatizado, OCR e LLMs + RAG para extrair e estruturar metadados, documentos e andamentos — base dos painéis de apoio jurídico do Ministério da Saúde.
 
-`Python` `Playwright` `Tesseract OCR`
+`Python` `Playwright` `LLMs` `RAG` `Tesseract OCR`
 
 </td>
 </tr>
@@ -119,11 +121,31 @@ Sistema das Demandas em Judicialização na Saúde (DJUD/Ministério da Saúde),
 
 ## 🏢 Experiência
 
-**Desenvolvedor Full Stack Python** — FIOTEC · Ministério da Saúde (DJUD/SE) · *dez/2024 – atual*<br>
-Django + Next.js com DS GOV BR, PostgreSQL e Docker. Solução implantada em todo o território nacional.
+**Analista de Dados** — FIOTEC · Projeto Desid/SE · Ministério da Saúde · *out/2026 – atual*<br>
+Painéis de dados e aplicações em PHP 8+ e Python com DS GOV BR. Criação do Extrator SEI (LLMs + RAG) e painéis que apoiam respostas jurídicas e decisões internas. Projetos Instituições Filantrópicas, ApuraSUS, BPS (Banco de Preços em Saúde), CATMAT e Painel Jurídico.
 
-**Desenvolvedor Full Stack PHP** — Consultoria OPAS/OMS · SVSA/DATHI · Ministério da Saúde · *mar/2019 – atual*<br>
-Sistemas de vigilância epidemiológica, dashboards, integração com SQL Server e modernização de legados para PHP 8+.
+**Desenvolvedor Full Stack Python** — FIOTEC · Projeto DJUD/SE · Ministério da Saúde · *dez/2024 – set/2026*<br>
+SisDJUD em Django + Next.js com DS GOV BR, modelagem em PostgreSQL, indicadores em Python, Docker e deploy via GitLab. Solução usada em todo o território nacional.
+
+**Desenvolvedor Full Stack PHP** — OPAS/OMS · SVSA/DATHI · Ministério da Saúde · *mar/2019 – atual*<br>
+Sistemas e dashboards de vigilância de ISTs, HIV/Aids, hepatites, hanseníase e tuberculose. Relatórios em PDF, Chart.js, SQL Server e modernização de legados para PHP 8+ com .env e Docker.
+
+**Infraestrutura & projetos freelance** — *atividade contínua*<br>
+Servidores Linux na DigitalOcean, Nginx, Docker e pipelines de CI/CD para clientes.
+
+<details>
+<summary><b>Experiências anteriores e formação</b></summary>
+<br>
+
+- Analista de Infraestrutura Sênior — Cast Informática S.A. · *2017 – 2019*
+- Técnico de Suporte CI2 — Link Data Informática e Serviços S.A. · *2014 – 2016*
+- Técnico de Suporte — UniCEUB · *2008*
+
+🎓 Pós-graduação em Docência em Ciência e Tecnologia da Informação — UniBF · *2019*<br>
+🎓 Pós-graduação em Gerenciamento de Projetos em TI — FACEL · *2016 – 2017*<br>
+🎓 Bacharelado em Sistemas de Informação — Faculdade Projeção · *2010 – 2015*
+
+</details>
 
 ## 🛠️ Stack
 
@@ -133,7 +155,7 @@ Sistemas de vigilância epidemiológica, dashboards, integração com SQL Server
   <img src="https://skillicons.dev/icons?i=postgres,mysql,docker,nginx,linux,git,gitlab,github,githubactions&perline=9" />
 </p>
 
-**IA & LLMs:** Claude · APIs de LLM · agentes · automações · engenharia de prompt
+**IA aplicada:** LLMs via API · RAG · agentes · automações inteligentes · Claude
 
 ## 💡 Serviços
 
@@ -141,8 +163,8 @@ Sistemas de vigilância epidemiológica, dashboards, integração com SQL Server
 |---|---|
 | 🌐 **[Seu Negócio na Web](https://luizhenrique.dev.br/seu-negocio-na-web/)** | Landing page profissional com domínio e hospedagem por 12 meses para médicos, advogados, psicólogos, dentistas, personal trainers e nutricionistas |
 | 🧩 **Sistemas sob medida** | Aplicações completas em Laravel, Symfony, Django e Next.js |
-| 📈 **Dashboards** | Indicadores, relatórios e visualizações interativas |
-| 🤖 **IA em produtos** | LLMs via API, agentes, extração e classificação de dados |
+| 📈 **Análise de dados e painéis** | Indicadores, relatórios e visualizações interativas sobre PostgreSQL, MySQL e SQL Server |
+| 🤖 **IA em produtos** | LLMs via API, RAG, agentes, extração e classificação de dados |
 | ☁️ **Infra & deploy** | Linux na DigitalOcean, Docker, Nginx e CI/CD |
 
 <div align="center">
