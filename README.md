@@ -107,9 +107,11 @@ Site do pet shop + Área do Tutor: cadastro de tutores e pets, login e painel ad
 <td width="50%" valign="top">
 
 ### SisDJUD
-Sistema do Departamento de Judicialização em Saúde do Ministério da Saúde, em uso em todo o território nacional. *Repositório público em breve.*
+<img src="projetos/sisdjud.png" alt="SisDJUD" />
 
-`Django` `Next.js` `DS GOV BR` `PostgreSQL`
+Sistema das Demandas em Judicialização na Saúde (DJUD/Ministério da Saúde), em uso em todo o país: monitoramento de demandas judiciais, análise farmacêutica, logística de entregas e gestão de acesso com login gov.br.
+
+`Django 5` `DRF` `Next.js 14` `DS GOV BR` `PostgreSQL` `Cypress`
 
 </td>
 </tr>
@@ -117,10 +119,10 @@ Sistema do Departamento de Judicialização em Saúde do Ministério da Saúde, 
 
 ## 🏢 Experiência
 
-**Desenvolvedor Full Stack Python** — FIOTEC · Ministério da Saúde (DJUD/SE) · *dez/2024 – atual*
+**Desenvolvedor Full Stack Python** — FIOTEC · Ministério da Saúde (DJUD/SE) · *dez/2024 – atual*<br>
 Django + Next.js com DS GOV BR, PostgreSQL e Docker. Solução implantada em todo o território nacional.
 
-**Desenvolvedor Full Stack PHP** — Consultoria OPAS/OMS · SVSA/DATHI · Ministério da Saúde · *mar/2019 – atual*
+**Desenvolvedor Full Stack PHP** — Consultoria OPAS/OMS · SVSA/DATHI · Ministério da Saúde · *mar/2019 – atual*<br>
 Sistemas de vigilância epidemiológica, dashboards, integração com SQL Server e modernização de legados para PHP 8+.
 
 ## 🛠️ Stack
