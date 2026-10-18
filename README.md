@@ -1,7 +1,5 @@
 <div align="center">
 
-<img src="luiz.jpg" width="120" style="border-radius:50%" alt="Luiz Henrique" />
-
 # Olá, eu sou o Luiz Henrique 👋
 
 **Desenvolvedor Full Stack · AI-Augmented Developer · Brasília-DF**
