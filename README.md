@@ -24,7 +24,7 @@ Construo sistemas web, painéis de dados e automações com IA — do levantamen
 - 📊 Especialista em **indicadores e dashboards** de dados conectados a PostgreSQL, MySQL e SQL Server
 - 💼 Atendo como **freelancer** empresas e profissionais liberais
 
-## 🚀 Projetos em destaque
+## 🚀 Apps que desenvolvi
 
 <table>
 <tr>
@@ -52,6 +52,28 @@ Gestão para clínicas e profissionais de saúde: agenda, prontuário eletrônic
 <tr>
 <td width="50%" valign="top">
 
+### [Quem Paga o Quê](https://quempagaoque.com.br/)
+<a href="https://quempagaoque.com.br/"><img src="projetos/quempagaoque.png" alt="Quem Paga o Quê" /></a>
+
+Contas compartilhadas do casal ou do grupo: cada um lança o que pagou e, no fim do mês, o app diz quem faz o Pix para quem — até o centavo.
+
+`PHP 8.3` `Vue 3` `Tailwind 4` `PWA` `PHPUnit`
+
+</td>
+<td width="50%" valign="top">
+
+### Extrator SEI
+<img src="projetos/extrator-sei.png" alt="Extrator SEI" />
+
+Automatiza o SEI com navegador headless: extrai metadados, árvore de documentos, andamentos e inteiro teor (com OCR) de processos para JSON/CSV. CLI e interface web local.
+
+`Python` `Playwright` `Tesseract OCR`
+
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+
 ### [PRO1 System](https://pro1system.com.br/)
 <a href="https://pro1system.com.br/"><img src="projetos/pro1system.png" alt="PRO1 System" /></a>
 
@@ -65,27 +87,29 @@ Gestão para empresa de eventos audiovisuais: agenda, clientes, repertório inte
 ### [Bruno Caixeta](https://brunocaixeta.com.br/)
 <a href="https://brunocaixeta.com.br/"><img src="projetos/bruno-caixeta.png" alt="Bruno Caixeta" /></a>
 
-PWA para personal de ciclismo: alunos, treinos via Intervals.icu, sync com Strava, financeiro e push notifications.
+PWA para assessoria de ciclismo: alunos, treinos via Intervals.icu, sync com Strava, financeiro e push notifications.
 
-`PWA` `Strava` `Intervals.icu`
+`PHP` `PWA` `Strava` `Intervals.icu`
 
 </td>
 </tr>
 <tr>
 <td width="50%" valign="top">
 
-### [CIH Brasil](https://cihbrasil.com/)
-<a href="https://cihbrasil.com/"><img src="projetos/cih-brasil.png" alt="CIH Brasil" /></a>
+### [Greg Banho & Tosa](https://gregpet.com.br/)
+<a href="https://gregpet.com.br/"><img src="projetos/gregpet.png" alt="Greg Banho & Tosa" /></a>
 
-Site institucional para clínica de saúde mental, com serviços, convênios e contato rápido via WhatsApp.
+Site do pet shop + Área do Tutor: cadastro de tutores e pets, login e painel administrativo para a equipe.
+
+`Laravel 13` `Filament 5` `Tailwind 4` `Alpine.js`
 
 </td>
 <td width="50%" valign="top">
 
-### [Galera Lá de Baixo](https://galeraladebaixo.com.br/)
-<a href="https://galeraladebaixo.com.br/"><img src="projetos/galera-la-debaixo.png" alt="Galera Lá de Baixo" /></a>
+### SisDJUD
+Sistema do Departamento de Judicialização em Saúde do Ministério da Saúde, em uso em todo o território nacional. *Repositório público em breve.*
 
-Site oficial de bike club de Sobradinho-DF: comunicação do grupo, eventos e redes sociais.
+`Django` `Next.js` `DS GOV BR` `PostgreSQL`
 
 </td>
 </tr>
