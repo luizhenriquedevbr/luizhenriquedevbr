@@ -94,7 +94,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="preload" as="image" href="img/cih-mobile.webp" type="image/webp">
+  <link rel="preload" as="image" href="img/pro1-mobile.webp" type="image/webp">
 
   <style>
     /* ============================================================
@@ -951,6 +951,23 @@
     }
     .footer a { color: #7DD3FC; }
     .footer a:hover { text-decoration: underline; }
+    .footer .dev-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.8);
+      font-size: 11px;
+      font-weight: 600;
+      line-height: 1;
+      white-space: nowrap;
+      transition: background-color 0.2s;
+    }
+    .footer .dev-tag:hover { background: rgba(255,255,255,0.16); text-decoration: none; }
+    .footer .dev-tag img { height: 11px; width: auto; }
 
     /* ============================================================
        WHATSAPP FLUTUANTE
@@ -1076,8 +1093,8 @@
       <div class="hero-visual">
         <div class="phone">
           <div class="phone-screen">
-            <img src="img/cih-mobile.webp" width="520" height="1040"
-                 alt="Página da CIH Brasil, clínica de saúde mental, aberta no celular"
+            <img src="img/pro1-mobile.webp" width="520" height="1040"
+                 alt="Página da Pro1 System, sistemas audiovisuais, aberta no celular"
                  fetchpriority="high">
           </div>
         </div>
@@ -1247,19 +1264,6 @@
     </div>
 
     <div class="work-grid">
-      <a class="work-card" href="https://cihbrasil.com/" target="_blank" rel="noopener">
-        <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>cihbrasil.com</span></div>
-        <div class="work-shot">
-          <img src="img/cih-desktop.webp" width="960" height="600" loading="lazy"
-               alt="Página inicial da CIH Brasil">
-        </div>
-        <div class="work-body">
-          <h3>CIH Brasil</h3>
-          <p class="work-kind">Clínica de saúde mental. Serviços, convênios e contato rápido pelo WhatsApp.</p>
-          <span class="work-link">Ver site <svg class="i" aria-hidden="true"><use href="#i-external"/></svg></span>
-        </div>
-      </a>
-
       <a class="work-card" href="https://brunocaixeta.com.br/" target="_blank" rel="noopener">
         <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>brunocaixeta.com.br</span></div>
         <div class="work-shot">
@@ -1273,15 +1277,28 @@
         </div>
       </a>
 
-      <a class="work-card" href="https://galeraladebaixo.com.br/" target="_blank" rel="noopener">
-        <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>galeraladebaixo.com.br</span></div>
+      <a class="work-card" href="https://cinthiacouto.com.br/" target="_blank" rel="noopener">
+        <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>cinthiacouto.com.br</span></div>
         <div class="work-shot">
-          <img src="img/galera-desktop.webp" width="960" height="600" loading="lazy"
-               alt="Página inicial do bike club Galera Lá de Baixo">
+          <img src="img/cinthia-desktop.webp" width="960" height="600" loading="lazy"
+               alt="Página inicial de Cinthia Couto, psicopedagogia e aprendizagem">
         </div>
         <div class="work-body">
-          <h3>Galera Lá de Baixo</h3>
-          <p class="work-kind">Bike club de Sobradinho-DF. Modalidades, eventos e integração com o Instagram.</p>
+          <h3>Cinthia Couto</h3>
+          <p class="work-kind">Psicopedagogia em Sobradinho-DF. Serviços, cursos e agendamento pelo WhatsApp.</p>
+          <span class="work-link">Ver site <svg class="i" aria-hidden="true"><use href="#i-external"/></svg></span>
+        </div>
+      </a>
+
+      <a class="work-card" href="https://luizhenrique.dev.br/" target="_blank" rel="noopener">
+        <div class="browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>luizhenrique.dev.br</span></div>
+        <div class="work-shot">
+          <img src="img/luiz-desktop.webp" width="960" height="600" loading="lazy"
+               alt="Página inicial de Luiz Henrique, desenvolvedor web">
+        </div>
+        <div class="work-body">
+          <h3>LuizHenrique.dev.br</h3>
+          <p class="work-kind">Portfólio de desenvolvedor. Projetos, experiência e contato direto.</p>
           <span class="work-link">Ver site <svg class="i" aria-hidden="true"><use href="#i-external"/></svg></span>
         </div>
       </a>
@@ -1468,7 +1485,11 @@
 ============================================================ -->
 <footer class="footer">
   <div class="container">
-    <p>&copy; 2026 Seu Negócio na Web. Desenvolvido por <a href="https://luizhenrique.dev.br/">Luiz Henrique</a>.</p>
+    <p>&copy; 2026 Seu Negócio na Web</p>
+    <a class="dev-tag" href="https://luizhenrique.dev.br/" target="_blank" rel="noopener" aria-label="Desenvolvido por LuizHenriqueDevBR">
+      Desenvolvido por
+      <img src="img/lh-dev.svg" alt="" width="47" height="11">
+    </a>
   </div>
 </footer>
 
