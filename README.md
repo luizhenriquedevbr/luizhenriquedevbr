@@ -67,7 +67,7 @@ Contas compartilhadas do casal ou do grupo: cada um lança o que pagou e, no fim
 ### Extrator SEI
 <img src="projetos/extrator-sei.png" alt="Extrator SEI" />
 
-Raspagem de processos do SEI com navegador automatizado, OCR e LLMs + RAG para extrair e estruturar metadados, documentos e andamentos — base dos painéis de apoio jurídico do Ministério da Saúde.
+Raspagem de processos do SEI com navegador automatizado, OCR e LLMs + RAG para extrair e estruturar metadados, documentos e andamentos, transformando processos em dados prontos para consulta, painéis e análise.
 
 `Python` `Playwright` `LLMs` `RAG` `Tesseract OCR`
 
@@ -122,7 +122,7 @@ Sistema das Demandas em Judicialização na Saúde (DJUD/Ministério da Saúde),
 ## 🏢 Experiência
 
 **Analista de Dados** — FIOTEC · Projeto Desid/SE · Ministério da Saúde · *out/2026 – atual*<br>
-Painéis de dados e aplicações em PHP 8+ e Python com DS GOV BR. Criação do Extrator SEI (LLMs + RAG) e painéis que apoiam respostas jurídicas e decisões internas. Projetos Instituições Filantrópicas, ApuraSUS, BPS (Banco de Preços em Saúde), CATMAT e Painel Jurídico.
+Painéis de dados e aplicações em PHP 8+ e Python com DS GOV BR. Criação do Extrator SEI (LLMs + RAG) para extrair e estruturar dados de processos do SEI. Projetos Instituições Filantrópicas, ApuraSUS, BPS (Banco de Preços em Saúde) e CATMAT.
 
 **Desenvolvedor Full Stack Python** — FIOTEC · Projeto DJUD/SE · Ministério da Saúde · *dez/2024 – set/2026*<br>
 SisDJUD em Django + Next.js com DS GOV BR, modelagem em PostgreSQL, indicadores em Python, Docker e deploy via GitLab. Solução usada em todo o território nacional.

@@ -27,7 +27,7 @@ Contato: luizmorais@gmail.com · WhatsApp +55 61 99286-8444 · https://luizhenri
 
 ## Experiência
 
-- Analista de Dados na FIOTEC, projeto Desid/SE do Departamento de Economia e Investimentos em Saúde do Ministério da Saúde, desde outubro de 2026. Painéis de dados e aplicações em PHP 8+ e Python com DS GOV BR. Criou o Extrator SEI, ferramenta de raspagem de dados do SEI com LLMs e RAG, cujos dados alimentam painéis de apoio a decisões e respostas jurídicas e internas do Ministério. Projetos: Instituições Filantrópicas, ApuraSUS, BPS (Banco de Preços em Saúde), CATMAT (Catálogo de Materiais) e apoio ao Painel Jurídico.
+- Analista de Dados na FIOTEC, projeto Desid/SE do Departamento de Economia e Investimentos em Saúde do Ministério da Saúde, desde outubro de 2026. Painéis de dados e aplicações em PHP 8+ e Python com DS GOV BR. Criou o Extrator SEI, ferramenta de raspagem de dados do SEI com LLMs e RAG, que extrai e estrutura metadados, documentos e andamentos dos processos. Projetos: Instituições Filantrópicas, ApuraSUS, BPS (Banco de Preços em Saúde) e CATMAT (Catálogo de Materiais).
 - Desenvolvedor Full Stack Python na FIOTEC, projeto DJUD/SE do Departamento de Judicialização na Saúde do Ministério da Saúde, de dezembro de 2024 a setembro de 2026. Python no backend, Next.js/React no frontend, design system DS GOV BR, PostgreSQL, Docker e deploy via GitLab. Solução implantada em todo o território nacional.
 - Desenvolvedor Full Stack PHP em consultoria OPAS/OMS para a SVSA/DATHI, Departamento de HIV/Aids, TB, Hepatites e IST do Ministério da Saúde, desde março de 2019. Sistemas web em PHP orientado a objetos, dashboards de vigilância epidemiológica, integração com SQL Server e modernização de sistemas legados para PHP 8+.
 
