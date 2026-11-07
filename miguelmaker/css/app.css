@@ -139,8 +139,12 @@ p{margin:0 0 1em}
 .rodape{background:var(--noite);color:var(--nevoa);padding:72px 0 40px}
 .rodape .alto{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;padding-bottom:40px;border-bottom:1px solid var(--noite-3)}
 .rodape .alto h2{color:#fff;font-size:clamp(32px,4.5vw,48px);max-width:16ch}
-.rodape .baixo{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding-top:28px;font-size:14px}
+.rodape .baixo{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;align-items:center;padding-top:28px;font-size:14px}
 .rodape .baixo a{color:var(--nevoa)}
 .rodape .marca{display:flex;align-items:center;gap:10px;font-size:20px}
 .rodape .marca .m{width:30px}
 .links{display:flex;gap:12px;flex-wrap:wrap}
+.dev-tag{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.8);font-size:11px;font-weight:600;line-height:1;white-space:nowrap;text-decoration:none;transition:background-color .2s}
+.rodape .baixo a.dev-tag{color:rgba(255,255,255,.8)}
+.dev-tag:hover{background:rgba(255,255,255,.16)}
+.dev-tag img{height:11px;width:auto}
