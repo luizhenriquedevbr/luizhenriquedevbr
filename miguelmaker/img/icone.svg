@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1080" role="img" aria-label="Miguel Maker">
+  <defs><clipPath id="m"><path d="M0,0 H45 L81.5,27 L118,0 H163 V145 H125 V63 L81.5,117 L38,63 V145 H0 Z"/></clipPath></defs>
+  <rect width="1080" height="1080" fill="#0D1530"/>
+  <g transform="translate(296 330) scale(3)" clip-path="url(#m)">
+    <rect y="0" width="163" height="10" fill="#FF7A2F"/>
+    <rect y="15" width="163" height="10" fill="#FF7A2F"/>
+    <rect y="30" width="163" height="10" fill="#4C8DFF"/>
+    <rect y="45" width="163" height="10" fill="#4C8DFF"/>
+    <rect y="60" width="163" height="10" fill="#4C8DFF"/>
+    <rect y="75" width="163" height="10" fill="#4C8DFF"/>
+    <rect y="90" width="163" height="10" fill="#4C8DFF"/>
+    <rect y="105" width="163" height="10" fill="#4C8DFF"/>
+    <rect y="120" width="163" height="10" fill="#4C8DFF"/>
+    <rect y="135" width="163" height="10" fill="#4C8DFF"/>
+  </g>
+</svg>
