@@ -144,6 +144,44 @@ class PartsTest extends TestCase
             ->assertJsonStructure(['snapshot', 'compare' => ['breakdown', 'lines', 'tariff', 'printer']]);
     }
 
+    public function test_mais_de_2_casas_ou_notacao_cientifica_422(): void
+    {
+        foreach (['120,005', '1e3'] as $g) {
+            $this->postJson('/api/parts/preview', $this->payload(['filaments' => [['filament_id' => $this->filament->id, 'grams' => $g]]]))
+                ->assertStatus(422);
+        }
+        $this->postJson('/api/parts/preview', $this->payload(['extras' => [['extra_id' => $this->e1->id, 'quantity' => '1,005']]]))
+            ->assertStatus(422);
+    }
+
+    public function test_round2_simetrico(): void
+    {
+        $this->assertSame('66.67', \App\Services\Cost\PartCostService::round2('66.666666'));
+        $this->assertSame('-66.67', \App\Services\Cost\PartCostService::round2('-66.666666'));
+        $this->assertSame('0.00', \App\Services\Cost\PartCostService::round2('-0.001000'));
+    }
+
+    public function test_diff_pct_arredonda_meio_para_cima(): void
+    {
+        $id = $this->postJson('/api/parts', $this->payload())->json('id');
+        $this->filament->update(['price_per_kg' => '60']); // 7.20 vs 14.40: material -50.00%
+        $r = $this->postJson("/api/parts/$id/recalcular")->assertOk();
+        $r->assertJsonPath('compare.breakdown.material.diff_pct', '-50.00');
+        // total: 21.9045 -> 14.7045, diff -7.2 => -32.87 (32.8718...)
+        $r->assertJsonPath('compare.breakdown.total.diff_pct', '-32.87');
+    }
+
+    public function test_compare_inclui_linha_removida(): void
+    {
+        $id = $this->postJson('/api/parts', $this->payload())->json('id');
+        $r = $this->postJson("/api/parts/preview?compare_with=$id", $this->payload(['extras' => [['extra_id' => $this->e1->id, 'quantity' => 1]]]))->assertOk();
+        $lines = collect($r->json('compare.lines.extras'));
+        $this->assertCount(2, $lines);
+        $removed = $lines->firstWhere('name', 'Caixa');
+        $this->assertNull($removed['new_price']);
+        $this->assertSame('1.20', $removed['old_price']);
+    }
+
     public function test_sem_energia_422(): void
     {
         EnergySetting::current()->update(['manual_override' => false, 'aneel_tariff_kwh' => null]);

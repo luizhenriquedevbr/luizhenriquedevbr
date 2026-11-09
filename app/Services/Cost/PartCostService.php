@@ -22,6 +22,12 @@ class PartCostService
     /** Arredonda meia-para-cima em 2 casas (bcmath, sem float). */
     public static function round2(string $v): string
     {
+        if (str_starts_with($v, '-')) {
+            $r = bcadd(bcadd(substr($v, 1), '0.005', 6), '0', 2);
+
+            return bccomp($r, '0', 2) === 0 ? $r : '-' . $r;
+        }
+
         return bcadd(bcadd($v, '0.005', 6), '0', 2);
     }
 
@@ -134,15 +140,25 @@ class PartCostService
             $diff = bcsub($n, $o, 6);
             $breakdown[$k] = [
                 'old' => $o, 'new' => $n, 'diff' => $diff,
-                'diff_pct' => bccomp($o, '0', 6) === 0 ? null : bcadd(bcdiv(bcmul($diff, '100', 12), $o, 6), '0', 2),
+                'diff_pct' => bccomp($o, '0', 6) === 0 ? null : self::round2(bcdiv(bcmul($diff, '100', 12), $o, 6)),
             ];
         }
 
-        $lines = fn (array $oldL, array $newL, string $price) => array_map(function ($l) use ($oldL, $price) {
-            $match = collect($oldL)->firstWhere('id', $l['id']);
+        $lines = function (array $oldL, array $newL, string $price) {
+            $out = array_map(function ($l) use ($oldL, $price) {
+                $match = collect($oldL)->firstWhere('id', $l['id']);
 
-            return ['name' => $l['name'], 'old_price' => $match[$price] ?? null, 'new_price' => $l[$price], 'active' => $l['active']];
-        }, $newL);
+                return ['name' => $l['name'], 'old_price' => $match[$price] ?? null, 'new_price' => $l[$price], 'active' => $l['active']];
+            }, $newL);
+            $newIds = array_column($newL, 'id');
+            foreach ($oldL as $l) {
+                if (! in_array($l['id'], $newIds, true)) {
+                    $out[] = ['name' => $l['name'], 'old_price' => $l[$price], 'new_price' => null, 'active' => $l['active']];
+                }
+            }
+
+            return $out;
+        };
 
         return [
             'breakdown' => $breakdown,

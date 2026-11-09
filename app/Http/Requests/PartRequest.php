@@ -48,10 +48,10 @@ class PartRequest extends FormRequest
             'minutes' => ['required', 'integer', 'min:0', 'max:59'],
             'filaments' => ['required', 'array', 'min:1'],
             'filaments.*.filament_id' => ['required', 'integer', 'exists:filaments,id'],
-            'filaments.*.grams' => ['required', 'numeric', 'gt:0', 'max:99999999'],
-            'extras' => ['nullable', 'array'],
+            'filaments.*.grams' => ['required', 'numeric', 'decimal:0,2', 'gt:0', 'max:99999999'],
+            'extras' =>['nullable', 'array'],
             'extras.*.extra_id' => ['required', 'integer', 'exists:extras,id'],
-            'extras.*.quantity' => ['required', 'numeric', 'gt:0', 'max:99999999'],
+            'extras.*.quantity' => ['required', 'numeric', 'decimal:0,2', 'gt:0', 'max:99999999'],
         ];
     }
 

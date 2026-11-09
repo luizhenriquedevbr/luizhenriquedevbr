@@ -87,11 +87,11 @@ class PartController extends Controller
     {
         $part = Part::findOrFail($id);
         $new = $this->costs->fromPart($part);
-        $part->update([
+        DB::transaction(fn () => $part->update([
             'snapshot' => $new,
             'cost_total' => PartCostService::round2($new['breakdown']['total']),
             'calculated_at' => now(),
-        ]);
+        ]));
 
         return $this->full($part);
     }
