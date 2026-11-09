@@ -20,6 +20,11 @@ class FilamentRequest extends FormRequest
         }
     }
 
+    public function messages(): array
+    {
+        return ['price_per_kg.decimal' => 'Use vírgula para centavos, sem ponto de milhar (ex.: 15000,00).'];
+    }
+
     public function rules(): array
     {
         $req = $this->isMethod('POST') ? 'required' : 'sometimes';
@@ -28,7 +33,7 @@ class FilamentRequest extends FormRequest
             'name' => [$req, 'string', 'max:255'],
             'type' => [$req, 'in:PLA,PETG,ABS,ASA,TPU,PC'],
             'color_brand' => ['nullable', 'string', 'max:255'],
-            'price_per_kg' => [$req, 'numeric', 'min:0', 'max:99999999'],
+            'price_per_kg' => [$req, 'numeric', 'decimal:0,2', 'min:0', 'max:99999999'],
             'active' => ['sometimes', 'boolean'],
         ];
     }

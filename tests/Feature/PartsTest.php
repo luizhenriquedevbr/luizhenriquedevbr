@@ -86,6 +86,29 @@ class PartsTest extends TestCase
         $this->assertContains('consumo_sem_tipo', $r->json('snapshot.warnings'));
     }
 
+    public function test_impressora_sem_valor_avisa(): void
+    {
+        $this->printer->update(['purchase_price' => '0']);
+        $r = $this->postJson('/api/parts/preview', $this->payload())->assertOk();
+        $this->assertContains('impressora_sem_valor', $r->json('snapshot.warnings'));
+        $r->assertJsonPath('snapshot.breakdown.wear', '0.000000');
+    }
+
+    public function test_impressora_com_valor_nao_avisa_sem_valor(): void
+    {
+        $r = $this->postJson('/api/parts/preview', $this->payload())->assertOk();
+        $this->assertNotContains('impressora_sem_valor', $r->json('snapshot.warnings'));
+    }
+
+    public function test_impressora_sem_perfil_avisa_consumo_vazio(): void
+    {
+        $this->printer->forceFill(['power_profiles' => []])->save();
+        $r = $this->postJson('/api/parts/preview', $this->payload())->assertOk();
+        $r->assertJsonPath('snapshot.printer.power_w', 0);
+        $this->assertContains('consumo_vazio', $r->json('snapshot.warnings'));
+        $this->assertNotContains('consumo_sem_tipo', $r->json('snapshot.warnings'));
+    }
+
     public function test_salvar_e_listar(): void
     {
         $this->postJson('/api/parts', $this->payload())->assertCreated()

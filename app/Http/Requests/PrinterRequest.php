@@ -27,13 +27,18 @@ class PrinterRequest extends FormRequest
         }
     }
 
+    public function messages(): array
+    {
+        return ['purchase_price.decimal' => 'Use vírgula para centavos, sem ponto de milhar (ex.: 15000,00).'];
+    }
+
     public function rules(): array
     {
         $req = $this->isMethod('POST') ? 'required' : 'sometimes';
 
         return [
             'name' => [$req, 'string', 'max:255'],
-            'purchase_price' => ['sometimes', 'numeric', 'min:0', 'max:99999999'],
+            'purchase_price' => ['sometimes', 'numeric', 'decimal:0,2', 'min:0', 'max:99999999'],
             'lifespan_hours' => ['sometimes', 'integer', 'min:1'],
             'power_profiles' => [$req, 'array', 'min:1', function ($attr, $value, $fail) {
                 $tipos = ['PLA', 'PETG', 'ABS', 'ASA', 'TPU', 'PC'];

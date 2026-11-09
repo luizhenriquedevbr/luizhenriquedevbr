@@ -94,6 +94,20 @@ class CadastrosTest extends TestCase
         $this->postJson('/api/printers', ['name' => 'B', 'purchase_price' => null, 'power_profiles' => $pw])->assertCreated();
     }
 
+    public function test_preco_com_ponto_de_milhar_422(): void
+    {
+        $pw = ['PLA' => 170];
+        $this->postJson('/api/printers', ['name' => 'A', 'purchase_price' => '15.000', 'power_profiles' => $pw])
+            ->assertStatus(422)->assertJsonValidationErrors('purchase_price');
+        $this->postJson('/api/filaments', ['name' => 'F', 'type' => 'PLA', 'price_per_kg' => '15.000'])
+            ->assertStatus(422)->assertJsonValidationErrors('price_per_kg');
+        $this->postJson('/api/extras', ['name' => 'E', 'unit_price' => '15.000'])
+            ->assertStatus(422)->assertJsonValidationErrors('unit_price');
+        $r = $this->postJson('/api/printers', ['name' => 'A', 'purchase_price' => '15000,00', 'power_profiles' => $pw])->assertCreated();
+        $this->assertSame('15000.00', $r->json('purchase_price'));
+        $this->postJson('/api/filaments', ['name' => 'F', 'type' => 'PLA', 'price_per_kg' => '119.90'])->assertCreated();
+    }
+
     public function test_power_profiles_estrito(): void
     {
         $this->postJson('/api/printers', ['name' => 'X', 'power_profiles' => [170, 200]])

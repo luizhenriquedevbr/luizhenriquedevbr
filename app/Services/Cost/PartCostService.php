@@ -62,7 +62,10 @@ class PartCostService
             $power = (int) $profiles[$dominant['type']];
         } else {
             $power = $profiles ? (int) max($profiles) : 0;
-            $warnings[] = 'consumo_sem_tipo';
+            $warnings[] = $profiles ? 'consumo_sem_tipo' : 'consumo_vazio';
+        }
+        if (bccomp((string) $printer->purchase_price, '0', 2) <= 0 || (int) $printer->lifespan_hours <= 0) {
+            $warnings[] = 'impressora_sem_valor';
         }
 
         $extras = [];

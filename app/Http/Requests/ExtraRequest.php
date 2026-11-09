@@ -20,13 +20,18 @@ class ExtraRequest extends FormRequest
         }
     }
 
+    public function messages(): array
+    {
+        return ['unit_price.decimal' => 'Use vírgula para centavos, sem ponto de milhar (ex.: 15000,00).'];
+    }
+
     public function rules(): array
     {
         $req = $this->isMethod('POST') ? 'required' : 'sometimes';
 
         return [
             'name' => [$req, 'string', 'max:255'],
-            'unit_price' => [$req, 'numeric', 'min:0', 'max:99999999'],
+            'unit_price' => [$req, 'numeric', 'decimal:0,2', 'min:0', 'max:99999999'],
             'active' => ['sometimes', 'boolean'],
         ];
     }
