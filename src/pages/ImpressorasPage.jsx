@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import api from '../lib/api'
 import { errosDaApi } from '../lib/erros'
-import { brl, paraNumero } from '../lib/formato'
+import { brl, paraInput, paraNumero } from '../lib/formato'
 import Aviso from '../components/Aviso'
 import Botao from '../components/Botao'
 import Campo from '../components/Campo'
@@ -17,7 +17,7 @@ function valoresIniciais(p) {
   for (const t of TIPOS) watts[t] = p?.power_profiles?.[t] != null ? String(p.power_profiles[t]) : ''
   return {
     name: p?.name ?? '',
-    purchase_price: p?.purchase_price ?? '',
+    purchase_price: paraInput(p?.purchase_price),
     lifespan_hours: p?.lifespan_hours != null ? String(p.lifespan_hours) : '10000',
     watts,
   }
@@ -58,7 +58,7 @@ export default function ImpressorasPage() {
       return form.id ? api.put(`/printers/${form.id}`, corpo) : api.post('/printers', corpo)
     },
     onSuccess: () => { setForm(null); setAviso(''); recarregar() },
-    onError: (e) => setErros(errosDaApi(e)),
+    onError: (e) => setErros(errosDaApi(e, ['name', 'purchase_price', 'lifespan_hours', 'power_profiles'])),
   })
 
   const excluir = useMutation({

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import api from '../lib/api'
 import { errosDaApi } from '../lib/erros'
-import { paraNumero } from '../lib/formato'
+import { paraInput, paraNumero } from '../lib/formato'
 import Aviso from '../components/Aviso'
 import Botao from '../components/Botao'
 import Campo from '../components/Campo'
@@ -52,11 +52,11 @@ export default function EnergiaPage() {
 
   // Formulário derivado dos dados; vira edição local assim que o usuário digita.
   const inicial = setting && {
-    icms_pct: String(setting.icms_pct ?? ''),
-    pis_pct: String(setting.pis_pct ?? ''),
-    cofins_pct: String(setting.cofins_pct ?? ''),
+    icms_pct: paraInput(setting.icms_pct),
+    pis_pct: paraInput(setting.pis_pct),
+    cofins_pct: paraInput(setting.cofins_pct),
     manual_override: !!setting.manual_override,
-    manual_tariff_kwh: setting.manual_tariff_kwh != null ? String(Number(setting.manual_tariff_kwh)) : '',
+    manual_tariff_kwh: setting.manual_tariff_kwh != null ? paraInput(setting.manual_tariff_kwh) : '',
   }
   const form = edicao ?? inicial
 
@@ -64,8 +64,8 @@ export default function EnergiaPage() {
     mutationFn: async () => (await api.post('/energy/refresh', null, { timeout: 120000 })).data,
     onMutate: () => { setErroConsulta(''); setAviso('') },
     onSuccess: (d) => {
-      qc.setQueryData(['energy'], d)
       setAviso(d.warning ? AVISOS[d.warning] || '' : '')
+      qc.invalidateQueries({ queryKey: ['energy'] })
     },
     onError: () => setErroConsulta('A consulta demorou demais ou falhou. Tente de novo em instantes.'),
   })
@@ -90,7 +90,7 @@ export default function EnergiaPage() {
       qc.setQueryData(['energy'], r.data)
       setSalvo(true)
     },
-    onError: (e) => setErros(errosDaApi(e)),
+    onError: (e) => setErros(errosDaApi(e, ['icms_pct', 'pis_pct', 'cofins_pct', 'impostos', ...(form.manual_override ? ['manual_tariff_kwh'] : [])])),
   })
 
   const mudar = (campo, valor) => { setSalvo(false); setEdicao({ ...form, [campo]: valor }) }

@@ -18,3 +18,16 @@ export function pct(v) {
   const x = Number.isFinite(n) ? n : 0
   return `${x.toLocaleString('pt-BR', { maximumFractionDigits: 2 })}%`
 }
+
+// Decimal da API ("119.90", "1.130000") -> texto de campo pt-BR ("119,90", "1,13").
+// Mantém ao menos 2 casas e tira zeros à direita além disso.
+export function paraInput(v) {
+  if (v === null || v === undefined || v === '') return ''
+  const n = paraNumero(v)
+  if (!Number.isFinite(n)) return String(v)
+  const [inteiro, dec = ''] = String(v).trim().replace(',', '.').split('.')
+  if (!String(v).includes('.') && !String(v).includes(',')) return inteiro
+  let d = dec.replace(/0+$/, '')
+  if (d.length < 2) d = d.padEnd(2, '0')
+  return `${inteiro},${d}`
+}

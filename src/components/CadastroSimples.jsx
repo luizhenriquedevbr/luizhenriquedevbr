@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import api from '../lib/api'
 import { errosDaApi } from '../lib/erros'
+import { paraInput } from '../lib/formato'
 import Aviso from './Aviso'
 import Botao from './Botao'
 import Campo from './Campo'
@@ -29,7 +30,7 @@ export default function CadastroSimples({ recurso, titulo, rotuloNovo, campos, v
 
   const abrir = (item) => {
     const valores = {}
-    for (const c of campos) valores[c.nome] = item?.[c.nome] ?? (c.tipo === 'select' ? c.opcoes[0] : '')
+    for (const c of campos) valores[c.nome] = c.decimal ? paraInput(item?.[c.nome]) : item?.[c.nome] ?? (c.tipo === 'select' ? c.opcoes[0] : '')
     setErros(SEM_ERROS)
     setForm({ id: item?.id, valores })
   }
@@ -41,7 +42,7 @@ export default function CadastroSimples({ recurso, titulo, rotuloNovo, campos, v
       return form.id ? api.put(`/${recurso}/${form.id}`, corpo) : api.post(`/${recurso}`, corpo)
     },
     onSuccess: () => { setForm(null); setAviso(''); recarregar() },
-    onError: (e) => setErros(errosDaApi(e)),
+    onError: (e) => setErros(errosDaApi(e, campos.map((c) => c.nome))),
   })
 
   const excluir = useMutation({

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { brl, pct, paraNumero } from './formato'
+import { brl, pct, paraNumero, paraInput } from './formato'
 
 const norm = (s) => s.replace(/ /g, ' ')
 
@@ -19,5 +19,14 @@ describe('formato', () => {
   })
   it('pct formata percentual', () => {
     expect(pct('12.5')).toBe('12,5%')
+  })
+  it('paraInput converte decimal da API em texto pt-BR', () => {
+    expect(paraInput('119.90')).toBe('119,90')
+    expect(paraInput('20.00')).toBe('20,00')
+    expect(paraInput('1.130000')).toBe('1,13')
+    expect(paraInput('0.834290')).toBe('0,83429')
+    expect(paraInput('15000.00')).toBe('15000,00')
+    expect(paraInput(null)).toBe('')
+    expect(paraInput('')).toBe('')
   })
 })
