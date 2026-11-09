@@ -7,6 +7,7 @@ import ImpressorasPage from './pages/ImpressorasPage'
 import FilamentosPage from './pages/FilamentosPage'
 import ExtrasPage from './pages/ExtrasPage'
 import EnergiaPage from './pages/EnergiaPage'
+import PecaFormPage from './pages/PecaFormPage'
 
 function Protegida({ children }) {
   const { user, carregando } = useAuth()
@@ -21,7 +22,9 @@ export default function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/" element={<Protegida><AppLayout /></Protegida>}>
         <Route index element={<EmBreve titulo="Peças" />} />
-        <Route path="pecas/nova" element={<EmBreve titulo="Nova peça" />} />
+        <Route path="pecas/nova" element={<PecaFormPage modo="nova" />} />
+        <Route path="pecas/:id/editar" element={<PecaFormPage key="e" modo="editar" />} />
+        <Route path="pecas/:id/duplicar" element={<PecaFormPage key="d" modo="duplicar" />} />
         <Route path="impressoras" element={<ImpressorasPage />} />
         <Route path="filamentos" element={<FilamentosPage />} />
         <Route path="extras" element={<ExtrasPage />} />
