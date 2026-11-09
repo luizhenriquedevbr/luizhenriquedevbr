@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 160" role="img" aria-label="Miguel Maker">
+  <!-- Texto em Fredoka Bold (Google Fonts). Para gráfica, converter textos em curvas. -->
+  <defs><clipPath id="m"><path d="M0,0 H45 L81.5,27 L118,0 H163 V145 H125 V63 L81.5,117 L38,63 V145 H0 Z"/></clipPath></defs>
+  <g transform="translate(0 7)" clip-path="url(#m)">
+    <rect y="0" width="163" height="10" fill="#FF7A2F"/>
+    <rect y="15" width="163" height="10" fill="#FF7A2F"/>
+    <rect y="30" width="163" height="10" fill="#4C8DFF"/>
+    <rect y="45" width="163" height="10" fill="#4C8DFF"/>
+    <rect y="60" width="163" height="10" fill="#4C8DFF"/>
+    <rect y="75" width="163" height="10" fill="#4C8DFF"/>
+    <rect y="90" width="163" height="10" fill="#4C8DFF"/>
+    <rect y="105" width="163" height="10" fill="#4C8DFF"/>
+    <rect y="120" width="163" height="10" fill="#4C8DFF"/>
+    <rect y="135" width="163" height="10" fill="#4C8DFF"/>
+  </g>
+  <text x="196" y="82" font-family="'Fredoka', sans-serif" font-weight="700" font-size="86" letter-spacing="0" fill="#FFFFFF">miguel</text>
+  <text x="200" y="146" font-family="'Fredoka', sans-serif" font-weight="700" font-size="50" letter-spacing="9" fill="#FF7A2F">MAKER</text>
+</svg>
