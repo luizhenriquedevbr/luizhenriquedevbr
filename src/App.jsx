@@ -2,7 +2,8 @@ import { Navigate, Route, Routes } from 'react-router-dom'
 import { useAuth } from './contexts/AuthContext'
 import AppLayout from './layouts/AppLayout'
 import LoginPage from './pages/LoginPage'
-import EmBreve from './pages/EmBreve'
+import PecasPage from './pages/PecasPage'
+import PecaPage from './pages/PecaPage'
 import ImpressorasPage from './pages/ImpressorasPage'
 import FilamentosPage from './pages/FilamentosPage'
 import ExtrasPage from './pages/ExtrasPage'
@@ -21,7 +22,9 @@ export default function App() {
     <Routes>
       <Route path="/login" element={<LoginPage />} />
       <Route path="/" element={<Protegida><AppLayout /></Protegida>}>
-        <Route index element={<EmBreve titulo="Peças" />} />
+        <Route index element={<PecasPage />} />
+        <Route path="pecas" element={<PecasPage />} />
+        <Route path="pecas/:id" element={<PecaPage />} />
         <Route path="pecas/nova" element={<PecaFormPage modo="nova" />} />
         <Route path="pecas/:id/editar" element={<PecaFormPage key="e" modo="editar" />} />
         <Route path="pecas/:id/duplicar" element={<PecaFormPage key="d" modo="duplicar" />} />
