@@ -11,7 +11,7 @@ export function AuthProvider({ children }) {
     if (!lerToken()) return
     api.get('/me')
       .then((r) => setUser(r.data.user ?? r.data))
-      .catch(() => limparToken())
+      .catch((e) => { if (e.response?.status === 401) limparToken() })
       .finally(() => setCarregando(false))
   }, [])
 

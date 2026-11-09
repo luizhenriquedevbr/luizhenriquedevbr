@@ -2,7 +2,8 @@ const moeda = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL
 
 export function paraNumero(texto) {
   if (typeof texto === 'number') return texto
-  const t = String(texto ?? '').trim().replace(/\s/g, '').replace(',', '.')
+  let t = String(texto ?? '').trim().replace(/\s/g, '')
+  if (t.includes(',')) t = t.replace(/\./g, '').replace(',', '.')
   if (t === '') return NaN
   return Number(t)
 }
