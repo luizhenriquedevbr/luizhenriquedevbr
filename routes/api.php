@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\EnergyController;
 use App\Http\Controllers\Api\ExtraController;
 use App\Http\Controllers\Api\FilamentController;
 use App\Http\Controllers\Api\PrinterController;
@@ -16,7 +17,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::patch('printers/{id}/ativar', [PrinterController::class, 'ativar']);
     Route::patch('filaments/{id}/ativar', [FilamentController::class, 'ativar']);
     Route::patch('extras/{id}/ativar', [ExtraController::class, 'ativar']);
-    Route::apiResource('printers', PrinterController::class);
+    Route::get('energy', [EnergyController::class, 'show']);
+    Route::put('energy', [EnergyController::class, 'update']);
+    Route::post('energy/refresh', [EnergyController::class, 'refresh']);
+    Route::apiResource('printers',PrinterController::class);
     Route::apiResource('filaments', FilamentController::class);
     Route::apiResource('extras', ExtraController::class);
 });

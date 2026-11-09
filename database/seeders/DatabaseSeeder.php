@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(AdminSeeder::class);
         $this->call(PrinterSeeder::class);
+        $this->call(EnergySettingSeeder::class);
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
