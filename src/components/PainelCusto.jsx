@@ -1,11 +1,6 @@
 import { brl } from '../lib/formato'
-import Aviso from './Aviso'
+import AvisosCusto from './AvisosCusto'
 import Cartao from './Cartao'
-
-const AVISOS = {
-  consumo_sem_tipo: 'Esse tipo de filamento não tem consumo cadastrado nessa impressora; usei o maior valor.',
-  cadastro_desativado: 'Algum cadastro usado aqui está desativado; usei o último preço dele.',
-}
 
 function Linha({ rotulo, valor }) {
   return (
@@ -55,11 +50,7 @@ export default function PainelCusto({ snapshot, carregando, quantidade = 1 }) {
       <p className="mt-3 text-xs">
         Tarifa {Number(snapshot.tariff_kwh).toLocaleString('pt-BR', { minimumFractionDigits: 4, maximumFractionDigits: 4 })} R$/kWh · consumo {snapshot.printer?.power_w} W
       </p>
-      {snapshot.warnings?.length > 0 && (
-        <div className="mt-3 space-y-2">
-          {snapshot.warnings.map((w) => <Aviso key={w} tom="alerta">{AVISOS[w] || w}</Aviso>)}
-        </div>
-      )}
+      <AvisosCusto avisos={snapshot.warnings} />
     </Cartao>
   )
 }

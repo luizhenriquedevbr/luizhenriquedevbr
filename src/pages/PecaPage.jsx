@@ -5,15 +5,11 @@ import api from '../lib/api'
 import { brl, paraInput } from '../lib/formato'
 import { dataBR } from '../lib/data'
 import Aviso from '../components/Aviso'
+import AvisosCusto from '../components/AvisosCusto'
 import Botao from '../components/Botao'
 import Cartao from '../components/Cartao'
 import ConfirmarInline from '../components/ConfirmarInline'
 import TabelaComparacao from '../components/TabelaComparacao'
-
-const AVISOS = {
-  consumo_sem_tipo: 'Esse tipo de filamento não tinha consumo cadastrado nessa impressora; usei o maior valor.',
-  cadastro_desativado: 'Algum cadastro usado aqui estava desativado; usei o último preço dele.',
-}
 
 const CLASSE_LINK = 'inline-flex items-center justify-center min-h-[44px] px-5 rounded-xl font-titulo font-semibold bg-azul/15 text-azul hover:bg-azul/25'
 const num = (v) => paraInput(v) || '0'
@@ -58,7 +54,7 @@ export default function PecaPage() {
 
   const atualizar = useMutation({
     mutationFn: async () => (await api.post(`/parts/${id}/recalcular`)).data,
-    onSuccess: (d) => setComparacao(d.compare),
+    onSuccess: (d) => setComparacao({ ...d.compare, warnings: d.snapshot?.warnings || [] }),
     onError: (e) => {
       const energia = e.response?.status === 422 && /energia/i.test(e.response.data?.message || '')
       setErro({ texto: energia ? 'Configure a energia primeiro.' : 'Não consegui recalcular. Tente de novo.', energia })
@@ -83,6 +79,9 @@ export default function PecaPage() {
   const b = s.breakdown
   const tarifaOrigem = s.tariff_source === 'manual' ? 'informada por você' : 'ANEEL'
   const igual = comparacao && semMudanca(comparacao)
+  const linhas = [...(comparacao?.lines?.filaments || []), ...(comparacao?.lines?.extras || [])]
+  const desativado = linhas.some((l) => l.active === false) || comparacao?.warnings?.includes('cadastro_desativado')
+  const avisosAtuais = (comparacao?.warnings || []).filter((w) => w !== 'cadastro_desativado')
 
   return (
     <div className="space-y-4">
@@ -113,6 +112,10 @@ export default function PecaPage() {
             ? <p className="text-sm text-white">Nada mudou desde o último cálculo.</p>
             : <p className="text-sm">Recalculei com os valores de hoje. Nada foi gravado ainda.</p>}
           <TabelaComparacao compare={comparacao} />
+          {desativado && (
+            <Aviso tom="alerta">Algum cadastro desta peça está desativado. Para trocar por outro, use <Link className="underline" to={`/pecas/${p.id}/editar`}>Editar</Link>.</Aviso>
+          )}
+          <AvisosCusto avisos={avisosAtuais} />
           <div className="flex flex-wrap gap-2">
             {!igual && <Botao carregando={aplicar.isPending} onClick={() => { setErro({ texto: '', energia: false }); aplicar.mutate() }}>Salvar novo custo</Botao>}
             <Botao variante="fantasma" onClick={() => setComparacao(null)}>{igual ? 'Fechar' : 'Manter o antigo'}</Botao>
@@ -171,11 +174,7 @@ export default function PecaPage() {
             </ul>
           </div>
         )}
-        {s.warnings?.length > 0 && (
-          <div className="space-y-2">
-            {s.warnings.map((w) => <Aviso key={w} tom="alerta">{AVISOS[w] || w}</Aviso>)}
-          </div>
-        )}
+        <AvisosCusto avisos={s.warnings} historico />
       </Cartao>
     </div>
   )

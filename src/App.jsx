@@ -9,6 +9,7 @@ import FilamentosPage from './pages/FilamentosPage'
 import ExtrasPage from './pages/ExtrasPage'
 import EnergiaPage from './pages/EnergiaPage'
 import PecaFormPage from './pages/PecaFormPage'
+import CadastrosPage from './pages/CadastrosPage'
 
 function Protegida({ children }) {
   const { user, carregando } = useAuth()
@@ -28,6 +29,7 @@ export default function App() {
         <Route path="pecas/nova" element={<PecaFormPage modo="nova" />} />
         <Route path="pecas/:id/editar" element={<PecaFormPage key="e" modo="editar" />} />
         <Route path="pecas/:id/duplicar" element={<PecaFormPage key="d" modo="duplicar" />} />
+        <Route path="cadastros" element={<CadastrosPage />} />
         <Route path="impressoras" element={<ImpressorasPage />} />
         <Route path="filamentos" element={<FilamentosPage />} />
         <Route path="extras" element={<ExtrasPage />} />

@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from 'react-router-dom'
+import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import Botao from '../components/Botao'
 
@@ -11,18 +11,27 @@ const menu = [
   { para: '/energia', rotulo: 'Energia' },
 ]
 
+// Barra de baixo (celular): 4 abas; Cadastros reúne Impressoras, Filamentos e Extras.
+const abas = [
+  { para: '/', rotulo: 'Peças', fim: true },
+  { para: '/pecas/nova', rotulo: 'Nova peça' },
+  { para: '/energia', rotulo: 'Energia' },
+  { para: '/cadastros', rotulo: 'Cadastros', grupo: ['/cadastros', '/impressoras', '/filamentos', '/extras'] },
+]
+
 const classeLink = ({ isActive }) =>
   `flex items-center justify-center text-center min-h-[44px] px-3 rounded-xl text-sm font-medium transition ${
     isActive ? 'bg-laranja text-noite' : 'text-nevoa hover:bg-noite3'
   }`
 
 const classeAba = ({ isActive }) =>
-  `flex items-center justify-center text-center min-h-[48px] px-0.5 rounded-lg text-[11px] leading-tight font-medium ${
+  `flex items-center justify-center text-center min-h-[48px] px-1 rounded-lg text-xs leading-tight font-medium ${
     isActive ? 'bg-laranja text-noite' : 'text-nevoa'
   }`
 
 export default function AppLayout() {
   const { sair } = useAuth()
+  const { pathname } = useLocation()
 
   return (
     <div className="min-h-screen md:flex">
@@ -43,8 +52,10 @@ export default function AppLayout() {
         <Outlet />
       </main>
 
-      <nav className="md:hidden fixed bottom-0 inset-x-0 bg-noite2 border-t border-noite3 grid grid-cols-6 gap-1 p-1.5">
-        {menu.map((m) => <NavLink key={m.para} to={m.para} end={m.fim} className={classeAba}>{m.rotulo}</NavLink>)}
+      <nav className="md:hidden fixed bottom-0 inset-x-0 bg-noite2 border-t border-noite3 grid grid-cols-4 gap-1 p-1.5 pb-[env(safe-area-inset-bottom)]">
+        {abas.map((m) => (
+          <NavLink key={m.para} to={m.para} end={m.fim} className={(s) => classeAba({ isActive: s.isActive || Boolean(m.grupo?.some((g) => pathname.startsWith(g))) })}>{m.rotulo}</NavLink>
+        ))}
       </nav>
     </div>
   )

@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import api from '../lib/api'
 import { errosDaApi } from '../lib/erros'
-import { FORM_VAZIO, formParaPayload, formValido, pecaParaForm } from '../lib/peca'
+import { FORM_VAZIO, errosDeDigitacao, formParaPayload, formValido, pecaParaForm } from '../lib/peca'
 import Aviso from '../components/Aviso'
 import Botao from '../components/Botao'
 import Campo from '../components/Campo'
@@ -78,7 +78,7 @@ function Formulario({ modo, id, original }) {
   const extras = useQuery({ queryKey: ['extras', false], queryFn: async () => (await api.get('/extras')).data })
 
   const valido = formValido(form)
-  const payload = useMemo(() => (valido ? JSON.stringify(formParaPayload(form)) : null), [valido, form])
+  const payload = useMemo(() => (valido ? JSON.stringify(formParaPayload(form, { previa: true })) : null), [valido, form])
   const payloadAtraso = useDebounce(payload, 400)
 
   // O payload faz parte da chave: resposta de digitação antiga nunca sobrescreve a atual (e a requisição velha é abortada).
@@ -97,13 +97,13 @@ function Formulario({ modo, id, original }) {
   const calculando = Boolean(payload) && (payload !== payloadAtraso || previa.isFetching)
 
   const comparar = useMutation({
-    mutationFn: async () => (await api.post(`/parts/preview?compare_with=${id}`, JSON.parse(payload))).data,
+    mutationFn: async () => (await api.post(`/parts/preview?compare_with=${id}`, formParaPayload(form))).data,
     onSuccess: (d) => setComparacao(d.compare),
     onError: (e) => setErros(errosDaApi(e, CAMPOS)),
   })
   const gravar = useMutation({
     mutationFn: () => {
-      const corpo = JSON.parse(payload)
+      const corpo = formParaPayload(form)
       return modo === 'editar' ? api.put(`/parts/${id}`, corpo) : api.post('/parts', corpo)
     },
     onSuccess: (r) => {
@@ -118,13 +118,14 @@ function Formulario({ modo, id, original }) {
   const mudarLinha = (grupo, i, campo, valor) =>
     mudar(grupo, form[grupo].map((l, j) => (j === i ? { ...l, [campo]: valor } : l)))
   const tirarLinha = (grupo, i) => mudar(grupo, form[grupo].filter((_, j) => j !== i))
-  const c = erros.campos
+  const digitacao = errosDeDigitacao(form)
+  const c = { ...digitacao, ...erros.campos }
 
   const aoSalvar = (ev) => {
     ev.preventDefault()
     setErros(SEM_ERROS)
-    if (!valido) {
-      setErros({ campos: {}, geral: 'Preencha nome, impressora, tempo (minutos de 0 a 59) e ao menos um filamento com gramas.' })
+    if (!valido || !form.name.trim()) {
+      setErros({ campos: form.name.trim() ? {} : { name: 'Dê um nome para a peça.' }, geral: 'Preencha nome, impressora, tempo (minutos de 0 a 59) e ao menos um filamento com gramas.' })
       return
     }
     if (modo === 'editar') comparar.mutate()
