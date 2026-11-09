@@ -3,6 +3,7 @@ node_modules/
 storage/logs/
 .env
 .env.*
+!.env.example
 docker-compose.override.yml
 *.log
 .DS_Store

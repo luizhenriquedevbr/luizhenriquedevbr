@@ -15,7 +15,7 @@ COPY docker/apache.conf /etc/apache2/sites-available/000-default.conf
 WORKDIR /var/www/html
 
 COPY composer.json composer.lock ./
-RUN composer install --no-dev --no-scripts --optimize-autoloader
+RUN composer install --no-scripts --optimize-autoloader
 
 COPY . .
 RUN mkdir -p storage/logs storage/framework/cache storage/framework/sessions \
