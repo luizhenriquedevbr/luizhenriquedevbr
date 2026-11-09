@@ -58,4 +58,16 @@ class AneelParserTest extends TestCase
         $this->assertSame('Amarela', $f['name']);
         $this->assertSame('0.018850', $f['add_kwh']);
     }
+
+    public function test_registro_malformado_lanca_indisponivel(): void
+    {
+        $this->expectException(\App\Services\Energy\AneelIndisponivel::class);
+        AneelParser::currentTariff([['DatInicioVigencia' => '2026-10-22', 'DatFimVigencia' => '2027-10-21', 'VlrTUSD' => '1,0']], '2026-11-09');
+    }
+
+    public function test_bandeira_malformada_lanca_indisponivel(): void
+    {
+        $this->expectException(\App\Services\Energy\AneelIndisponivel::class);
+        AneelParser::currentFlag([['DatCompetencia' => '2026-10-01', 'NomBandeiraAcionada' => 'Verde', 'VlrAdicionalBandeira' => 'x']], '2026-11-09');
+    }
 }

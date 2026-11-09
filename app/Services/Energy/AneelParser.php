@@ -39,7 +39,7 @@ final class AneelParser
         if ($best === null) {
             return null;
         }
-        $mwh = bcadd(self::decimal((string) $best['VlrTUSD']), self::decimal((string) $best['VlrTE']), 6);
+        $mwh = bcadd(self::num($best, 'VlrTUSD'), self::num($best, 'VlrTE'), 6);
 
         return [
             'tariff_kwh' => bcdiv($mwh, '1000', self::S),
@@ -65,10 +65,30 @@ final class AneelParser
             return null;
         }
 
+        $name = $best['NomBandeiraAcionada'] ?? null;
+        if (! is_string($name) || trim($name) === '') {
+            throw new AneelIndisponivel('registro de bandeira malformado');
+        }
+
         return [
-            'name' => $best['NomBandeiraAcionada'],
-            'add_kwh' => bcdiv(self::decimal((string) $best['VlrAdicionalBandeira']), '1000', self::S),
+            'name' => $name,
+            'add_kwh' => bcdiv(self::num($best, 'VlrAdicionalBandeira'), '1000', self::S),
             'competence' => $best['DatCompetencia'],
         ];
+    }
+
+    /** Valor numérico obrigatório do registro; registro malformado conta como ANEEL indisponível. */
+    private static function num(array $r, string $key): string
+    {
+        $v = $r[$key] ?? null;
+        if (! is_string($v) && ! is_int($v) && ! is_float($v)) {
+            throw new AneelIndisponivel("registro sem $key");
+        }
+        $d = self::decimal((string) $v);
+        if (! preg_match('/^\d+(\.\d+)?$/', $d)) {
+            throw new AneelIndisponivel("$key inválido");
+        }
+
+        return $d;
     }
 }

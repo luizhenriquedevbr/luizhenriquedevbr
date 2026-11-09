@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\EnergySetting;
 use App\Support\Decimal;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -33,5 +34,22 @@ class EnergyRequest extends FormRequest
             'manual_override' => ['sometimes', 'boolean'],
             'manual_tariff_kwh' => ['sometimes', 'nullable', 'numeric', 'min:0', 'max:9999'],
         ];
+    }
+
+    public function after(): array
+    {
+        return [function ($validator) {
+            if ($validator->errors()->isNotEmpty()) {
+                return;
+            }
+            $cur = EnergySetting::current();
+            $sum = '0';
+            foreach (['icms_pct', 'pis_pct', 'cofins_pct'] as $k) {
+                $sum = bcadd($sum, (string) $this->input($k, $cur->$k), 6);
+            }
+            if (bccomp($sum, '100', 6) >= 0) {
+                $validator->errors()->add('impostos', 'ICMS + PIS + COFINS deve ser menor que 100%.');
+            }
+        }];
     }
 }

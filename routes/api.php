@@ -20,7 +20,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('energy', [EnergyController::class, 'show']);
     Route::put('energy', [EnergyController::class, 'update']);
     Route::post('energy/refresh', [EnergyController::class, 'refresh']);
-    Route::apiResource('printers',PrinterController::class);
+    Route::apiResource('printers', PrinterController::class);
     Route::apiResource('filaments', FilamentController::class);
     Route::apiResource('extras', ExtraController::class);
 });

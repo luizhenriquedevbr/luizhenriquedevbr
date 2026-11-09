@@ -79,11 +79,71 @@ class EnergyTest extends TestCase
 
     public function test_bandeira_fora_mantem_bandeira_anterior(): void
     {
+        Http::swap(new \Illuminate\Http\Client\Factory());
+        Http::fake(function ($request) {
+            if (($request->data()['resource_id'] ?? '') === self::TARIFA_ID) {
+                return Http::response(['success' => true, 'result' => ['records' => [
+                    ['DatInicioVigencia' => '2026-10-22', 'DatFimVigencia' => '2027-10-21', 'VlrTUSD' => '453,47', 'VlrTE' => '380,82'],
+                ]]]);
+            }
+
+            return Http::response(['success' => true, 'result' => ['records' => [
+                ['DatCompetencia' => '2026-11-01', 'NomBandeiraAcionada' => 'Amarela', 'VlrAdicionalBandeira' => '18,85'],
+            ]]]);
+        });
+        $this->postJson('/api/energy/refresh')->assertOk()->assertJsonPath('setting.flag_name', 'Amarela');
+
         $this->fakeAneel(true, false);
         $r = $this->postJson('/api/energy/refresh')->assertOk();
         $r->assertJsonPath('warning', 'aneel_bandeira_indisponivel');
         $r->assertJsonPath('setting.aneel_tariff_kwh', '0.834290');
-        $r->assertJsonPath('setting.flag_add_kwh', '0.000000');
+        $r->assertJsonPath('setting.flag_name', 'Amarela');
+        $r->assertJsonPath('setting.flag_add_kwh', '0.018850');
+    }
+
+    public function test_registro_malformado_nao_quebra(): void
+    {
+        $this->fakeAneel();
+        $this->postJson('/api/energy/refresh')->assertOk();
+
+        Http::swap(new \Illuminate\Http\Client\Factory());
+        Http::fake(fn ($request) => Http::response(['success' => true, 'result' => ['records' => [
+            ['DatInicioVigencia' => '2026-10-22', 'DatFimVigencia' => '2027-10-21', 'VlrTUSD' => '453,47'],
+            ['DatCompetencia' => '2026-10-01', 'VlrAdicionalBandeira' => 'abc'],
+        ]]]));
+        $this->postJson('/api/energy/refresh')->assertOk()
+            ->assertJsonPath('warning', 'aneel_indisponivel')
+            ->assertJsonPath('setting.aneel_tariff_kwh', '0.834290')
+            ->assertJsonPath('final.value', '1.130014');
+    }
+
+    public function test_flag_malformada_mantem_bandeira(): void
+    {
+        Http::swap(new \Illuminate\Http\Client\Factory());
+        Http::fake(function ($request) {
+            if (($request->data()['resource_id'] ?? '') === self::TARIFA_ID) {
+                return Http::response(['success' => true, 'result' => ['records' => [
+                    ['DatInicioVigencia' => '2026-10-22', 'DatFimVigencia' => '2027-10-21', 'VlrTUSD' => '453,47', 'VlrTE' => '380,82'],
+                ]]]);
+            }
+
+            return Http::response(['success' => true, 'result' => ['records' => [
+                ['DatCompetencia' => '2026-10-01', 'NomBandeiraAcionada' => 'Verde'],
+            ]]]);
+        });
+        $this->postJson('/api/energy/refresh')->assertOk()
+            ->assertJsonPath('warning', 'aneel_bandeira_indisponivel')
+            ->assertJsonPath('setting.aneel_tariff_kwh', '0.834290')
+            ->assertJsonPath('setting.flag_name', null);
+    }
+
+    public function test_impostos_somando_100_ou_mais_sao_recusados(): void
+    {
+        $this->putJson('/api/energy', ['icms_pct' => '99', 'pis_pct' => '99', 'cofins_pct' => '99'])
+            ->assertStatus(422)->assertJsonValidationErrors('impostos');
+        $this->putJson('/api/energy', ['icms_pct' => '99'])->assertStatus(422);
+        $this->assertSame('20.00', EnergySetting::current()->icms_pct);
+        $this->putJson('/api/energy', ['icms_pct' => '25'])->assertOk();
     }
 
     public function test_sem_registro_vigente(): void
