@@ -14,8 +14,9 @@ class FilamentRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
-        if ($this->has('price_per_kg')) {
-            $this->merge(['price_per_kg' => Decimal::normalize($this->input('price_per_kg'))]);
+        $v = $this->input('price_per_kg');
+        if ($this->has('price_per_kg') && (is_scalar($v) || $v === null)) {
+            $this->merge(['price_per_kg' => Decimal::normalize($v)]);
         }
     }
 

@@ -14,8 +14,9 @@ class ExtraRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
-        if ($this->has('unit_price')) {
-            $this->merge(['unit_price' => Decimal::normalize($this->input('unit_price'))]);
+        $v = $this->input('unit_price');
+        if ($this->has('unit_price') && (is_scalar($v) || $v === null)) {
+            $this->merge(['unit_price' => Decimal::normalize($v)]);
         }
     }
 

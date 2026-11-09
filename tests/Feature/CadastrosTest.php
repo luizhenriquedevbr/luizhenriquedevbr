@@ -81,4 +81,50 @@ class CadastrosTest extends TestCase
         $this->assertSame(330, $p[0]->power_profiles['ABS']);
         $this->assertSame(10000, $p[0]->lifespan_hours);
     }
+
+    public function test_preco_vazio_impressora_usa_default(): void
+    {
+        $pw = ['PLA' => 170];
+        $r = $this->postJson('/api/printers', ['name' => 'A', 'purchase_price' => '', 'power_profiles' => $pw]);
+        $r->assertCreated()->assertJsonPath('purchase_price', '0.00');
+        $id = $r->json('id');
+        $this->putJson("/api/printers/$id", ['purchase_price' => '1.500,50'])->assertOk();
+        $this->putJson("/api/printers/$id", ['purchase_price' => ''])->assertOk()
+            ->assertJsonPath('purchase_price', '1500.50');
+        $this->postJson('/api/printers', ['name' => 'B', 'purchase_price' => null, 'power_profiles' => $pw])->assertCreated();
+    }
+
+    public function test_power_profiles_estrito(): void
+    {
+        $this->postJson('/api/printers', ['name' => 'X', 'power_profiles' => [170, 200]])
+            ->assertStatus(422)->assertJsonValidationErrors('power_profiles');
+        $this->postJson('/api/printers', ['name' => 'X', 'power_profiles' => ['NYLON' => 170]])
+            ->assertStatus(422)->assertJsonValidationErrors('power_profiles');
+        $this->postJson('/api/printers', ['name' => 'X', 'power_profiles' => ['PLA' => '170']])
+            ->assertStatus(422)->assertJsonValidationErrors('power_profiles');
+        $this->postJson('/api/printers', ['name' => 'X', 'power_profiles' => ['PLA' => 170, 'ABS' => 330]])
+            ->assertCreated()->assertJsonPath('power_profiles.ABS', 330);
+        $this->assertSame(330, Printer::first()->power_profiles['ABS']);
+    }
+
+    public function test_decimal_nao_escalar_422(): void
+    {
+        $this->postJson('/api/filaments', ['name' => 'X', 'type' => 'PLA', 'price_per_kg' => [1]])
+            ->assertStatus(422)->assertJsonValidationErrors('price_per_kg');
+        $this->postJson('/api/extras', ['name' => 'X', 'unit_price' => ['a' => 1]])
+            ->assertStatus(422)->assertJsonValidationErrors('unit_price');
+        $this->postJson('/api/printers', ['name' => 'X', 'purchase_price' => [1], 'power_profiles' => ['PLA' => 1]])
+            ->assertStatus(422)->assertJsonValidationErrors('purchase_price');
+    }
+
+    public function test_reseed_preserva_edicao(): void
+    {
+        $this->seed(\Database\Seeders\PrinterSeeder::class);
+        $p = Printer::first();
+        $p->update(['purchase_price' => '15000', 'power_profiles' => ['PLA' => 100]]);
+        $this->seed(\Database\Seeders\PrinterSeeder::class);
+        $p->refresh();
+        $this->assertSame('15000.00', $p->purchase_price);
+        $this->assertSame(['PLA' => 100], $p->power_profiles);
+    }
 }
