@@ -1,0 +1,16 @@
+vendor/
+node_modules/
+storage/logs/
+.env
+.env.*
+!.env.example
+!.env.production.example
+docker-compose.override.yml
+*.log
+.DS_Store
+CLAUDE.md
+.claude/
+/public/hot
+/public/storage
+/storage/*.key
+.phpunit.result.cache

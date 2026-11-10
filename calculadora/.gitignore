@@ -1,0 +1,8 @@
+# api/ e app/ têm .gitignore próprio (vendor/, node_modules/, .env* etc.)
+docker-compose.override.yml
+*.log
+.DS_Store
+CLAUDE.md
+.claude/
+.superpowers/
+docs/superpowers/

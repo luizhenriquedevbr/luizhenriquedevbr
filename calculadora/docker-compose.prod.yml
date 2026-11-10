@@ -1,0 +1,76 @@
+# Compose de produção — autocontido (não faz merge com docker-compose.yml, que é só de dev).
+# Uso no servidor: o deploy.sh do site chama calculadora/deploy.sh.
+# Só o app (nginx) fica na rede do Traefik; ele serve o React em /calculadora e repassa /calculadora/api para a API.
+# A regra com PathPrefix é mais longa que a do site, então o Traefik dá prioridade a ela.
+# API e banco ficam só na rede interna.
+name: calculadora
+
+services:
+  app:
+    build:
+      context: ./app
+      args:
+        VITE_API_URL: /calculadora/api
+    container_name: calculadora-app
+    restart: unless-stopped
+    depends_on:
+      - api
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.calculadora.rule=Host(`luizhenrique.dev.br`) && PathPrefix(`/calculadora`)"
+      - "traefik.http.routers.calculadora.entrypoints=websecure"
+      - "traefik.http.routers.calculadora.tls.certresolver=le"
+      - "traefik.http.services.calculadora.loadbalancer.server.port=80"
+      - "traefik.docker.network=web"
+    networks:
+      - web
+      - internal
+
+  api:
+    build:
+      context: ./api
+      args:
+        COMPOSER_FLAGS: --no-dev
+    container_name: calculadora-api
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      # Variável de ambiente real vence o .env (dotenv imutável): a senha só existe no arquivo do /root.
+      DB_PASSWORD: ${CALC_DB_PASSWORD:?defina em /root/calculadora-deploy.env}
+    volumes:
+      - storage_data:/var/www/html/storage
+      - ./api/.env.prod:/var/www/html/.env
+    networks:
+      - internal
+
+  db:
+    image: mysql:8.0
+    container_name: calculadora-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${CALC_DB_ROOT_PASSWORD:?defina em /root/calculadora-deploy.env}
+      MYSQL_DATABASE: calculadora
+      MYSQL_USER: calculadora
+      MYSQL_PASSWORD: ${CALC_DB_PASSWORD:?defina em /root/calculadora-deploy.env}
+    volumes:
+      - db_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "127.0.0.1", "-P", "3306", "--protocol=TCP", "-u", "calculadora", "-p${CALC_DB_PASSWORD:?defina em /root/calculadora-deploy.env}"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+    networks:
+      - internal
+
+networks:
+  web:
+    external: true
+  internal:
+    driver: bridge
+
+# Dados que o git não leva: db_data (peças, cadastros, tarifa) e storage_data (logs).
+volumes:
+  storage_data:
+  db_data:

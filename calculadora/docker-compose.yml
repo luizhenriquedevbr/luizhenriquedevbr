@@ -1,0 +1,59 @@
+name: calculadora
+
+services:
+  api:
+    build: ./api
+    ports:
+      - "8011:80"
+    volumes:
+      - ./api/app:/var/www/html/app
+      - ./api/config:/var/www/html/config
+      - ./api/routes:/var/www/html/routes
+      - ./api/resources:/var/www/html/resources
+      - ./api/database:/var/www/html/database
+      - ./api/tests:/var/www/html/tests
+      - ./api/storage:/var/www/html/storage
+      - ./api/phpunit.xml:/var/www/html/phpunit.xml
+      - ./api/.env.docker:/var/www/html/.env
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  app:
+    build:
+      context: ./app
+      args:
+        VITE_API_URL: http://localhost:8011/api
+    ports:
+      - "5184:80"
+    depends_on:
+      - api
+    restart: unless-stopped
+
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: calculadora
+      MYSQL_USER: calculadora
+      MYSQL_PASSWORD: secret
+    volumes:
+      - calculadora-db-data:/var/lib/mysql
+      - ./docker/mysql-init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "calculadora", "-psecret"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  calculadora-db-data:
+
+# Sub-rede fixa: o pool padrão do Docker está esgotado nesta máquina (muitos projetos).
+networks:
+  default:
+    ipam:
+      config:
+        - subnet: 192.168.64.0/20
