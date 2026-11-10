@@ -15,3 +15,7 @@ git pull --ff-only origin main
 docker compose -f docker-compose.yml -f docker-compose.prod.yml up -d --build
 
 echo "=== deploy concluido: $(date -Is) ==="
+
+# Calculadora do Miguel Maker em /calculadora (compose próprio, com API e MySQL). Roda depois do site:
+# se faltar configuração dela, o site já está no ar e o erro aparece aqui.
+bash calculadora/deploy.sh

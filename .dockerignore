@@ -11,3 +11,4 @@ docker-compose.prod.yml
 package.json
 package-lock.json
 tailwind.config.js
+calculadora
