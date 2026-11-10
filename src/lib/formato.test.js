@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { brl, pct, paraNumero, paraInput, mascaraMoeda, moedaParaInput } from './formato'
+import { brl, pct, paraNumero, paraInput, mascaraMoeda, moedaParaInput, precoVenda } from './formato'
 
 const norm = (s) => s.replace(/ /g, ' ')
 
@@ -39,6 +39,13 @@ describe('formato', () => {
     expect(mascaraMoeda('0,0')).toBe('')
     expect(mascaraMoeda('123456789')).toBe('1.234.567,89')
     expect(paraNumero(mascaraMoeda('1056000'))).toBe(10560)
+  })
+  it('precoVenda aplica o lucro sobre o custo e arredonda em centavos', () => {
+    expect(precoVenda('3.02', '100.00')).toBe(6.04)
+    expect(precoVenda('21.74', '100')).toBe(43.48)
+    expect(precoVenda('10.00', '50,5')).toBe(15.05)
+    expect(precoVenda('10.00', '0')).toBe(10)
+    expect(precoVenda('10.00', null)).toBe(20)
   })
   it('moedaParaInput formata valor da API com máscara', () => {
     expect(moedaParaInput('10560.00')).toBe('10.560,00')

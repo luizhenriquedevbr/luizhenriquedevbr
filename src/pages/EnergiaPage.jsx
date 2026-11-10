@@ -57,6 +57,7 @@ export default function EnergiaPage() {
     cofins_pct: paraInput(setting.cofins_pct),
     manual_override: !!setting.manual_override,
     manual_tariff_kwh: setting.manual_tariff_kwh != null ? paraInput(setting.manual_tariff_kwh) : '',
+    markup_pct: paraInput(setting.markup_pct),
   }
   const form = edicao ?? inicial
 
@@ -85,13 +86,19 @@ export default function EnergiaPage() {
       cofins_pct: form.cofins_pct,
       manual_override: form.manual_override,
       manual_tariff_kwh: form.manual_tariff_kwh === '' ? null : form.manual_tariff_kwh,
+      markup_pct: form.markup_pct,
     }),
-    onSuccess: (r) => {
+    onSuccess: (r, qual) => {
       qc.setQueryData(['energy'], r.data)
-      setSalvo(true)
+      setEdicao(null)
+      setSalvo(qual)
     },
-    onError: (e) => setErros(errosDaApi(e, ['icms_pct', 'pis_pct', 'cofins_pct', 'impostos', ...(form.manual_override ? ['manual_tariff_kwh'] : [])])),
+    onError: (e) => setErros(errosDaApi(e, ['icms_pct', 'pis_pct', 'cofins_pct', 'impostos', 'markup_pct', ...(form.manual_override ? ['manual_tariff_kwh'] : [])])),
   })
+
+  // qual: cartão que mostra o "Salvo." (lucro ou impostos); os dois salvam a mesma configuração.
+  const enviar = (qual) => (ev) => { ev.preventDefault(); setErros(SEM_ERROS); setSalvo(false); salvar.mutate(qual) }
+  const onde = salvar.isPending ? salvar.variables : ''
 
   const mudar = (campo, valor) => { setSalvo(false); setEdicao({ ...form, [campo]: valor }) }
 
@@ -157,10 +164,19 @@ export default function EnergiaPage() {
       </Cartao>
 
       <Cartao>
-        <form
-          onSubmit={(ev) => { ev.preventDefault(); setErros(SEM_ERROS); setSalvo(false); salvar.mutate() }}
-          className="space-y-4"
-        >
+        <form onSubmit={enviar('lucro')} className="space-y-4">
+          <h2 className="text-lg font-semibold">Lucro sobre o custo</h2>
+          <p className="text-sm">O preço de venda sugerido é o custo mais essa porcentagem. 100% = o dobro do custo.</p>
+          <div className="max-w-[12rem]">
+            <Campo label="Lucro (%)" inputMode="decimal" value={form.markup_pct} erro={erros.campos.markup_pct} onChange={(e) => mudar('markup_pct', e.target.value)} />
+          </div>
+          {salvo === 'lucro' && <Aviso tom="sucesso">Salvo.</Aviso>}
+          <Botao type="submit" carregando={salvar.isPending && onde === 'lucro'}>Salvar</Botao>
+        </form>
+      </Cartao>
+
+      <Cartao>
+        <form onSubmit={enviar('impostos')} className="space-y-4">
           <h2 className="text-lg font-semibold">Impostos e valor manual</h2>
           <p className="text-sm">Confira na sua conta de luz: as alíquotas variam de acordo com o consumo e a distribuidora.</p>
 
@@ -187,8 +203,8 @@ export default function EnergiaPage() {
           )}
 
           {erros.geral && <Aviso tom="erro">{erros.geral}</Aviso>}
-          {salvo && <Aviso tom="sucesso">Salvo.</Aviso>}
-          <Botao type="submit" carregando={salvar.isPending}>Salvar</Botao>
+          {salvo === 'impostos' && <Aviso tom="sucesso">Salvo.</Aviso>}
+          <Botao type="submit" carregando={salvar.isPending && onde === 'impostos'}>Salvar</Botao>
         </form>
       </Cartao>
     </div>

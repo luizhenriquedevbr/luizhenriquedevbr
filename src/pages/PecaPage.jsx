@@ -9,6 +9,7 @@ import AvisosCusto from '../components/AvisosCusto'
 import Botao from '../components/Botao'
 import Cartao from '../components/Cartao'
 import ConfirmarInline from '../components/ConfirmarInline'
+import PrecoVenda from '../components/PrecoVenda'
 import TabelaComparacao from '../components/TabelaComparacao'
 
 const CLASSE_LINK = 'inline-flex items-center justify-center min-h-[44px] px-5 rounded-xl font-titulo font-semibold bg-azul/15 text-azul hover:bg-azul/25'
@@ -130,6 +131,7 @@ export default function PecaPage() {
           <p className="font-titulo text-3xl font-bold text-laranja tabular-nums">{brl(b.total)}</p>
           <p className="text-sm mt-1">Por unidade: <span className="text-white font-semibold tabular-nums">{brl(b.per_unit)}</span></p>
         </div>
+        <PrecoVenda total={b.total} porUnidade={b.per_unit} quantidade={p.quantity} />
         <dl className="text-sm divide-y divide-noite3/60">
           <Linha rotulo="Material" valor={b.material} />
           <Linha rotulo="Energia" valor={b.energy} />

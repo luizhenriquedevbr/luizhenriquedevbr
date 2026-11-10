@@ -1,6 +1,7 @@
 import { brl } from '../lib/formato'
 import AvisosCusto from './AvisosCusto'
 import Cartao from './Cartao'
+import PrecoVenda from './PrecoVenda'
 
 function Linha({ rotulo, valor }) {
   return (
@@ -41,6 +42,7 @@ export default function PainelCusto({ snapshot, carregando, quantidade = 1 }) {
           </>
         )}
       </div>
+      <PrecoVenda total={b.total} porUnidade={b.per_unit} quantidade={quantidade} />
       <dl className="text-sm divide-y divide-noite3/60">
         <Linha rotulo="Material" valor={b.material} />
         <Linha rotulo="Energia" valor={b.energy} />

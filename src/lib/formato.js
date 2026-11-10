@@ -28,6 +28,14 @@ export function mascaraMoeda(texto) {
   return `${inteiro},${p.slice(-2)}`
 }
 
+// Preço de venda = custo × (1 + lucro%), em centavos. Lucro ausente vale 100% (o dobro do custo).
+export function precoVenda(custo, lucroPct) {
+  const c = paraNumero(custo)
+  const l = paraNumero(lucroPct)
+  const pct = Number.isFinite(l) ? l : 100
+  return Number.isFinite(c) ? Math.round(c * (100 + pct)) / 100 : 0
+}
+
 // Preço da API ("10560.00") -> campo com máscara ("10.560,00"); zero ou vazio abre o campo vazio.
 export function moedaParaInput(v) {
   const n = paraNumero(v)
