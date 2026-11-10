@@ -125,7 +125,7 @@ function Formulario({ modo, id, original }) {
     ev.preventDefault()
     setErros(SEM_ERROS)
     if (!valido || !form.name.trim()) {
-      setErros({ campos: form.name.trim() ? {} : { name: 'Dê um nome para a peça.' }, geral: 'Preencha nome, impressora, tempo (minutos de 0 a 59) e ao menos um filamento com gramas.' })
+      setErros({ campos: form.name.trim() ? {} : { name: 'Dê um nome para a peça.' }, geral: Object.keys(digitacao).length ? 'Corrija os campos marcados.' : 'Preencha nome, impressora, tempo (minutos de 0 a 59) e ao menos um filamento com gramas.' })
       return
     }
     if (modo === 'editar') comparar.mutate()

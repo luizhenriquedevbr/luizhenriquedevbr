@@ -2,8 +2,11 @@ import { NavLink, Outlet, useLocation } from 'react-router-dom'
 import { useAuth } from '../contexts/AuthContext'
 import Botao from '../components/Botao'
 
+// Peças fica ativa na lista ("/" ou "/pecas") e no detalhe/edição de uma peça, mas não em "Nova peça".
+const ehPecas = (p) => p === '/' || (p.startsWith('/pecas') && !p.startsWith('/pecas/nova'))
+
 const menu = [
-  { para: '/', rotulo: 'Peças', fim: true },
+  { para: '/', rotulo: 'Peças', fim: true, ativo: ehPecas },
   { para: '/pecas/nova', rotulo: 'Nova peça' },
   { para: '/impressoras', rotulo: 'Impressoras' },
   { para: '/filamentos', rotulo: 'Filamentos' },
@@ -13,7 +16,7 @@ const menu = [
 
 // Barra de baixo (celular): 4 abas; Cadastros reúne Impressoras, Filamentos e Extras.
 const abas = [
-  { para: '/', rotulo: 'Peças', fim: true },
+  { para: '/', rotulo: 'Peças', fim: true, ativo: ehPecas },
   { para: '/pecas/nova', rotulo: 'Nova peça' },
   { para: '/energia', rotulo: 'Energia' },
   { para: '/cadastros', rotulo: 'Cadastros', grupo: ['/cadastros', '/impressoras', '/filamentos', '/extras'] },
@@ -38,7 +41,7 @@ export default function AppLayout() {
       <aside className="hidden md:flex md:flex-col md:w-60 md:shrink-0 md:h-screen md:sticky md:top-0 bg-noite2 border-r border-noite3/60 p-4 gap-4">
         <img src="/logo-horizontal-fundo-escuro.svg" alt="Miguel Maker" className="w-44" />
         <nav className="flex flex-col gap-1">
-          {menu.map((m) => <NavLink key={m.para} to={m.para} end={m.fim} className={classeLink}>{m.rotulo}</NavLink>)}
+          {menu.map((m) => <NavLink key={m.para} to={m.para} end={m.fim} className={(s) => classeLink({ isActive: s.isActive || Boolean(m.ativo?.(pathname)) })}>{m.rotulo}</NavLink>)}
         </nav>
         <Botao variante="fantasma" onClick={sair} className="mt-auto">Sair</Botao>
       </aside>
@@ -52,9 +55,9 @@ export default function AppLayout() {
         <Outlet />
       </main>
 
-      <nav className="md:hidden fixed bottom-0 inset-x-0 bg-noite2 border-t border-noite3 grid grid-cols-4 gap-1 p-1.5 pb-[env(safe-area-inset-bottom)]">
+      <nav className="md:hidden fixed bottom-0 inset-x-0 bg-noite2 border-t border-noite3 grid grid-cols-4 gap-1 p-1.5 pb-[max(0.375rem,env(safe-area-inset-bottom))]">
         {abas.map((m) => (
-          <NavLink key={m.para} to={m.para} end={m.fim} className={(s) => classeAba({ isActive: s.isActive || Boolean(m.grupo?.some((g) => pathname.startsWith(g))) })}>{m.rotulo}</NavLink>
+          <NavLink key={m.para} to={m.para} end={m.fim} className={(s) => classeAba({ isActive: s.isActive || Boolean(m.ativo?.(pathname)) || Boolean(m.grupo?.some((g) => pathname.startsWith(g))) })}>{m.rotulo}</NavLink>
         ))}
       </nav>
     </div>
