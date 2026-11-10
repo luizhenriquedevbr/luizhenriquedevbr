@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import api from '../lib/api'
 import { errosDaApi } from '../lib/erros'
-import { brl, paraInput, paraNumero } from '../lib/formato'
+import { brl, mascaraMoeda, moedaParaInput, paraNumero } from '../lib/formato'
 import Aviso from '../components/Aviso'
 import Botao from '../components/Botao'
 import Campo from '../components/Campo'
@@ -17,7 +17,7 @@ function valoresIniciais(p) {
   for (const t of TIPOS) watts[t] = p?.power_profiles?.[t] != null ? String(p.power_profiles[t]) : ''
   return {
     name: p?.name ?? '',
-    purchase_price: paraNumero(p?.purchase_price) ? paraInput(p.purchase_price) : '',
+    purchase_price: moedaParaInput(p?.purchase_price),
     lifespan_hours: p?.lifespan_hours != null ? String(p.lifespan_hours) : '10000',
     watts,
   }
@@ -103,7 +103,7 @@ export default function ImpressorasPage() {
             <h2 className="text-lg font-semibold">{form.id ? 'Editar impressora' : 'Nova impressora'}</h2>
             <div className="grid gap-4 sm:grid-cols-2">
               <Campo className="sm:col-span-2" label="Nome" value={form.valores.name} erro={erros.campos.name} onChange={(e) => mudar('name', e.target.value)} />
-              <Campo label="Valor de compra (R$)" inputMode="decimal" placeholder="15000,00" value={form.valores.purchase_price} erro={erros.campos.purchase_price} onChange={(e) => mudar('purchase_price', e.target.value)} />
+              <Campo label="Valor de compra (R$)" inputMode="numeric" placeholder="0,00" value={form.valores.purchase_price} erro={erros.campos.purchase_price} onChange={(e) => mudar('purchase_price', mascaraMoeda(e.target.value))} />
               <Campo label="Vida útil (horas)" inputMode="numeric" value={form.valores.lifespan_hours} erro={erros.campos.lifespan_hours} onChange={(e) => mudar('lifespan_hours', e.target.value)} />
             </div>
 

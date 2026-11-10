@@ -164,7 +164,7 @@ function Formulario({ modo, id, original }) {
           <Cartao className="space-y-4">
             <Escolha label="Impressora" valor={form.printer_id} opcoes={optImp} erro={c.printer_id} onChange={(v) => mudar('printer_id', v)} />
             <div className="grid grid-cols-2 gap-4">
-              <Campo label="Tempo: horas" inputMode="numeric" value={form.hours} erro={c.hours} onChange={(e) => mudar('hours', e.target.value)} />
+              <Campo label="Tempo: horas (ex.: 3,5)" inputMode="decimal" value={form.hours} erro={c.hours} onChange={(e) => mudar('hours', e.target.value)} />
               <Campo label="Minutos (0 a 59)" inputMode="numeric" value={form.minutes} erro={c.minutes} onChange={(e) => mudar('minutes', e.target.value)} />
             </div>
           </Cartao>

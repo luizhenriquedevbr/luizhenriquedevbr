@@ -7,7 +7,7 @@ const campos = [
   { nome: 'name', label: 'Nome', placeholder: 'PLA Preto' },
   { nome: 'type', label: 'Tipo', tipo: 'select', opcoes: TIPOS },
   { nome: 'color_brand', label: 'Cor / marca (opcional)', anulavel: true },
-  { nome: 'price_per_kg', label: 'Preço por kg (R$)', placeholder: '119,90', inputMode: 'decimal', decimal: true },
+  { nome: 'price_per_kg', label: 'Preço por kg (R$)', placeholder: '0,00', inputMode: 'numeric', moeda: true },
 ]
 
 export default function FilamentosPage() {

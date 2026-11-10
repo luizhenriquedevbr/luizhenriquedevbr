@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import api from '../lib/api'
 import { errosDaApi } from '../lib/erros'
-import { paraInput } from '../lib/formato'
+import { mascaraMoeda, moedaParaInput, paraInput } from '../lib/formato'
 import Aviso from './Aviso'
 import Botao from './Botao'
 import Campo from './Campo'
@@ -13,7 +13,8 @@ import Seletor from './Seletor'
 const SEM_ERROS = { campos: {}, geral: '' }
 
 // Lista + formulário para cadastros simples (filamentos, extras).
-// campos: [{ nome, label, tipo?: 'texto'|'select', opcoes?, placeholder?, inputMode?, anulavel? }]
+// campos: [{ nome, label, tipo?: 'texto'|'select', opcoes?, placeholder?, inputMode?, anulavel?, decimal?, moeda? }]
+// moeda: campo de preço com máscara (dígitos entram pela direita: "1990" -> "19,90").
 // descricao(item) devolve { titulo, detalhe }.
 export default function CadastroSimples({ recurso, titulo, rotuloNovo, campos, vazio, descricao }) {
   const qc = useQueryClient()
@@ -30,7 +31,7 @@ export default function CadastroSimples({ recurso, titulo, rotuloNovo, campos, v
 
   const abrir = (item) => {
     const valores = {}
-    for (const c of campos) valores[c.nome] = c.decimal ? paraInput(item?.[c.nome]) : item?.[c.nome] ?? (c.tipo === 'select' ? c.opcoes[0] : '')
+    for (const c of campos) valores[c.nome] = c.moeda ? moedaParaInput(item?.[c.nome]) : c.decimal ? paraInput(item?.[c.nome]) : item?.[c.nome] ?? (c.tipo === 'select' ? c.opcoes[0] : '')
     setErros(SEM_ERROS)
     setForm({ id: item?.id, valores })
   }
@@ -84,7 +85,7 @@ export default function CadastroSimples({ recurso, titulo, rotuloNovo, campos, v
                   label: c.label,
                   value: form.valores[c.nome],
                   erro: erros.campos[c.nome],
-                  onChange: (ev) => setForm({ ...form, valores: { ...form.valores, [c.nome]: ev.target.value } }),
+                  onChange: (ev) => setForm({ ...form, valores: { ...form.valores, [c.nome]: c.moeda ? mascaraMoeda(ev.target.value) : ev.target.value } }),
                 }
                 return c.tipo === 'select'
                   ? <Seletor key={c.nome} {...comum} opcoes={c.opcoes} />

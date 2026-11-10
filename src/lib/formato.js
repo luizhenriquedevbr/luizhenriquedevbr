@@ -19,6 +19,21 @@ export function pct(v) {
   return `${x.toLocaleString('pt-BR', { maximumFractionDigits: 2 })}%`
 }
 
+// Máscara de preço: só os dígitos contam e as 2 últimas viram centavos ("1056000" -> "10.560,00").
+export function mascaraMoeda(texto) {
+  const d = String(texto ?? '').replace(/\D/g, '').replace(/^0+/, '')
+  if (!d) return ''
+  const p = d.padStart(3, '0')
+  const inteiro = p.slice(0, -2).replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+  return `${inteiro},${p.slice(-2)}`
+}
+
+// Preço da API ("10560.00") -> campo com máscara ("10.560,00"); zero ou vazio abre o campo vazio.
+export function moedaParaInput(v) {
+  const n = paraNumero(v)
+  return Number.isFinite(n) && n > 0 ? mascaraMoeda(n.toFixed(2)) : ''
+}
+
 // Decimal da API ("119.90", "1.130000") -> texto de campo pt-BR ("119,90", "1,13").
 // Mantém ao menos 2 casas e tira zeros à direita além disso.
 export function paraInput(v) {

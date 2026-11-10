@@ -28,11 +28,19 @@ export function pecaParaForm(p) {
 }
 
 const ehInteiro = (t) => /^\d*$/.test(String(t ?? '').trim())
+const ehHora = (t) => /^\d*([.,]\d{1,2})?$/.test(String(t ?? '').trim())
 
-// Erros de digitação (horas, minutos e quantidade só aceitam inteiros; "3,5" não é truncado em silêncio).
+// Tempo total em minutos: horas aceitam até 2 casas ("3,5" = 3 h 30), arredondado ao minuto, mais o campo de minutos.
+function totalMinutos(f) {
+  const h = paraNumero(f.hours)
+  const centesimos = Number.isFinite(h) ? Math.round(h * 100) : 0
+  return Math.round((centesimos * 60) / 100) + inteiro(f.minutes)
+}
+
+// Erros de digitação (horas até 2 casas; minutos e quantidade só inteiros; nada é truncado em silêncio).
 export function errosDeDigitacao(f) {
   const e = {}
-  if (!ehInteiro(f.hours)) e.hours = 'Use um número inteiro — coloque os minutos no campo ao lado'
+  if (!ehHora(f.hours)) e.hours = 'Use no máximo 2 casas depois da vírgula'
   if (!ehInteiro(f.minutes)) e.minutes = 'Use um número inteiro'
   if (!ehInteiro(f.quantity)) e.quantity = 'Use um número inteiro'
   return e
@@ -42,10 +50,9 @@ export function errosDeDigitacao(f) {
 // O nome não entra (só é exigido ao salvar); a prévia usa um nome de mentirinha.
 export function formValido(f) {
   const min = inteiro(f.minutes)
-  const horas = inteiro(f.hours)
   const filamentos = f.filaments.filter((l) => l.filament_id && paraNumero(l.grams) > 0)
   return Boolean(
-    Object.keys(errosDeDigitacao(f)).length === 0 && f.printer_id && inteiro(f.quantity) >= 1 && min >= 0 && min <= 59 && horas >= 0 && horas * 60 + min > 0 && filamentos.length >= 1
+    Object.keys(errosDeDigitacao(f)).length === 0 && f.printer_id && inteiro(f.quantity) >= 1 && min >= 0 && min <= 59 && totalMinutos(f) > 0 && filamentos.length >= 1
   )
 }
 
@@ -56,8 +63,8 @@ export function formParaPayload(f, { previa = false } = {}) {
     name: previa ? 'prévia' : f.name.trim(),
     quantity: inteiro(f.quantity),
     printer_id: Number(f.printer_id),
-    hours: inteiro(f.hours),
-    minutes: inteiro(f.minutes),
+    hours: Math.floor(totalMinutos(f) / 60),
+    minutes: totalMinutos(f) % 60,
     filaments: f.filaments
       .filter((l) => l.filament_id && paraNumero(l.grams) > 0)
       .map((l) => ({ filament_id: Number(l.filament_id), grams: String(l.grams).trim() })),
