@@ -13,6 +13,10 @@ cd "$(dirname "$0")"
 export CALC_DB_PASSWORD CALC_DB_ROOT_PASSWORD
 
 [ -f api/.env.prod ] || { echo "ERRO: calculadora/api/.env.prod ausente — copie de api/.env.production.example" >&2; exit 1; }
+# O Apache da API roda como www-data (uid/gid 33 na imagem php). Com 600/root ele não lê o .env,
+# o Laravel cai nos padrões (DB_HOST=127.0.0.1) e todo acesso ao banco dá "Connection refused".
+chown root:33 api/.env.prod
+chmod 640 api/.env.prod
 
 docker compose -f docker-compose.prod.yml up -d --build
 

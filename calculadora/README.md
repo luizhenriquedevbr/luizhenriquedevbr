@@ -36,8 +36,8 @@ https://luizhenrique.dev.br/calculadora. Fica no repositório do site (`luizhenr
 cd /var/www/luizhenriquedevbr && git pull --ff-only origin main
 printf 'CALC_DB_PASSWORD=%s\nCALC_DB_ROOT_PASSWORD=%s\n' "$(openssl rand -hex 24)" "$(openssl rand -hex 24)" > /root/calculadora-deploy.env
 chmod 600 /root/calculadora-deploy.env
-cp calculadora/api/.env.production.example calculadora/api/.env.prod   # preencha ADMIN_EMAIL e ADMIN_PASSWORD
-chmod 600 calculadora/api/.env.prod
+cp calculadora/api/.env.production.example calculadora/api/.env.prod
+chown root:33 calculadora/api/.env.prod && chmod 640 calculadora/api/.env.prod   # www-data (33) da API precisa ler
 bash deploy.sh
 docker exec calculadora-api php artisan key:generate --force
 docker exec calculadora-api php artisan db:seed --force   # cria o login, a X2D e a configuração
