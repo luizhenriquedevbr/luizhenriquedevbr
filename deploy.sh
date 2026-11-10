@@ -1,11 +1,9 @@
 #!/bin/bash
-# Deploy da calculadora, rodado no próprio servidor (modelo pull, como avora e luizhenriquedevbr):
-# nenhuma credencial do servidor fica no GitHub; o servidor puxa com deploy key só de leitura.
+# Sobe a calculadora (luizhenrique.dev.br/calculadora). Chamado pelo deploy.sh do site,
+# depois do git pull; também dá para rodar sozinho.
 set -euo pipefail
 
-cd /var/www/calculadora
-git fetch origin main
-git reset --hard origin/main
+cd "$(dirname "$0")"
 
 # Senhas do banco ficam fora do repositório; sem o arquivo o deploy para, em vez de subir com senha padrão.
 [ -f /root/calculadora-deploy.env ] || { echo "ERRO: /root/calculadora-deploy.env ausente" >&2; exit 1; }
@@ -14,8 +12,8 @@ git reset --hard origin/main
 : "${CALC_DB_ROOT_PASSWORD:?defina CALC_DB_ROOT_PASSWORD em /root/calculadora-deploy.env}"
 export CALC_DB_PASSWORD CALC_DB_ROOT_PASSWORD
 
-[ -f api/.env.prod ] || { echo "ERRO: api/.env.prod ausente — copie de api/.env.production.example" >&2; exit 1; }
+[ -f api/.env.prod ] || { echo "ERRO: calculadora/api/.env.prod ausente — copie de api/.env.production.example" >&2; exit 1; }
 
 docker compose -f docker-compose.prod.yml up -d --build
 
-echo "=== deploy concluido: $(date -Is) ==="
+echo "=== calculadora: deploy concluido: $(date -Is) ==="

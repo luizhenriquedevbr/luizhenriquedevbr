@@ -29,7 +29,8 @@ api.interceptors.response.use(
     const url = erro.config?.url || ''
     if (erro.response?.status === 401 && !url.includes('/login')) {
       limparToken()
-      if (window.location.pathname !== '/login') window.location.assign('/login')
+      const login = `${import.meta.env.BASE_URL}login`
+      if (window.location.pathname !== login) window.location.assign(login)
     }
     return Promise.reject(erro)
   }

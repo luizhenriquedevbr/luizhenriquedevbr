@@ -1,6 +1,7 @@
 # Compose de produção — autocontido (não faz merge com docker-compose.yml, que é só de dev).
-# Uso no servidor (pelo deploy.sh):  docker compose -f docker-compose.prod.yml up -d --build
-# Só o app (nginx) fica na rede do Traefik; ele serve o React e repassa /api para a API.
+# Uso no servidor: o deploy.sh do site chama calculadora/deploy.sh.
+# Só o app (nginx) fica na rede do Traefik; ele serve o React em /calculadora e repassa /calculadora/api para a API.
+# A regra com PathPrefix é mais longa que a do site, então o Traefik dá prioridade a ela.
 # API e banco ficam só na rede interna.
 name: calculadora
 
@@ -9,14 +10,14 @@ services:
     build:
       context: ./app
       args:
-        VITE_API_URL: /api
+        VITE_API_URL: /calculadora/api
     container_name: calculadora-app
     restart: unless-stopped
     depends_on:
       - api
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.calculadora.rule=Host(`calculadora.luizhenrique.dev.br`)"
+      - "traefik.http.routers.calculadora.rule=Host(`luizhenrique.dev.br`) && PathPrefix(`/calculadora`)"
       - "traefik.http.routers.calculadora.entrypoints=websecure"
       - "traefik.http.routers.calculadora.tls.certresolver=le"
       - "traefik.http.services.calculadora.loadbalancer.server.port=80"

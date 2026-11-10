@@ -17,44 +17,34 @@ docker compose exec api php artisan db:seed
 ```
 
 - API: http://localhost:8011/api
-- App: http://localhost:5184
+- App: http://localhost:5184/calculadora/ (mesmo caminho da produção)
 - O MySQL não expõe porta; só a rede interna do compose acessa.
 - O usuário de login vem de `ADMIN_*` no `.env.docker` e é criado pelo `db:seed`.
 
 ## Produção
 
-https://calculadora.luizhenrique.dev.br, no droplet com Traefik, em `/var/www/calculadora`. O servidor puxa do GitHub com deploy key só de leitura e roda `deploy.sh` (nenhuma credencial do servidor fica no GitHub).
+https://luizhenrique.dev.br/calculadora. Fica no repositório do site (`luizhenriquedevbr`), na pasta `calculadora/`, no droplet em `/var/www/luizhenriquedevbr/calculadora`. O `deploy.sh` do site faz o `git pull`, sobe o site e chama `calculadora/deploy.sh`.
 
-- `docker-compose.prod.yml`: só o `app` (nginx) fica na rede `web` do Traefik; ele serve o React e repassa `/api` para a API. API e MySQL ficam na rede interna, sem porta publicada.
-- Senhas do banco: `/root/calculadora-deploy.env` (`CALC_DB_PASSWORD`, `CALC_DB_ROOT_PASSWORD`). Sem esse arquivo o deploy para.
-- Configuração da API: `api/.env.prod`, copiado de `api/.env.production.example` (`APP_DEBUG=false`).
-- **Dados fora do git:** volume `calculadora_db_data` (peças, cadastros, tarifa), volume `calculadora_storage_data` (logs), `api/.env.prod` e `/root/calculadora-deploy.env`. Numa migração de servidor, copie os quatro antes de desligar o antigo.
+- `docker-compose.prod.yml`: só o `app` (nginx) fica na rede `web` do Traefik, com a regra `Host(luizhenrique.dev.br) && PathPrefix(/calculadora)`, que vence a regra do site por ser mais longa. Ele serve o React em `/calculadora/` e repassa `/calculadora/api` para a API. API e MySQL ficam na rede interna, sem porta publicada.
+- Senhas do banco: `/root/calculadora-deploy.env` (`CALC_DB_PASSWORD`, `CALC_DB_ROOT_PASSWORD`). Sem esse arquivo o deploy da calculadora para (o site já subiu antes).
+- Configuração da API: `calculadora/api/.env.prod`, copiado de `api/.env.production.example` (`APP_DEBUG=false`).
+- **Dados fora do git:** volume `calculadora_db_data` (peças, cadastros, tarifa), volume `calculadora_storage_data` (logs), `calculadora/api/.env.prod` e `/root/calculadora-deploy.env`. Numa migração de servidor, copie os quatro antes de desligar o antigo.
 
-### Primeiro deploy
+### Primeiro deploy (no servidor, depois do push)
 
 ```bash
-# 1. DNS: registro A calculadora.luizhenrique.dev.br -> IP do droplet
-# 2. No servidor
-ssh-keygen -t ed25519 -f ~/.ssh/calculadora_deploy -N ""   # chave pública vai em Settings > Deploy keys (só leitura)
-cat >> ~/.ssh/config <<'CFG'
-Host github-calculadora
-    HostName github.com
-    User git
-    IdentityFile ~/.ssh/calculadora_deploy
-CFG
-git clone git@github-calculadora:luizhenriquedevbr/miguelmaker-calculadora.git /var/www/calculadora
-cd /var/www/calculadora
+cd /var/www/luizhenriquedevbr && git pull --ff-only origin main
 printf 'CALC_DB_PASSWORD=%s\nCALC_DB_ROOT_PASSWORD=%s\n' "$(openssl rand -hex 24)" "$(openssl rand -hex 24)" > /root/calculadora-deploy.env
 chmod 600 /root/calculadora-deploy.env
-cp api/.env.production.example api/.env.prod   # preencha ADMIN_EMAIL e ADMIN_PASSWORD
-chmod 600 api/.env.prod
+cp calculadora/api/.env.production.example calculadora/api/.env.prod   # preencha ADMIN_EMAIL e ADMIN_PASSWORD
+chmod 600 calculadora/api/.env.prod
 bash deploy.sh
 docker exec calculadora-api php artisan key:generate --force
 docker exec calculadora-api php artisan db:seed --force   # cria o login, a X2D e a configuração
-# depois: apague ADMIN_PASSWORD do api/.env.prod
+# depois: apague a linha ADMIN_PASSWORD do calculadora/api/.env.prod
 ```
 
-Deploys seguintes: `git push` aqui e `bash /var/www/calculadora/deploy.sh` no servidor.
+Deploys seguintes: `git push` e `bash /var/www/luizhenriquedevbr/deploy.sh` no servidor (sobe site e calculadora).
 
 ## Energia (ANEEL)
 

@@ -33,7 +33,7 @@ export default function LoginPage() {
 
   return (
     <main className="min-h-screen flex flex-col items-center justify-center px-4 py-10">
-      <img src="/logo-horizontal-fundo-escuro.svg" alt="Miguel Maker" className="w-56 max-w-full mb-8" />
+      <img src={`${import.meta.env.BASE_URL}logo-horizontal-fundo-escuro.svg`} alt="Miguel Maker" className="w-56 max-w-full mb-8" />
       <form onSubmit={enviar} className="w-full max-w-sm bg-noite2 rounded-2xl p-6 border border-noite3/60 space-y-4">
         <h1 className="text-2xl font-semibold">Calculadora de custo</h1>
         {erro && <Aviso tom="erro">{erro}</Aviso>}

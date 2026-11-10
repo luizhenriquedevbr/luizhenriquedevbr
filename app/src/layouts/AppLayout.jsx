@@ -39,7 +39,7 @@ export default function AppLayout() {
   return (
     <div className="min-h-screen md:flex">
       <aside className="hidden md:flex md:flex-col md:w-60 md:shrink-0 md:h-screen md:sticky md:top-0 bg-noite2 border-r border-noite3/60 p-4 gap-4">
-        <img src="/logo-horizontal-fundo-escuro.svg" alt="Miguel Maker" className="w-44" />
+        <img src={`${import.meta.env.BASE_URL}logo-horizontal-fundo-escuro.svg`} alt="Miguel Maker" className="w-44" />
         <nav className="flex flex-col gap-1">
           {menu.map((m) => <NavLink key={m.para} to={m.para} end={m.fim} className={(s) => classeLink({ isActive: s.isActive || Boolean(m.ativo?.(pathname)) })}>{m.rotulo}</NavLink>)}
         </nav>
@@ -47,7 +47,7 @@ export default function AppLayout() {
       </aside>
 
       <header className="md:hidden flex items-center justify-between px-4 py-3 bg-noite2 border-b border-noite3/60">
-        <img src="/logo-horizontal-fundo-escuro.svg" alt="Miguel Maker" className="h-9" />
+        <img src={`${import.meta.env.BASE_URL}logo-horizontal-fundo-escuro.svg`} alt="Miguel Maker" className="h-9" />
         <Botao variante="fantasma" onClick={sair}>Sair</Botao>
       </header>
 
