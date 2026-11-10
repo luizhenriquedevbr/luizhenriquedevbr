@@ -17,7 +17,7 @@ function valoresIniciais(p) {
   for (const t of TIPOS) watts[t] = p?.power_profiles?.[t] != null ? String(p.power_profiles[t]) : ''
   return {
     name: p?.name ?? '',
-    purchase_price: paraInput(p?.purchase_price),
+    purchase_price: paraNumero(p?.purchase_price) ? paraInput(p.purchase_price) : '',
     lifespan_hours: p?.lifespan_hours != null ? String(p.lifespan_hours) : '10000',
     watts,
   }
