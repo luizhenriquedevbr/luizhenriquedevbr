@@ -1,4 +1,4 @@
-FROM php:8.1-apache-bullseye
+FROM php:8.4.27-apache-bookworm
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
@@ -15,7 +15,8 @@ COPY docker/apache.conf /etc/apache2/sites-available/000-default.conf
 WORKDIR /var/www/html
 
 COPY composer.json composer.lock ./
-RUN composer install --no-scripts --optimize-autoloader
+ARG COMPOSER_FLAGS=""
+RUN composer install $COMPOSER_FLAGS --no-scripts --optimize-autoloader
 
 COPY . .
 RUN mkdir -p storage/logs storage/framework/cache storage/framework/sessions \

@@ -19,7 +19,8 @@ return [
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['http://localhost:5184', 'http://127.0.0.1:5184'],
+    // Produção usa o mesmo domínio (o nginx do app repassa /api), então não precisa de CORS lá.
+    'allowed_origins' => array_filter(explode(',', env('CORS_ALLOWED_ORIGINS', 'http://localhost:5184,http://127.0.0.1:5184'))),
 
     'allowed_origins_patterns' => [],
 

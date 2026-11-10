@@ -46,7 +46,8 @@ return [
     |
     */
 
-    'expiration' => null,
+    // Minutos de validade do token (padrão 30 dias); depois disso pede login de novo.
+    'expiration' => (int) env('SANCTUM_EXPIRATION', 60 * 24 * 30),
 
     /*
     |--------------------------------------------------------------------------

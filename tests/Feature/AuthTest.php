@@ -35,6 +35,28 @@ class AuthTest extends TestCase
             ->assertJsonValidationErrors(['email']);
     }
 
+    public function test_login_bloqueia_apos_5_tentativas_por_minuto(): void
+    {
+        $this->usuario();
+        for ($i = 0; $i < 5; $i++) {
+            $this->postJson('/api/login', ['email' => 'luiz@example.com', 'password' => 'errada'])->assertStatus(422);
+        }
+        $this->postJson('/api/login', ['email' => 'luiz@example.com', 'password' => 'segredo-123'])->assertStatus(429);
+    }
+
+    public function test_token_expira_em_30_dias(): void
+    {
+        $this->usuario();
+        $token = $this->postJson('/api/login', ['email' => 'luiz@example.com', 'password' => 'segredo-123'])->json('token');
+
+        $this->travel(29)->days();
+        $this->withToken($token)->getJson('/api/me')->assertOk();
+        $this->app['auth']->forgetGuards();
+
+        $this->travel(2)->days();
+        $this->withToken($token)->getJson('/api/me')->assertStatus(401);
+    }
+
     public function test_rota_protegida_sem_token_401(): void
     {
         $this->getJson('/api/me')->assertStatus(401);
