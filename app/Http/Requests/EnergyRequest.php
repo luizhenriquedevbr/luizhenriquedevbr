@@ -8,7 +8,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class EnergyRequest extends FormRequest
 {
-    private const DECIMALS = ['icms_pct', 'pis_pct', 'cofins_pct', 'manual_tariff_kwh'];
+    private const DECIMALS = ['icms_pct', 'pis_pct', 'cofins_pct', 'manual_tariff_kwh', 'markup_pct'];
 
     public function authorize(): bool
     {
@@ -33,6 +33,7 @@ class EnergyRequest extends FormRequest
             'cofins_pct' => ['sometimes', 'numeric', 'min:0', 'max:99'],
             'manual_override' => ['sometimes', 'boolean'],
             'manual_tariff_kwh' => ['sometimes', 'nullable', 'numeric', 'min:0', 'max:9999'],
+            'markup_pct' => ['sometimes', 'numeric', 'decimal:0,2', 'min:0', 'max:1000'],
         ];
     }
 

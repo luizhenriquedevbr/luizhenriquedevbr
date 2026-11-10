@@ -8,7 +8,7 @@ class EnergySetting extends Model
 {
     protected $fillable = [
         'aneel_tariff_kwh', 'aneel_valid_from', 'aneel_valid_to', 'flag_name', 'flag_add_kwh', 'flag_competence',
-        'icms_pct', 'pis_pct', 'cofins_pct', 'manual_override', 'manual_tariff_kwh', 'fetched_at',
+        'icms_pct', 'pis_pct', 'cofins_pct', 'manual_override', 'manual_tariff_kwh', 'markup_pct', 'fetched_at',
     ];
 
     protected $casts = [

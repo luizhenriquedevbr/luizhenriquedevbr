@@ -51,6 +51,14 @@ class EnergyTest extends TestCase
         $r->assertJsonPath('setting.cofins_pct', '5.07');
         $r->assertJsonPath('final', null);
         $r->assertJsonPath('refresh_due', true);
+        $r->assertJsonPath('setting.markup_pct', '100.00');
+    }
+
+    public function test_lucro_editavel_com_virgula(): void
+    {
+        $this->putJson('/api/energy', ['markup_pct' => '150,5'])->assertOk()->assertJsonPath('setting.markup_pct', '150.50');
+        $this->putJson('/api/energy', ['markup_pct' => '-1'])->assertStatus(422)->assertJsonValidationErrors('markup_pct');
+        $this->putJson('/api/energy', ['markup_pct' => '1001'])->assertStatus(422)->assertJsonValidationErrors('markup_pct');
     }
 
     public function test_refresh_com_aneel_fake(): void
